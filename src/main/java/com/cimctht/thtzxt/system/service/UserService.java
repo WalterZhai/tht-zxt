@@ -1,6 +1,7 @@
 package com.cimctht.thtzxt.system.service;
 
 import com.cimctht.thtzxt.common.entity.TableEntity;
+import com.cimctht.thtzxt.common.exception.UnimaxException;
 import com.cimctht.thtzxt.common.utils.MathsUtils;
 import com.cimctht.thtzxt.system.Impl.UserServiceImpl;
 import com.cimctht.thtzxt.system.entity.User;
@@ -54,4 +55,19 @@ public class UserService implements UserServiceImpl {
         List<Map> resultList = query.getResultList();
         return new TableEntity(resultList, MathsUtils.convertInteger2BigDecimal(resultList.size()));
     }
+
+    @Override
+    public void editPassword(String username,String pwd1, String pwd2, String pwd3) {
+        User user = userRepository.findUserByLoginNameAndIsDelete(username,0);
+        if(!pwd2.equals(pwd3)){
+            throw new UnimaxException("新密码与确认密码不一致!");
+        }
+        if(!pwd1.equals(user.getPassword())){
+            throw new UnimaxException("登录密码错误!");
+        }
+        user.setPassword(pwd2);
+        userRepository.save(user);
+    }
+
+
 }

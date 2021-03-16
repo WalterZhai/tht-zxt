@@ -12,4 +12,6 @@ public interface UserServiceImpl {
 
     TableEntity onlineUserData(Integer page, Integer limit);
 
+    void editPassword(String username,String pwd1,String pwd2,String pwd3);
+
 }

@@ -244,7 +244,7 @@ layui.use(['jquery','element', 'layer'], function () {
             title : '密码修改',
             area : [ '300px', '300px' ],
             fix : false,
-            content : '/topage?url=user/index/edit-password.html'
+            content : '/topage?url=system/index/edit-password.html'
         });
 
     });

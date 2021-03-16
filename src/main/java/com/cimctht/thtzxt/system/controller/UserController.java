@@ -27,7 +27,7 @@ public class UserController {
     static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserServiceImpl userServiceImpl;
 
     @Autowired
     private UserRepository userRepository;
@@ -37,7 +37,7 @@ public class UserController {
     public TableEntity userTableData(HttpServletRequest request, String searchName, String page, String limit) {
         TableEntity table;
         try{
-            table = userService.queryUsersByLikeName(searchName,Integer.parseInt(page),Integer.parseInt(limit));
+            table = userServiceImpl.queryUsersByLikeName(searchName,Integer.parseInt(page),Integer.parseInt(limit));
         }catch (Exception e){
             table = new TableEntity(e);
         }
@@ -48,7 +48,7 @@ public class UserController {
     public TableEntity onlineUserData(HttpServletRequest request,String page,String limit) {
         TableEntity table;
         try{
-            table = userService.onlineUserData(Integer.parseInt(page),Integer.parseInt(limit));
+            table = userServiceImpl.onlineUserData(Integer.parseInt(page),Integer.parseInt(limit));
         }catch (Exception e){
             table = new TableEntity(e);
         }
@@ -81,6 +81,21 @@ public class UserController {
             return new JsonResult("修改成功");
         }catch (Exception e){
             return new JsonResult(new UnimaxException("修改失败"));
+        }
+    }
+
+    @PostMapping(value = "/user/editPassword")
+    public JsonResult editPassword(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("username");
+        String pwd1 = request.getParameter("pwd1");
+        String pwd2 = request.getParameter("pwd2");
+        String pwd3 = request.getParameter("pwd3");
+        try{
+            userServiceImpl.editPassword(username,pwd1,pwd2,pwd3);
+            return new JsonResult("修改成功");
+        }catch (Exception e){
+            return new JsonResult(new UnimaxException(e.getMessage()));
         }
     }
 
