@@ -1,5 +1,6 @@
 package com.cimctht.thtzxt.system.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.cimctht.thtzxt.common.entity.JsonResult;
 import com.cimctht.thtzxt.common.exception.UnimaxException;
 import com.cimctht.thtzxt.system.Impl.MenuServiceImpl;
@@ -48,6 +49,18 @@ public class MenuController {
             return new JsonResult(menu);
         }catch (Exception e){
             return new JsonResult(new UnimaxException(e.getMessage()));
+        }
+    }
+
+    @PostMapping(value = "/menu/ajaxUserLoadTreeChecked")
+    public JsonResult ajaxUserLoadTreeChecked(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        try{
+            JSONArray array = menuServiceImpl.ajaxUserLoadTreeChecked(user);
+            return new JsonResult(array);
+        }catch (Exception e){
+            return new JsonResult(new UnimaxException("加载树形菜单失败!"));
         }
     }
 

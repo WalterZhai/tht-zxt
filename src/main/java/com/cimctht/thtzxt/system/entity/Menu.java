@@ -36,6 +36,8 @@ public class Menu extends BaseEntity {
     @OneToMany(mappedBy = "parentMenu", fetch = FetchType.LAZY)
     @OrderBy("seq ASC")
     private List<Menu> childMenus = new ArrayList<>();
+    @ManyToMany(mappedBy = "collects")
+    private List<User> users = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -107,5 +109,13 @@ public class Menu extends BaseEntity {
 
     public void setChildMenus(List<Menu> childMenus) {
         this.childMenus = childMenus;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

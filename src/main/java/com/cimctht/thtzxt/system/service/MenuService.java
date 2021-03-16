@@ -1,5 +1,7 @@
 package com.cimctht.thtzxt.system.service;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.cimctht.thtzxt.system.Impl.MenuServiceImpl;
 import com.cimctht.thtzxt.system.entity.Menu;
 import com.cimctht.thtzxt.system.entity.Role;
@@ -85,6 +87,61 @@ public class MenuService implements MenuServiceImpl {
         return mls;
     }
 
+    @Override
+    public JSONArray ajaxUserLoadTreeChecked(User user) {
+        //所有用户能看到的菜单
+        List<Menu> menuList = new ArrayList<>();
+        List<Role> roleList = user.getRoles();
+        for(Role role : roleList){
+            for(Menu menu : role.getMenus()){
+                if(!menuList.contains(menu)){
+                    menuList.add(menu);
+                }
+            }
+        }
+    //     //获得用户已收藏的菜单
+    //     List<String> listCollectids = menuRepository.queryMenuidByUserCollect(userid);
+    //
+    //     JSONArray resultArr = new JSONArray();
+    //     JSONObject mtop = new JSONObject();
+    //     mtop.put("title","<h3><i class='layui-icon layui-icon-align-left'>&nbsp;</i>菜单树</h3>");
+    //     mtop.put("id","");
+    //     mtop.put("spread",true);
+    //     //返回的JSONArr
+    //     JSONArray arr = new JSONArray();
+    //     List<Menu> listTop = menuRepository.queryMenusByLeveAndIsDeleteOrderBySeq(1,0);
+    //     for(Menu top : listTop){
+    //         if(listMenuids.contains(top.getId())){
+    //             JSONObject jsono = new JSONObject();
+    //             jsono.put("title",top.getName());
+    //             jsono.put("id",top.getId());
+    //             jsono.put("spread",true);
+    //             List<Menu> listChildren = menuRepository.queryMenusByLeveAndIsDeleteAndPmenuOrderBySeq(2,0,top);
+    //
+    //             if(listChildren.size()>0){
+    //                 JSONArray arrChild = new JSONArray();
+    //                 for(Menu child : listChildren){
+    //                     if(listMenuids.contains(child.getId())){
+    //                         JSONObject jsonoChild = new JSONObject();
+    //                         jsonoChild.put("title",child.getName());
+    //                         jsonoChild.put("id",child.getId());
+    //                         if(listCollectids.contains(child.getId())){
+    //                             jsonoChild.put("checked",true);
+    //                         }
+    //                         jsonoChild.put("spread",true);
+    //                         arrChild.add(jsonoChild);
+    //                     }
+    //                 }
+    //                 jsono.put("children",arrChild);
+    //             }
+    //             arr.add(jsono);
+    //         }
+    //     }
+    //
+    //     mtop.put("children",arr);
+    //     resultArr.add(mtop);
+        return new JSONArray();
+    }
 
 
 }

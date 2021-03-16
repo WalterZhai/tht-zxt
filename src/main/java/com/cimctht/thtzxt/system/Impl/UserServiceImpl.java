@@ -10,4 +10,6 @@ public interface UserServiceImpl {
 
     TableEntity queryUsersByLikeName(String name, Integer page, Integer limit);
 
+    TableEntity onlineUserData(Integer page, Integer limit);
+
 }

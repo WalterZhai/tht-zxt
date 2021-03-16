@@ -13,7 +13,6 @@ import java.util.List;
  */
 public interface MenuRepository extends JpaRepository<Menu,String> {
 
-
     Menu findMenuByCodeAndIsDelete(String code,Integer isDelete);
 
     @Query(nativeQuery = true, value =" select MENU_CODE_SEQ.nextval from dual ")

@@ -34,6 +34,9 @@ public class User extends BaseEntity {
     @ManyToMany(targetEntity = Group.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     @JoinTable(name = "SYS_USER_GROUP",joinColumns = @JoinColumn(name = "USER_ID"),inverseJoinColumns = @JoinColumn(name = "GROUP_ID"))
     private List<Group> groups = new ArrayList<>();
+    @ManyToMany(targetEntity = Menu.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @JoinTable(name = "SYS_USER_MENU",joinColumns = @JoinColumn(name = "USER_ID"),inverseJoinColumns = @JoinColumn(name = "MENU_ID"))
+    private List<Menu> collects = new ArrayList<>();
 
     public String getLoginName() {
         return loginName;
@@ -97,5 +100,13 @@ public class User extends BaseEntity {
 
     public void setGroups(List<Group> groups) {
         this.groups = groups;
+    }
+
+    public List<Menu> getCollects() {
+        return collects;
+    }
+
+    public void setCollects(List<Menu> collects) {
+        this.collects = collects;
     }
 }

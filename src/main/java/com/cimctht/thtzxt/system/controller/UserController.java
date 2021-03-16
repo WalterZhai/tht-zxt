@@ -38,5 +38,16 @@ public class UserController {
         return table;
     }
 
+    @GetMapping(value = "/user/onlineUserData")
+    public TableEntity onlineUserData(HttpServletRequest request,String page,String limit) {
+        TableEntity table;
+        try{
+            table = userService.onlineUserData(Integer.parseInt(page),Integer.parseInt(limit));
+        }catch (Exception e){
+            table = new TableEntity(e);
+        }
+        return table;
+    }
+
 
 }
