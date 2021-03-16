@@ -48,14 +48,5 @@ public class SystemController {
         return modelAndView;
     }
 
-    // @GetMapping(value="/loginout")
-    // public ModelAndView loginout(HttpSession session) {
-    //     User user = (User) session.getAttribute("user");
-    //     logger.info(user.getName()+" 登出成功！");
-    //     session.invalidate();
-    //     ModelAndView modelAndView= new ModelAndView("login");
-    //     return modelAndView;
-    // }
-
 
 }

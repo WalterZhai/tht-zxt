@@ -67,15 +67,15 @@
 
 			<ul th:each="menu:${menus}" class="layui-nav layui-nav-tree">
 				<li class="layui-nav-item" lay-unselect>
-				<a class="" href="javascript:;"><i th:class="'layui-icon '+${menu.getIcon()}"></i><span th:text="${menu.getName()}"></span></a>
+				<a class="" href="javascript:;"><i th:class="'layui-icon '+${menu.icon}"></i><span th:text="${menu.name}"></span></a>
 
 				<th:block th:fragment="row(menu)">
 					<dl th:each="child:${menu.childMenus}" class="layui-nav-child">
 						<dd th:if="${#lists.isEmpty(child.childMenus)}">
-							<a class="site-main-active" href="javascript:;" th:attr="data-id=${menu.id},data-url=${menu.href},data-title=${menu.name}"><i th:class="'layui-icon '+${child.getIcon()}"></i><span th:text="${child.getName()}"></span></a>
+							<a class="site-main-active" href="javascript:;" th:attr="data-id=${child.id},data-url=${child.href},data-title=${child.name}"><i th:class="'layui-icon '+${child.icon}"></i><span th:text="${child.name}"></span></a>
 						</dd>
 						<dd th:if="not ${#lists.isEmpty(child.childMenus)}" >
-							<a href="javascript:;" ><i th:class="'layui-icon '+${child.getIcon()}"></i><span th:text="${child.getName()}"></span></a>
+							<a href="javascript:;" ><i th:class="'layui-icon '+${child.icon}"></i><span th:text="${child.name}"></span></a>
 							<th:block th:include="this::row(${child})"></th:block>
 						</dd>
 					</dl>
