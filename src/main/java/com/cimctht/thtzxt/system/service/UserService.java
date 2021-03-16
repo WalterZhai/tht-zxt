@@ -1,10 +1,16 @@
 package com.cimctht.thtzxt.system.service;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.cimctht.thtzxt.common.constant.SysConstant;
 import com.cimctht.thtzxt.common.entity.TableEntity;
 import com.cimctht.thtzxt.common.exception.UnimaxException;
 import com.cimctht.thtzxt.common.utils.MathsUtils;
 import com.cimctht.thtzxt.system.Impl.UserServiceImpl;
+import com.cimctht.thtzxt.system.bo.SimpleUserBo;
+import com.cimctht.thtzxt.system.entity.Role;
 import com.cimctht.thtzxt.system.entity.User;
+import com.cimctht.thtzxt.system.repository.RoleRepository;
 import com.cimctht.thtzxt.system.repository.UserRepository;
 import org.hibernate.query.internal.NativeQueryImpl;
 import org.hibernate.transform.Transformers;
@@ -19,6 +25,8 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,11 +48,19 @@ public class UserService implements UserServiceImpl {
     @PersistenceContext(unitName = "unimaxPersistenceUnit")
     private EntityManager unimaxEntityManager;
 
+    @Autowired
+    private RoleRepository roleRepository;
+
     @Override
-    public TableEntity queryUsersByLikeName(String name, Integer page, Integer limit) {
+    public TableEntity userTableData(String loginName, String name, Integer page, Integer limit) {
         Pageable pageable = PageRequest.of(page-1,limit);
-        Page<User> pages = userRepository.findUsersByIsDeleteAndNameLike(0,"%"+name+"%",pageable);
-        return new TableEntity(pages.getContent(), MathsUtils.convertLong2BigDecimal(pages.getTotalElements()));
+        Page<User> pages = userRepository.findUsersByIsDeleteAndLoginNameLikeAndNameLikeOrderByCreateDate(0, "%"+loginName+"%", "%" + name + "%", pageable);
+        List<User> list = pages.getContent();
+        List<SimpleUserBo> result = new ArrayList<>();
+        for(User user : list){
+            result.add(new SimpleUserBo(user));
+        }
+        return new TableEntity(result, MathsUtils.convertLong2BigDecimal(pages.getTotalElements()));
     }
 
     @Override
@@ -67,6 +83,42 @@ public class UserService implements UserServiceImpl {
         }
         user.setPassword(pwd2);
         userRepository.save(user);
+    }
+
+    @Override
+    public void updateIsLockedById(String id, Integer isLocked) {
+        User user = userRepository.findUserById(id);
+        if(SysConstant.ADMIN.equals(user.getLoginName())){
+            throw new UnimaxException("admin用户不能修改！");
+        }
+        user.setIsLocked(isLocked);
+        userRepository.save(user);
+    }
+
+    @Override
+    public Map<String, Object> ajaxLoadTransferUserRelRole(String userid) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        User user = userRepository.findUserById(userid);
+        List<Role> roleExist = user.getRoles();
+        List<Role> roleAll = roleRepository.findRolesByIsDelete(0);
+        //data值
+        JSONArray arr = new JSONArray();
+        for(Role r : roleAll){
+            JSONObject o = new JSONObject();
+            o.put("value",r.getId());
+            o.put("title",r.getName());
+            o.put("disabled","");
+            o.put("checked","");
+            arr.add(o);
+        }
+        result.put("data",arr);
+        //value值
+        List<String> listids = new ArrayList<String>();
+        for(Role r : roleExist){
+            listids.add(r.getId());
+        }
+        result.put("value",listids);
+        return result;
     }
 
 

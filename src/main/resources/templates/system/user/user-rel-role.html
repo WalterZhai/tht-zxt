@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>用户关联角色</title>
-	<script th:src="@{/layui/jquery.min.js}"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/index.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/layui/css/layui.css}"/>
 	<script th:src="@{/layui/layui.js}"></script>
 	<script th:src="@{/assets/js/templet.js}"></script>
@@ -13,29 +13,35 @@
 <div id="transfer"></div>
 <div class="layui-input-block"></div>
 <div class="layui-input-block">
-	<button class="layui-btn layui-btn-primary tree-cancel">关闭</button>
+	<button class="layui-btn layui-btn-ms layui-btn-primary tree-cancel">关闭</button>
 </div>
 
 </body>
 
-<script>
+<script th:inline="javascript">
+
+
 	layui.use(['form','layer','transfer'], function(){
 		var form = layui.form;
 		var layer = layui.layer;
 		var transfer = layui.transfer;
 		var $ = layui.jquery;
 
-		window.ajaxLoadTransfer = function (userid) {
+		layer.ready(function () {
+			ajaxLoadTransfer();
+		})
+
+		function ajaxLoadTransfer() {
 
 			$.ajax({
 				url:'/user/ajaxLoadTransferUserRelRole',
 				type:'post',
 				data:{
-					userid:userid
+					userid:[[${id}]]
 				},
 				success:function(result){
 					if(result.state == 1){
-						laodTransfer(result.data.data,result.data.value,userid);
+						laodTransfer(result.data.data,result.data.value,[[${id}]]);
 					}else{
 						layer.msg(result.message,{icon: 5});
 					}

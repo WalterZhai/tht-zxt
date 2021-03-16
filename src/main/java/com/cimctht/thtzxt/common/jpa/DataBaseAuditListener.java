@@ -1,6 +1,5 @@
 package com.cimctht.thtzxt.common.jpa;
 
-import com.cimctht.thtzxt.system.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -99,9 +98,9 @@ public class DataBaseAuditListener {
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
             HttpSession session = request.getSession();
             //获得用户
-            User bu = (User) session.getAttribute("user");
+            String username = (String) session.getAttribute("username");
             // 在此处使用当前用户id或默认用户id
-            String id = bu.getLoginName();
+            String id = username;
             userId.set(object, id);
         }
     }

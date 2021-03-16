@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  * @author Walter(翟笑天)
@@ -18,5 +19,9 @@ public interface RoleRepository extends JpaRepository<Role,String> {
 
     @Query(nativeQuery = true, value =" select ROLE_CODE_SEQ.nextval from dual ")
     BigInteger queryCodeSeqNext();
+
+    List<Role> findRolesByIsDelete(Integer isDelete);
+
+    Role findRoleById(String id);
 
 }

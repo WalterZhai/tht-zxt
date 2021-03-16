@@ -90,4 +90,16 @@ public interface SysConstant {
     /** 序列名称定义-用户组 **/
     String GROUP_CODE_SEQ = "GROUP_CODE_SEQ";
 
+    /** 0 **/
+    Integer CONSTANT_ZERO = 0;
+
+    /** 1 **/
+    Integer CONSTANT_ONE = 1;
+
+    /** 2 **/
+    Integer CONSTANT_TWO = 2;
+
+    /** -1 **/
+    Integer CONSTANT_NEGATIVE_ONE = 0;
+
 }

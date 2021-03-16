@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>登录</title>
-	<script th:src="@{/layui/jquery.min.js}"></script>
+	<title>新增用户</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/index.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/layui/css/layui.css}"/>
 	<script th:src="@{/layui/layui.js}"></script>
 	<script th:src="@{/assets/js/templet.js}"></script>
@@ -12,36 +12,30 @@
 <body>
 
 <form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;">
-	<input name="id" type="hidden">
-	<div class="layui-form-item">
-		<label class="layui-form-label">真实名</label>
-		<div class="layui-input-block">
-			<input type="text" name="name" required  lay-verify="required" placeholder="请输入真实名" autocomplete="off" class="layui-input">
-		</div>
-	</div>
-	<div class="layui-form-item">
-		<label class="layui-form-label">登录名</label>
-		<div class="layui-input-block">
-			<input type="text" name="loginName" required  lay-verify="required" placeholder="请输入登录名" autocomplete="off" class="layui-input">
-		</div>
-	</div>
-	<div class="layui-form-item">
-		<label class="layui-form-label">电子邮箱</label>
-		<div class="layui-input-block">
-			<input type="text" name="email" placeholder="请输入电子邮箱" autocomplete="off" class="layui-input">
-		</div>
-	</div>
-	<div class="layui-form-item">
-		<label class="layui-form-label">电话</label>
-		<div class="layui-input-block">
-			<input type="text" name="mobile" placeholder="请输入电话" autocomplete="off" class="layui-input">
-		</div>
-	</div>
-	<span style="color:red;font-size: 20px">&nbsp;&nbsp;&nbsp;&nbsp;默认密码 123456</span>
+
+	<label class="label-size label-color">真实名*</label>
+	<input type="text" name="name" required  lay-verify="required" autocomplete="off" class="input-size">
+
+	<label class="label-size label-color">登录名*</label>
+	<input type="text" name="loginName" required  lay-verify="required" autocomplete="off" class="input-size">
+
+	<br>
+
+	<label class="label-size">电子邮箱</label>
+	<input type="text" name="email" autocomplete="off" class="input-size">
+
+	<label class="label-size">电话</label>
+	<input type="text" name="mobile" autocomplete="off" class="input-size">
+
+	<br>
+	<label class="label-color">默认密码123456</label>
+
+	<hr class="layui-bg-green">
+
 	<div class="layui-form-item">
 		<div class="layui-input-block">
-			<button class="layui-btn" lay-submit lay-filter="formSubmit">立即提交</button>
-			<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+			<button class="layui-btn layui-btn-sm" lay-submit lay-filter="formSubmit">立即提交</button>
+			<button type="reset" class="layui-btn layui-btn-sm layui-btn-primary">重置</button>
 		</div>
 	</div>
 </form>
@@ -49,9 +43,10 @@
 </body>
 
 <script>
-	layui.use(['form','layer'], function(){
+	layui.use(['form','layer','jquery'], function(){
 		var form = layui.form;
 		var layer = layui.layer;
+		var $ = layui.jquery;
 
 		//监听提交
 		form.on('submit(formSubmit)', function(data){
@@ -65,7 +60,7 @@
 					if(result.state == 1){
 						var index = parent.layer.getFrameIndex(window.name);
 						parent.layer.close(index);
-						window.parent.refreshTab();
+						window.parent.queryTab();
 					}else{
 						layer.msg(result.message,{icon: 5});
 					}
