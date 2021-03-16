@@ -44,7 +44,8 @@ public class SystemController {
         HttpSession session = request.getSession();
         Principal principal = request.getUserPrincipal();
         User user = userRepository.findUserByLoginNameAndIsDelete(principal.getName(),0);
-        session.setAttribute("user",user);
+        session.setAttribute("name",user.getName());
+        session.setAttribute("username",user.getLoginName());
         List<Menu> menus = menuServiceImpl.selectLoginMenu(user);
         ModelMap Model = new ModelMap().addAttribute("menus", menus);
         ModelAndView modelAndView= new ModelAndView("system/system/index",Model);

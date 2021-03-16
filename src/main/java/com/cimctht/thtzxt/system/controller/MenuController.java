@@ -1,5 +1,6 @@
 package com.cimctht.thtzxt.system.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.cimctht.thtzxt.common.entity.JsonResult;
 import com.cimctht.thtzxt.common.exception.UnimaxException;
@@ -32,9 +33,9 @@ public class MenuController {
     @PostMapping(value = "/menu/loadSearchInfo")
     public JsonResult loadSearchInfo(HttpServletRequest request, String info) {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        String username = (String) session.getAttribute("username");
         try{
-            List<String> list = menuServiceImpl.loadSearchInfo(info,user);
+            List<String> list = menuServiceImpl.loadSearchInfo(info,username);
             return new JsonResult(list);
         }catch (Exception e){
             return new JsonResult(new UnimaxException(e.getMessage()));
@@ -55,12 +56,26 @@ public class MenuController {
     @PostMapping(value = "/menu/ajaxUserLoadTreeChecked")
     public JsonResult ajaxUserLoadTreeChecked(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        String username = (String) session.getAttribute("username");
         try{
-            JSONArray array = menuServiceImpl.ajaxUserLoadTreeChecked(user);
+            JSONArray array = menuServiceImpl.ajaxUserLoadTreeChecked(username);
             return new JsonResult(array);
         }catch (Exception e){
             return new JsonResult(new UnimaxException("加载树形菜单失败!"));
+        }
+    }
+
+    @PostMapping(value = "/menu/saveMenuCollect")
+    public JsonResult saveMenuCollect(HttpServletRequest request) {
+        String treeData = request.getParameter("treeData");
+        JSONArray trees = JSON.parseArray(treeData);
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("username");
+        try{
+            menuServiceImpl.saveMenuCollect(trees,username);
+            return new JsonResult("保存成功!");
+        }catch (Exception e){
+            return new JsonResult(new UnimaxException(e.getMessage()));
         }
     }
 

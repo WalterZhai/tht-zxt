@@ -21,9 +21,9 @@ public class Role extends BaseEntity {
     private String code;
     @Column(name = "DESCRIPTION",columnDefinition = "VARCHAR(200)")
     private String description;
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(mappedBy = "roles",fetch=FetchType.EAGER)
     private List<User> users = new ArrayList<>();
-    @ManyToMany(targetEntity = Menu.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @ManyToMany(targetEntity = Menu.class, cascade = CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinTable(name = "SYS_ROLE_MENU",joinColumns = @JoinColumn(name = "ROLE_ID"),inverseJoinColumns = @JoinColumn(name = "MENU_ID"))
     private List<Menu> menus = new ArrayList<>();
 

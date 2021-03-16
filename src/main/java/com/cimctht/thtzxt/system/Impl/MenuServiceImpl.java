@@ -15,8 +15,9 @@ public interface MenuServiceImpl {
 
     List<Menu> selectLoginMenu(User user);
 
-    List<String> loadSearchInfo(String info,User user);
+    List<String> loadSearchInfo(String info,String username);
 
-    JSONArray ajaxUserLoadTreeChecked(User user);
+    JSONArray ajaxUserLoadTreeChecked(String username);
 
+    void saveMenuCollect(JSONArray data,String username);
 }

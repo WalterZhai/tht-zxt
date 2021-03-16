@@ -28,13 +28,13 @@ public class User extends BaseEntity {
     private String email;
     @Column(name = "MOBILE",columnDefinition = "VARCHAR(20)")
     private String mobile;
-    @ManyToMany(targetEntity = Role.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @ManyToMany(targetEntity = Role.class, cascade = CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinTable(name = "SYS_USER_ROLE",joinColumns = @JoinColumn(name = "USER_ID"),inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     private List<Role> roles = new ArrayList<>();
-    @ManyToMany(targetEntity = Group.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @ManyToMany(targetEntity = Group.class, cascade = CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinTable(name = "SYS_USER_GROUP",joinColumns = @JoinColumn(name = "USER_ID"),inverseJoinColumns = @JoinColumn(name = "GROUP_ID"))
     private List<Group> groups = new ArrayList<>();
-    @ManyToMany(targetEntity = Menu.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @ManyToMany(targetEntity = Menu.class, cascade = CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinTable(name = "SYS_USER_MENU",joinColumns = @JoinColumn(name = "USER_ID"),inverseJoinColumns = @JoinColumn(name = "MENU_ID"))
     private List<Menu> collects = new ArrayList<>();
 

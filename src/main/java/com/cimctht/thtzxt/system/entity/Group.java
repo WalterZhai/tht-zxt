@@ -3,10 +3,7 @@ package com.cimctht.thtzxt.system.entity;
 
 import com.cimctht.thtzxt.common.entity.BaseEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +21,7 @@ public class Group extends BaseEntity {
     private String name;
     @Column(name = "DESCRIPTION",columnDefinition = "VARCHAR(200)")
     private String description;
-    @ManyToMany(mappedBy = "groups")
+    @ManyToMany(mappedBy = "groups",fetch= FetchType.EAGER)
     private List<User> users = new ArrayList<>();
 
     public String getCode() {

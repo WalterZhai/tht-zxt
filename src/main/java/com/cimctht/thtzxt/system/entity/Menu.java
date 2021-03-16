@@ -31,12 +31,12 @@ public class Menu extends BaseEntity {
     private Integer type;
     @Column(name = "ICON",columnDefinition = "VARCHAR(30)")
     private String icon;
-    @ManyToMany(mappedBy = "menus")
+    @ManyToMany(mappedBy = "menus",fetch=FetchType.EAGER)
     private List<Role> roles = new ArrayList<>();
-    @OneToMany(mappedBy = "parentMenu", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "parentMenu", fetch = FetchType.EAGER)
     @OrderBy("seq ASC")
     private List<Menu> childMenus = new ArrayList<>();
-    @ManyToMany(mappedBy = "collects")
+    @ManyToMany(mappedBy = "collects",fetch=FetchType.EAGER)
     private List<User> users = new ArrayList<>();
 
     public String getName() {

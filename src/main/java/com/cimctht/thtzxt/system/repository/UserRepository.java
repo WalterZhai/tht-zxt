@@ -18,4 +18,6 @@ public interface UserRepository extends JpaRepository<User,String> {
     User findUserByLoginNameAndIsLockedAndIsDelete(String loginName, Integer isLocked, Integer isDelete);
 
     Page<User> findUsersByIsDeleteAndNameLike(Integer isDelete, String name, Pageable pageable);
+
+    User findUserById(String id);
 }
