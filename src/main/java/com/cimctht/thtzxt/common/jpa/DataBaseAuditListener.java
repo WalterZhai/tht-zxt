@@ -16,6 +16,10 @@ import javax.servlet.http.HttpSession;
 import java.lang.reflect.Field;
 import java.util.Date;
 
+/**
+ * @author Walter(翟笑天)
+ * @date 2020/10/10
+ */
 @Component
 public class DataBaseAuditListener {
 

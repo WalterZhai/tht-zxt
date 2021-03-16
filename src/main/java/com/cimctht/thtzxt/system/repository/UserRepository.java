@@ -6,6 +6,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * @author Walter(翟笑天)
+ * @date 2020/10/10
+ */
 @Transactional
 public interface UserRepository extends JpaRepository<User,String> {
 

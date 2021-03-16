@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * @author Walter(翟笑天)
+ * @date 2020/10/10
+ */
 @RestController
 public class UserController {
 

@@ -1,5 +1,9 @@
 package com.cimctht.thtzxt.common.entity;
 
+/**
+ * @author Walter(翟笑天)
+ * @date 2020/10/10
+ */
 public class JsonResult {
     private static final int SUCCESS = 1;
     private static final int ERROR = 0;

@@ -18,6 +18,10 @@ import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.List;
 
+/**
+ * @author Walter(翟笑天)
+ * @date 2020/10/10
+ */
 @RestController
 public class SystemController {
 

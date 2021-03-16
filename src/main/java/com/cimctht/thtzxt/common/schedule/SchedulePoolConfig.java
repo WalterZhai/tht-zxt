@@ -5,7 +5,10 @@ import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Component;
 
-
+/**
+ * @author Walter(翟笑天)
+ * @date 2020/10/10
+ */
 @Component
 public class SchedulePoolConfig {
 

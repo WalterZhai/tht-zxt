@@ -11,7 +11,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 
-
+/**
+ * @author Walter(翟笑天)
+ * @date 2020/10/10
+ */
 @Component
 public class DefaultLoginProvider implements AuthenticationProvider {
 

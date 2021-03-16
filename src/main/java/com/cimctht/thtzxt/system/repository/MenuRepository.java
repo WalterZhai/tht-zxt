@@ -7,6 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 import java.math.BigInteger;
 import java.util.List;
 
+/**
+ * @author Walter(翟笑天)
+ * @date 2020/10/10
+ */
 public interface MenuRepository extends JpaRepository<Menu,String> {
 
 

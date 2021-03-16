@@ -9,9 +9,8 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- * @comment
  * @author Walter(翟笑天)
- * @date 2021/3/5
+ * @date 2020/10/10
  */
 @MappedSuperclass
 @EntityListeners(DataBaseAuditListener.class)

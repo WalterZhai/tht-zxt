@@ -6,6 +6,10 @@ import com.cimctht.thtzxt.system.entity.User;
 
 import java.util.List;
 
+/**
+ * @author Walter(翟笑天)
+ * @date 2020/10/10
+ */
 public interface MenuServiceImpl {
 
     List<Menu> selectLoginMenu(User user);

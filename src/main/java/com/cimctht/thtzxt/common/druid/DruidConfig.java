@@ -15,6 +15,10 @@ import org.springframework.core.env.Environment;
 
 import javax.sql.DataSource;
 
+/**
+ * @author Walter(翟笑天)
+ * @date 2020/10/10
+ */
 @Configuration
 public class DruidConfig {
 

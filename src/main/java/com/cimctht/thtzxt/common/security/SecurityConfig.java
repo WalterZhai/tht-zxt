@@ -12,6 +12,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 
+/**
+ * @author Walter(翟笑天)
+ * @date 2020/10/10
+ */
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 

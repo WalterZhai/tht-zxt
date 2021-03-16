@@ -1,5 +1,9 @@
 package com.cimctht.thtzxt.common.exception;
 
+/**
+ * @author Walter(翟笑天)
+ * @date 2020/10/10
+ */
 public class UnimaxException extends RuntimeException{
 	
 	public UnimaxException() {

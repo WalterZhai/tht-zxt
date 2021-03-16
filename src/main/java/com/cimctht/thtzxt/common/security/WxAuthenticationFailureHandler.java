@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @author Walter(翟笑天)
+ * @date 2020/10/10
+ */
 @Component("wxAuthenticationFailureHandler")
 public class WxAuthenticationFailureHandler implements AuthenticationFailureHandler {
 

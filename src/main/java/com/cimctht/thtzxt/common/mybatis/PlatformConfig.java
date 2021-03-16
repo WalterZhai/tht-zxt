@@ -16,6 +16,10 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
 
+/**
+ * @author Walter(翟笑天)
+ * @date 2020/10/10
+ */
 @Configuration
 @MapperScan(basePackages = {"com.cimctht.servicestation.dao.platform.*"},sqlSessionFactoryRef = "sqlSessionFactoryPlatform")
 public class PlatformConfig {

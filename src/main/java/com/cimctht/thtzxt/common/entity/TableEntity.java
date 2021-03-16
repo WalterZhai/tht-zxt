@@ -2,6 +2,10 @@ package com.cimctht.thtzxt.common.entity;
 
 import java.math.BigDecimal;
 
+/**
+ * @author Walter(翟笑天)
+ * @date 2020/10/10
+ */
 public class TableEntity {
     private String code;
     private String msg;

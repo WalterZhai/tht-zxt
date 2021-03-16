@@ -10,6 +10,10 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Walter(翟笑天)
+ * @date 2020/10/10
+ */
 @Entity
 @Table(name="SYS_GROUP")
 public class Group extends BaseEntity {

@@ -21,6 +21,10 @@ import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 import java.util.Map;
 
+/**
+ * @author Walter(翟笑天)
+ * @date 2020/10/10
+ */
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(

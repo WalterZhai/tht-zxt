@@ -5,6 +5,10 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
+/**
+ * @author Walter(翟笑天)
+ * @date 2020/10/10
+ */
 public class WxLoginAuthenticationToken  extends AbstractAuthenticationToken {
 
     private static final long serialVersionUID = -6437322217156360297L;

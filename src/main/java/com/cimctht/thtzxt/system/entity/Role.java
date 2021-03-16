@@ -7,6 +7,10 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Walter(翟笑天)
+ * @date 2020/10/10
+ */
 @Entity
 @Table(name="SYS_ROLE")
 public class Role extends BaseEntity {
