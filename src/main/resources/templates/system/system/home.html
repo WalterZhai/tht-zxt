@@ -9,6 +9,7 @@
     <script th:src="@{/layui/layui.js}"></script>
     <script th:src="@{/assets/js/templet.js}"></script>
     <script th:src="@{/assets/js/index.js}"></script>
+    <script th:src="@{/assets/css/index.css}"></script>
 </head>
 <body>
 
@@ -69,7 +70,7 @@
                     parent.openTabByBo(menu);
                     $("#search-main").val("");
                 }else{
-                    layer.msg(result.message,{icon: 5});
+                    layer.msg("菜单不存在！",{icon: 5});
                 }
             }
         });
@@ -104,9 +105,9 @@
         var htl = "";
         for(var i in arr){
             htl += "<div class='layui-col-md2'> " +
-                "<div class='console-app-group' data-url='"+arr[i].dataurl+"' data-id='"+arr[i].dataid+"' data-title='"+arr[i].datatitle+"'>" +
-                "<i class='console-app-icon layui-icon "+arr[i].iconid+"'></i>" +
-                "<div class='console-app-name'>"+arr[i].datatitle+"</div>" +
+                "<div class='console-app-group' data-url='"+arr[i].href+"' data-id='"+arr[i].id+"' data-title='"+arr[i].name+"'>" +
+                "<i class='console-app-icon layui-icon "+arr[i].icon+"'></i>" +
+                "<div class='console-app-name'>"+arr[i].name+"</div>" +
                 "</div>" +
                 "</div>";
         }
@@ -132,7 +133,7 @@
         background-color: #E4EAF7;
         cursor: pointer;
         display: block;
-        margin: 0 10px;
+        margin: 10px 10px;
     }
 
     .console-app-group .console-app-icon {

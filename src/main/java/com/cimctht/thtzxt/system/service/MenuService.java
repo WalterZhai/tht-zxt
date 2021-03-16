@@ -135,7 +135,7 @@ public class MenuService implements MenuServiceImpl {
         JSONObject object = new JSONObject();
         object.put("title",menu.getName());
         object.put("id",menu.getId());
-        object.put("spread",true);
+        object.put("spread",false);
         if(collectList.contains(menu)){
             object.put("checked",true);
         }

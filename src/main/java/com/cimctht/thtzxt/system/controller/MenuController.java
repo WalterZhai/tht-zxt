@@ -5,15 +5,18 @@ import com.alibaba.fastjson.JSONArray;
 import com.cimctht.thtzxt.common.entity.JsonResult;
 import com.cimctht.thtzxt.common.exception.UnimaxException;
 import com.cimctht.thtzxt.system.Impl.MenuServiceImpl;
+import com.cimctht.thtzxt.system.bo.SimpleMenuBo;
 import com.cimctht.thtzxt.system.entity.Menu;
 import com.cimctht.thtzxt.system.entity.User;
 import com.cimctht.thtzxt.system.repository.MenuRepository;
+import com.cimctht.thtzxt.system.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +31,9 @@ public class MenuController {
 
     @Autowired
     private MenuServiceImpl menuServiceImpl;
+
+    @Autowired
+    private UserRepository userRepository;
 
 
     @PostMapping(value = "/menu/loadSearchInfo")
@@ -47,7 +53,7 @@ public class MenuController {
         try{
             String code = info.substring(info.indexOf("(") + 1, info.indexOf(")"));
             Menu menu = menuRepository.findMenuByCodeAndIsDelete(code, 0);
-            return new JsonResult(menu);
+            return new JsonResult(new SimpleMenuBo(menu));
         }catch (Exception e){
             return new JsonResult(new UnimaxException(e.getMessage()));
         }
@@ -74,6 +80,22 @@ public class MenuController {
         try{
             menuServiceImpl.saveMenuCollect(trees,username);
             return new JsonResult("保存成功!");
+        }catch (Exception e){
+            return new JsonResult(new UnimaxException(e.getMessage()));
+        }
+    }
+
+    @PostMapping(value = "/menu/ajaxSelectCollect")
+    public JsonResult ajaxSelectCollect(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("username");
+        try{
+            User user = userRepository.findUserByLoginNameAndIsDelete(username,0);
+            List<SimpleMenuBo> list = new ArrayList<>();
+            for(Menu menu : user.getCollects()){
+                list.add(new SimpleMenuBo(menu));
+            }
+            return new JsonResult(list);
         }catch (Exception e){
             return new JsonResult(new UnimaxException(e.getMessage()));
         }

@@ -20,4 +20,5 @@ public interface MenuServiceImpl {
     JSONArray ajaxUserLoadTreeChecked(String username);
 
     void saveMenuCollect(JSONArray data,String username);
+
 }
