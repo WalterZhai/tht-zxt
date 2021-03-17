@@ -3,6 +3,7 @@ package com.cimctht.thtzxt.system.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.cimctht.thtzxt.common.entity.JsonResult;
+import com.cimctht.thtzxt.common.entity.TableEntity;
 import com.cimctht.thtzxt.common.exception.UnimaxException;
 import com.cimctht.thtzxt.system.Impl.MenuServiceImpl;
 import com.cimctht.thtzxt.system.bo.SimpleMenuBo;
@@ -11,6 +12,7 @@ import com.cimctht.thtzxt.system.entity.User;
 import com.cimctht.thtzxt.system.repository.MenuRepository;
 import com.cimctht.thtzxt.system.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -98,6 +100,101 @@ public class MenuController {
             return new JsonResult(list);
         }catch (Exception e){
             return new JsonResult(new UnimaxException(e.getMessage()));
+        }
+    }
+
+    @PostMapping(value = "/menu/ajaxLoadTree")
+    public JsonResult ajaxLoadTree(HttpServletRequest request) {
+        try{
+            JSONArray array = menuServiceImpl.ajaxLoadTree();
+            return new JsonResult(array);
+        }catch (Exception e){
+            return new JsonResult(new UnimaxException("加载树形菜单失败!"));
+        }
+    }
+
+    @GetMapping(value = "/menu/menuTableData")
+    public TableEntity menuTableData(HttpServletRequest request, String id, Integer page, Integer limit) {
+        TableEntity table;
+        try{
+            table = menuServiceImpl.menuTableData(id,page,limit);
+        }catch (Exception e){
+            table = new TableEntity(e);
+        }
+        return table;
+    }
+
+    @PostMapping(value = "/menu/addMenu")
+    public JsonResult addMenu(HttpServletRequest request,String id,String name,String href,Integer type,String icon) {
+        try{
+            Menu parent = menuRepository.findMenuById(id);
+            Menu menu = new Menu();
+            menu.setName(name);
+            menu.setParentMenu(parent);
+            menu.setHref(href);
+            menu.setType(type);
+            menu.setIcon(icon);
+            Integer seq;
+            if(parent!=null){
+                seq = menuRepository.queryMaxSeqByParentMenuId(parent.getId()) + 1;
+            }else{
+                seq = menuRepository.queryMaxSeqByParentMenuIsNull() + 1;
+            }
+            menu.setSeq(seq);
+            menuRepository.save(menu);
+            return new JsonResult();
+        }catch (Exception e){
+            return new JsonResult(new UnimaxException(e.getMessage()));
+        }
+    }
+
+    @PostMapping(value = "/menu/editMenu")
+    public JsonResult editMenu(HttpServletRequest request,String id,String name,String href,Integer type,String icon) {
+        try{
+            Menu menu = menuRepository.findMenuById(id);
+            menu.setName(name);
+            menu.setHref(href);
+            menu.setType(type);
+            menu.setIcon(icon);
+            menuRepository.save(menu);
+            return new JsonResult();
+        }catch (Exception e){
+            return new JsonResult(new UnimaxException(e.getMessage()));
+        }
+    }
+
+    @PostMapping(value = "/menu/delMenu")
+    public JsonResult delMenu(HttpServletRequest request,String id) {
+        try{
+            Menu menu = menuRepository.findMenuById(id);
+            if(menu.getChildMenus().size()>0){
+                throw new UnimaxException("存在子菜单，无法删除！");
+            }
+            menu.setIsDelete(1);
+            menuRepository.save(menu);
+            return new JsonResult("删除成功");
+        }catch (Exception e){
+            return new JsonResult(new UnimaxException(e.getMessage()));
+        }
+    }
+
+    @PostMapping(value = "/menu/rowUp")
+    public JsonResult rowUp(HttpServletRequest request,String id) {
+        try{
+            menuServiceImpl.rowUp(id);
+            return new JsonResult();
+        }catch (Exception e){
+            return new JsonResult(new UnimaxException("移动失败"));
+        }
+    }
+
+    @PostMapping(value = "/menu/rowDown")
+    public JsonResult rowDown(HttpServletRequest request,String id) {
+        try{
+            menuServiceImpl.rowDown(id);
+            return new JsonResult();
+        }catch (Exception e){
+            return new JsonResult(new UnimaxException("移动失败"));
         }
     }
 

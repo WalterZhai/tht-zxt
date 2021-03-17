@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>登录</title>
-	<script th:src="@{/layui/jquery.min.js}"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/index.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/layui/css/layui.css}"/>
 	<script th:src="@{/layui/layui.js}"></script>
 	<script th:src="@{/assets/js/templet.js}"></script>
@@ -13,38 +13,32 @@
 
 <form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;">
 	<input name="id" type="hidden">
-	<div class="layui-form-item">
-		<label class="layui-form-label">菜单名</label>
-		<div class="layui-input-block">
-			<input type="text" name="name" required  lay-verify="required" placeholder="请输入菜单名" autocomplete="off" class="layui-input">
-		</div>
-	</div>
-	<div class="layui-form-item">
-		<label class="layui-form-label">链接</label>
-		<div class="layui-input-block">
-			<input type="text" name="href" placeholder="请输入链接" autocomplete="off" class="layui-input">
-		</div>
-	</div>
-	<div class="layui-form-item">
-		<label class="layui-form-label">快速ID</label>
-		<div class="layui-input-block">
-			<input type="text" name="selectId" required  lay-verify="required" placeholder="请输入快速ID" autocomplete="off" class="layui-input">
-		</div>
-	</div>
-	<div class="layui-form-item">
-		<label class="layui-form-label">类型</label>
-		<div class="layui-input-block">
-			<input type="radio" name="type" value="0" title="web" checked>
-			<input type="radio" name="type" value="1" title="app" >
-		</div>
-	</div>
-	<div class="layui-form-item">
-		<label class="layui-form-label">图标</label>
-		<div class="layui-input-block">
-			<input type="text" name="icon"  placeholder="请输入图标" autocomplete="off" class="layui-input">
-		</div>
-	</div>
+
+	<label class="label-size label-color">菜单名*</label>
+	<input type="text" name="name" required  lay-verify="required" autocomplete="off" class="input-size">
+
+	<br>
+
+	<label class="label-size">链接</label>
+	<input type="text" name="href" autocomplete="off" class="input-size" style="width: 300px">
+
+	<br>
+
+	<label class="label-size label-color">类型*</label>
+	<input type="radio" name="type" value="0" title="web" checked>
+	<input type="radio" name="type" value="1" title="app" >
+
+	<br>
+
+	<label class="label-size">图标</label>
+	<input type="text" name="icon" autocomplete="off" class="input-size">
+
+	<br>
+
 	<a href="https://www.layui.com/doc/element/icon.html" target="_blank" style="">图片浏览...</a>
+
+	<hr class="layui-bg-green">
+
 	<div class="layui-form-item">
 		<div class="layui-input-block">
 			<button class="layui-btn" lay-submit lay-filter="formSubmit2">立即提交</button>
@@ -55,9 +49,10 @@
 </body>
 
 <script>
-	layui.use(['form','layer'], function(){
+	layui.use(['form','layer','jquery'], function(){
 		var form = layui.form;
 		var layer = layui.layer;
+		var $ = layui.jquery;
 
 		//监听提交
 		form.on('submit(formSubmit2)', function(data){

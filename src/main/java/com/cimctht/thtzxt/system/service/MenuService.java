@@ -3,7 +3,10 @@ package com.cimctht.thtzxt.system.service;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.cimctht.thtzxt.common.entity.TableEntity;
+import com.cimctht.thtzxt.common.utils.MathsUtils;
 import com.cimctht.thtzxt.system.Impl.MenuServiceImpl;
+import com.cimctht.thtzxt.system.bo.SimpleMenuBo;
 import com.cimctht.thtzxt.system.entity.Menu;
 import com.cimctht.thtzxt.system.entity.Role;
 import com.cimctht.thtzxt.system.entity.User;
@@ -12,6 +15,9 @@ import com.cimctht.thtzxt.system.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -177,6 +183,112 @@ public class MenuService implements MenuServiceImpl {
             }
         }
         return resultIds;
+    }
+
+    @Override
+    public JSONArray ajaxLoadTree() {
+        //最终返回
+        JSONArray result = new JSONArray();
+        //虚拟顶层
+        JSONObject virtualTop = new JSONObject();
+        virtualTop.put("title","<h3><i class='layui-icon layui-icon-align-left'>&nbsp;</i>菜单树</h3>");
+        virtualTop.put("id","");
+        virtualTop.put("spread",true);
+        //实际菜单层级
+        JSONArray arr = new JSONArray();
+        List<Menu> menus =  menuRepository.findMenusByIsDeleteAndParentMenuOrderBySeq(0,null);
+        for(Menu menu : menus){
+            JSONObject object = recursiveMenu(menu);
+            arr.add(object);
+        }
+        virtualTop.put("children",arr);
+        result.add(virtualTop);
+        return result;
+    }
+
+    //递归建模
+    public JSONObject recursiveMenu(Menu menu){
+        JSONObject object = new JSONObject();
+        object.put("title",menu.getName());
+        object.put("id",menu.getId());
+        object.put("spread",false);
+        if(menu.getChildMenus().size()>0){
+            JSONArray children = new JSONArray();
+            for(Menu child : menu.getChildMenus()){
+                JSONObject obj = recursiveMenu(child);
+                children.add(obj);
+            }
+            object.put("children",children);
+        }
+        return object;
+    }
+
+    @Override
+    public TableEntity menuTableData(String id, Integer page, Integer limit) {
+        Menu parent = menuRepository.findMenuById(id);
+        Pageable pageable = PageRequest.of(page-1,limit);
+        Page<Menu> pages = menuRepository.findMenusByIsDeleteAndParentMenuOrderBySeq(0,parent,pageable);
+        List<Menu> list = pages.getContent();
+        List<SimpleMenuBo> result = new ArrayList<>();
+        for(Menu menu : list){
+            result.add(new SimpleMenuBo(menu));
+        }
+        return new TableEntity(result, MathsUtils.convertLong2BigDecimal(pages.getTotalElements()));
+    }
+
+    @Override
+    public void rowUp(String menuId) {
+        Menu menu = menuRepository.findMenuById(menuId);
+        //找到父菜单
+        Menu parentMenu = menu.getParentMenu();
+        //找到同父菜单下的所有子菜单
+        List<Menu> children = parentMenu.getChildMenus();
+        //目标位置,原本位置大于1，对整体修改
+        if(menu.getSeq()>1){
+            Integer target = menu.getSeq()-1;
+            List<Menu> result = new ArrayList<>();
+            Integer seq = 1;
+            for(Menu child : children){
+                if(!child.equals(menu)){
+                    if(seq==target){
+                        menu.setSeq(target);
+                    }else{
+                        menu.setSeq(seq);
+                    }
+                    seq += 1;
+                }
+                result.add(child);
+            }
+            menuRepository.saveAll(children);
+        }
+    }
+
+    @Override
+    public void rowDown(String menuId) {
+        Menu menu = menuRepository.findMenuById(menuId);
+        //找到父菜单
+        Menu parentMenu = menu.getParentMenu();
+        //找到同父菜单下的所有子菜单
+        List<Menu> children = parentMenu.getChildMenus();
+        Integer last = children.get(children.size()-1).getSeq();
+        if(menu.getSeq()<last){
+            Integer target = menu.getSeq()+1;
+            List<Menu> result = new ArrayList<>();
+            Integer seq = 1;
+            for(Menu child : children){
+                if(!child.equals(menu)){
+                    if(seq==target){
+                        menu.setSeq(target);
+                    }else{
+                        menu.setSeq(seq);
+                    }
+                }
+                seq += 1;
+                result.add(child);
+            }
+            menuRepository.saveAll(children);
+        }
+
     }
 
 }

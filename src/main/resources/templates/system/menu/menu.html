@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>菜单管理</title>
-    <script th:src="@{/layui/jquery.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/index.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/layui/css/layui.css}"/>
     <script th:src="@{/layui/layui.js}"></script>
     <script th:src="@{/assets/js/templet.js}"></script>
@@ -20,10 +20,10 @@
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <div class="layui-input-inline" style="width: auto;">
-                            <button type="button" class="layui-btn table-refresh"><i class="layui-icon layui-icon-search"></i>刷新树</button>
+                            <button type="button" class="layui-btn layui-btn-sm table-refresh"><i class="layui-icon layui-icon-refresh"></i>刷新</button>
                         </div>
                         <div class="layui-input-inline" style="width: auto;">
-                            <button type="button" class="layui-btn menu-add"><i class="layui-icon layui-icon-add-1"></i>添加子菜单</button>
+                            <button type="button" class="layui-btn layui-btn-sm menu-add"><i class="layui-icon layui-icon-add-1"></i>添加</button>
                         </div>
                     </div>
                 </div>
@@ -52,21 +52,21 @@
 
         table.render({
             elem: '#tableList'
-            ,url: '/menu/tableData' //数据接口
+            ,url: '/menu/menuTableData' //数据接口
             ,title: '子菜单明细表'
             ,page: {curr:1} //开启分页
-            ,limit:10
+            ,limit:20
+            ,size: 'sm'
+            ,height: 'full-80'
             ,cols: [
                 [ //表头
                     {field: 'id', title: 'ID', width:80 ,hide:true}
                     ,{field: 'name', title: '菜单名', width:150}
-                    ,{field: 'pmenu', title: '父菜单', width:150,templet:'<div>{{d.pmenu==null?"":d.pmenu.name}}</div>'}
+                    ,{field: 'pname', title: '父菜单', width:150}
                     ,{field: 'href', title: '链接', width:200}
-                    ,{field: 'leve', title: '等级', width:80}
-                    ,{field: 'seq', title: '同级别顺序', width:100}
+                    ,{field: 'seq', title: '同父顺序', width:100}
                     ,{field: 'type', title: '类型', width:80}
-                    ,{field: 'uda2', title: '快速ID', width:120}
-                    ,{field: 'uda1', title: '图标ID', width:120}
+                    ,{field: 'icon', title: '图标ID', width:120}
                     ,{field: '',title: '功能操作',width:240,toolbar:'#bar'}
                 ]
             ]
@@ -95,9 +95,9 @@
         //刷新表格
         window.refreshTab  = function(){
             table.reload('tableList',{
-                url:'/menu/tableData',
+                url:'/menu/menuTableData',
                 page: {curr:1},
-                limit:10,
+                limit:20,
                 where:{
                     id : id
                 }
@@ -142,42 +142,22 @@
 
         //添加新菜单
         $('.menu-add').on('click', function () {
-            $.ajax({
-                url:'/menu/treeAddJudge',
-                type:'post',
-                data:{
-                    id : id
-                },
-                success:function(result){
-                    if(result.state == 1){
-                        treeAddLit(id);
-                    }else{
-                        layer.msg(result.message,{icon: 5});
-                    }
-                }
-            });
-        });
-
-        function treeAddLit(pid) {
             layer.open({
                 type : 2,
                 maxmin : true,
                 title : '添加菜单',
                 area : [ '500px', '400px' ],
                 fix : false,
-                content : '/topage?url=user/menu/menu-add.html',
+                content : '/topage?url=system/menu/menu-add.html',
                 success:function(layero,index){
                     var body = layer.getChildFrame('body', index);
-                    body.find("input[name='id']").val(pid);
+                    body.find("input[name='id']").val(id);
                 }
             });
-        }
+        });
 
 
         window.reloadTree =function(){
-            // id = "";
-            // //tree.reload('mtId', {});
-            // ajaxLoadTree();
             refreshTab();
         }
 
@@ -204,15 +184,14 @@
                 title : '修改菜单信息',
                 area : [ '500px', '400px' ],
                 fix : false,
-                content : '/topage?url=user/menu/menu-edit.html',
+                content : '/topage?url=system/menu/menu-edit.html',
                 success:function(layero,index){
                     var body = layer.getChildFrame('body', index);
                     body.find("input[name='id']").val(obj.id);
                     body.find("input[name='name']").val(obj.name);
                     body.find("input[name='href']").val(obj.href);
-                    body.find("input[name='selectId']").val(obj.uda2);
                     body.find("input[name='type']").val(obj.type);
-                    body.find("input[name='icon']").val(obj.uda1);
+                    body.find("input[name='icon']").val(obj.icon);
                 }
             });
         }
@@ -225,7 +204,7 @@
                     url:'/menu/delMenu',
                     type:'post',
                     data:{
-                        obj:JSON.stringify(obj)
+                        id:obj.id
                     },
                     success:function(result){
                         if(result.state == 1){
@@ -247,7 +226,7 @@
                 url:'/menu/rowUp',
                 type:'post',
                 data:{
-                    obj:JSON.stringify(obj)
+                    id:obj.id
                 },
                 success:function(result){
                     if(result.state == 1){
@@ -264,7 +243,7 @@
                 url:'/menu/rowDown',
                 type:'post',
                 data:{
-                    obj:JSON.stringify(obj)
+                    id:obj.id
                 },
                 success:function(result){
                     if(result.state == 1){

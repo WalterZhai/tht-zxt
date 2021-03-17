@@ -12,6 +12,9 @@ public class SimpleMenuBo {
     private String id;
     private String href;
     private String icon;
+    private String pname;
+    private Integer seq;
+    private Integer type;
 
     public SimpleMenuBo() {
     }
@@ -21,6 +24,9 @@ public class SimpleMenuBo {
         this.id = menu.getId();
         this.href = menu.getHref();
         this.icon = menu.getIcon();
+        this.pname = menu.getParentMenu()==null?"":menu.getParentMenu().getName();
+        this.seq = menu.getSeq();
+        this.type = menu.getType();
     }
 
     public String getName() {
@@ -53,5 +59,29 @@ public class SimpleMenuBo {
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public String getPname() {
+        return pname;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
+    }
+
+    public Integer getSeq() {
+        return seq;
+    }
+
+    public void setSeq(Integer seq) {
+        this.seq = seq;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }

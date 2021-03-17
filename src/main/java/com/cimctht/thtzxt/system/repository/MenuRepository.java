@@ -1,6 +1,8 @@
 package com.cimctht.thtzxt.system.repository;
 
 import com.cimctht.thtzxt.system.entity.Menu;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,4 +26,13 @@ public interface MenuRepository extends JpaRepository<Menu,String> {
 
     List<Menu> findMenusByIsDeleteAndIdIn(Integer isDelete,List<String> ids);
 
+    Page<Menu> findMenusByIsDeleteAndParentMenuOrderBySeq(Integer isDelete, Menu menu, Pageable pageable);
+
+    Menu findMenuById(String id);
+
+    @Query(nativeQuery = true, value =" select nvl(max(seq),0) from SYS_MENU t where t.is_delete=0 and t.parent_id=?1 ")
+    Integer queryMaxSeqByParentMenuId(String parentMenuId);
+
+    @Query(nativeQuery = true, value =" select nvl(max(seq),0) from SYS_MENU t where t.is_delete=0 and t.parent_id is null ")
+    Integer queryMaxSeqByParentMenuIsNull();
 }
