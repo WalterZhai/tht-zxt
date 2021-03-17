@@ -11,15 +11,12 @@ import java.util.Map;
  */
 public interface RoleServiceImpl {
 
-    // TableEntity findRolesByIsDeleteAndCodeLikeAndNameLike(String name, String code, Integer page, Integer limit);
-    //
-    // void addRole(String code,String name);
-    //
-    // void editRole(String id,String code,String name);
-    //
-    // Map<String,Object> ajaxLoadTransferRoleRelUser(String roleid);
-    //
-    // void addSelectUser(String roleid, JSONArray arr);
-    //
-    // void delSelectUser(String roleid,JSONArray arr);
+    TableEntity roleTableData(String code, String name, Integer page, Integer limit);
+
+    JSONArray ajaxLoadMenuTreeByRole(String roleid);
+
+    void saveMenuSelectByRole(String id,JSONArray trees);
+
+    Map<String,Object> ajaxLoadTransferRoleRelUser(String roleid);
+
 }

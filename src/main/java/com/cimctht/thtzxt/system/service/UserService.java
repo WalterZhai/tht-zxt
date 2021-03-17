@@ -6,6 +6,7 @@ import com.cimctht.thtzxt.common.constant.SysConstant;
 import com.cimctht.thtzxt.common.entity.TableEntity;
 import com.cimctht.thtzxt.common.exception.UnimaxException;
 import com.cimctht.thtzxt.common.utils.MathsUtils;
+import com.cimctht.thtzxt.common.utils.StringUtils;
 import com.cimctht.thtzxt.system.Impl.UserServiceImpl;
 import com.cimctht.thtzxt.system.bo.SimpleUserBo;
 import com.cimctht.thtzxt.system.entity.Role;
@@ -54,7 +55,7 @@ public class UserService implements UserServiceImpl {
     @Override
     public TableEntity userTableData(String loginName, String name, Integer page, Integer limit) {
         Pageable pageable = PageRequest.of(page-1,limit);
-        Page<User> pages = userRepository.findUsersByIsDeleteAndLoginNameLikeAndNameLikeOrderByCreateDate(0, "%"+loginName+"%", "%" + name + "%", pageable);
+        Page<User> pages = userRepository.findUsersByIsDeleteAndLoginNameLikeAndNameLikeOrderByCreateDate(0, StringUtils.string2LikeParam(loginName), StringUtils.string2LikeParam(name), pageable);
         List<User> list = pages.getContent();
         List<SimpleUserBo> result = new ArrayList<>();
         for(User user : list){

@@ -47,6 +47,9 @@ public class InitImplementsService {
     @Autowired
     private MenuRepository menuRepository;
 
+    @Autowired
+    private RoleRepository groupRepository;
+
 
     /**
      * @comment 初始化spring session 表
@@ -315,7 +318,7 @@ public class InitImplementsService {
 
             //用户组
             Group group = new Group();
-            group.setCode(SysConstant.SYSTEM_GROUP_CODE_PREFIX + StringUtils.padLeft(roleRepository.queryCodeSeqNext().toString(),3,"0"));
+            group.setCode(SysConstant.SYSTEM_GROUP_CODE_PREFIX + StringUtils.padLeft(groupRepository.queryCodeSeqNext().toString(),3,"0"));
             group.setName(SysConstant.SYSTEM_GROUP_NAME);
             group.setDescription(SysConstant.SYSTEM_GROUP_DESCRIPTION);
             group.setCreateId(SysConstant.ADMIN);

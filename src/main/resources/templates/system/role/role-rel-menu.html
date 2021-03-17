@@ -13,27 +13,29 @@
 <div id="menu-tree"></div>
 <div class="layui-input-block"></div>
 <div class="layui-input-block">
-	<button class="layui-btn tree-confirm" >确定</button>
-	<button class="layui-btn layui-btn-primary tree-cancel">取消</button>
+	<button class="layui-btn layui-btn-sm tree-confirm" >确定</button>
+	<button class="layui-btn layui-btn-sm layui-btn-primary tree-cancel">取消</button>
 </div>
 
 </body>
 
-<script>
+<script th:inline="javascript">
 	layui.use(['form','layer','tree'], function(){
 		var form = layui.form;
 		var layer = layui.layer;
 		var tree = layui.tree;
 		var $ = layui.jquery;
-		var idrole = "";
 
-		window.ajaxLoadTree = function (roleid) {
-			idrole = roleid;
+		layer.ready(function () {
+			ajaxLoadTree();
+		});
+
+		function ajaxLoadTree() {
 			$.ajax({
-				url:'/menu/ajaxLoadTreeChecked',
+				url:'/role/ajaxLoadMenuTreeByRole',
 				type:'post',
 				data:{
-					roleid:roleid
+					roleid:[[${id}]]
 				},
 				success:function(result){
 					if(result.state == 1){
@@ -60,10 +62,10 @@
 		$('.tree-confirm').on('click', function () {
 			var checkData = tree.getChecked('mtId');
 			$.ajax({
-				url:'/menu/saveMenuSelect',
+				url:'/role/saveMenuSelectByRole',
 				type:'post',
 				data:{
-					id:idrole,
+					id:[[${id}]],
 					treeData:JSON.stringify(checkData)
 				},
 				success:function(result){

@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CollectionsUtils {
-	
+
+	/**
+	 * @comment 字符串数组转字符串list
+	 * @author Walter(翟笑天)
+	 * @date 2021/3/17
+	 */
 	public static List<String> convertArrays2ListByString(String[] arr){
 		List<String> list = new ArrayList<String>();
 		for(String s : arr) {

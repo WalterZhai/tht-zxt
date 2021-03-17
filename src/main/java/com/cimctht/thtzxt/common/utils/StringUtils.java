@@ -7,8 +7,9 @@ import java.util.UUID;
 public class StringUtils {
 
 	/**
-	 * 将string 按分隔符分隔返回list
-	 * @return
+	 * @comment 将string 按分隔符分隔返回list
+	 * @author Walter(翟笑天)
+	 * @date 2021/3/17
 	 */
 	public static List<String> transString2ListString(String str,String reg) {
 		List<String> list = new ArrayList<String>();
@@ -19,7 +20,11 @@ public class StringUtils {
 		return list;
 	}
 	
-	
+	/**
+	 * @comment 判断是否为null或者空字符串（""）
+	 * @author Walter(翟笑天)
+	 * @date 2021/3/17
+	 */
 	public static boolean isEmpty(String str) {
 		if("".equals(str)) {
 			return true;
@@ -30,8 +35,9 @@ public class StringUtils {
 	}
 	
 	/**
-	 * 将list<String>修改成?,?,?的形式
-	 * @return
+	 * @comment 将list<String>修改成?,?,?的形式
+	 * @author Walter(翟笑天)
+	 * @date 2021/3/17
 	 */
 	public static String list2String(List<String> list) {
 		String s = "";
@@ -46,8 +52,9 @@ public class StringUtils {
 	}
 	
 	/**
-	 * 将list<String>改成in后面的形式
-	 * @return
+	 * @comment 将list<String>改成in后面的形式
+	 * @author Walter(翟笑天)
+	 * @date 2021/3/17
 	 */
 	public static String list2InString(List<String> list) {
 		String s = "";
@@ -63,8 +70,9 @@ public class StringUtils {
 	
 	
 	/**
-	 * 将String[]改成in后面的形式
-	 * @return
+	 * @comment 将String[]改成in后面的形式
+	 * @author Walter(翟笑天)
+	 * @date 2021/3/17
 	 */
 	public static String arr2InString(String[] arr) {
 		String s = "";
@@ -79,19 +87,18 @@ public class StringUtils {
 	}
 	
 	/**
-	 * 生成GID
-	 * @return
+	 * @comment 生成32位UUID
+	 * @author Walter(翟笑天)
+	 * @date 2021/3/17
 	 */
 	public static String generteUUID() {
 		 return UUID.randomUUID().toString().replace("-", "").toLowerCase();
 	}
 	
 	/**
-	 * 左补位
-	 * @param s
-	 * @param len
-	 * @param c
-	 * @return
+	 * @comment 左补位(同C#)
+	 * @author Walter(翟笑天)
+	 * @date 2021/3/17
 	 */
 	public static String padLeft(String s,Integer len, String c) {
 		if(s.length()>=len) {
@@ -105,11 +112,9 @@ public class StringUtils {
 	}
 	
 	/**
-	 * 右补位
-	 * @param s
-	 * @param len
-	 * @param c
-	 * @return
+	 * @comment 右补位(同C#)
+	 * @author Walter(翟笑天)
+	 * @date 2021/3/17
 	 */
 	public static String padRight(String s,Integer len, String c) {
 		if(s.length()>=len) {
@@ -121,5 +126,28 @@ public class StringUtils {
 		}
 		return s;
 	}
-	
+
+	/**
+	 * @comment 判断字符串不为空
+	 * @author Walter(翟笑天)
+	 * @date 2021/3/17
+	 */
+	public static boolean isNotEmpty(String str) {
+		boolean flag = isEmpty(str);
+		if(flag){
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+	/**
+	 * @comment 将String改为 % string % 模式
+	 * @author Walter(翟笑天)
+	 * @date 2021/3/17
+	 */
+	public static String string2LikeParam(String s) {
+		return "%" + s + "%";
+	}
+
 }

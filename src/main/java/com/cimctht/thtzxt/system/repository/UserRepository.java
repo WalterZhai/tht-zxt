@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @author Walter(翟笑天)
  * @date 2020/10/10
@@ -20,4 +22,6 @@ public interface UserRepository extends JpaRepository<User,String> {
     Page<User> findUsersByIsDeleteAndLoginNameLikeAndNameLikeOrderByCreateDate(Integer isDelete, String loginName, String name, Pageable pageable);
 
     User findUserById(String id);
+
+    List<User> findUsersByIsDelete(Integer isDelete);
 }

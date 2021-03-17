@@ -18,24 +18,27 @@
 
 </body>
 
-<script>
+<script th:inline="javascript">
 	layui.use(['form','layer','transfer'], function(){
 		var form = layui.form;
 		var layer = layui.layer;
 		var transfer = layui.transfer;
 		var $ = layui.jquery;
 
-		window.ajaxLoadTransfer = function (roleid) {
+		layer.ready(function () {
+			ajaxLoadTransfer();
+		});
 
+		function ajaxLoadTransfer() {
 			$.ajax({
 				url:'/role/ajaxLoadTransferRoleRelUser',
 				type:'post',
 				data:{
-					roleid:roleid
+					roleid:[[${id}]]
 				},
 				success:function(result){
 					if(result.state == 1){
-						laodTransfer(result.data.data,result.data.value,roleid);
+						laodTransfer(result.data.data,result.data.value,[[${id}]]);
 					}else{
 						layer.msg(result.message,{icon: 5});
 					}
