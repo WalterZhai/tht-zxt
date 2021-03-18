@@ -10,8 +10,10 @@ import com.cimctht.thtzxt.common.utils.StringUtils;
 import com.cimctht.thtzxt.system.Impl.MenuServiceImpl;
 import com.cimctht.thtzxt.system.bo.SimpleMenuBo;
 import com.cimctht.thtzxt.system.entity.Menu;
+import com.cimctht.thtzxt.system.entity.Role;
 import com.cimctht.thtzxt.system.entity.User;
 import com.cimctht.thtzxt.system.repository.MenuRepository;
+import com.cimctht.thtzxt.system.repository.RoleRepository;
 import com.cimctht.thtzxt.system.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +40,9 @@ public class MenuController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
 
     @PostMapping(value = "/menu/loadSearchInfo")
@@ -174,12 +179,28 @@ public class MenuController {
                 throw new UnimaxException("存在子菜单，无法删除！");
             }
 
-
+            //父菜单中清除子菜单
             Menu parent = menu.getParentMenu();
             if(parent!=null){
                 parent.getChildMenus().remove(menu);
                 menuRepository.save(parent);
             }
+            //角色中清除子菜单
+            List<Role> roles = menu.getRoles();
+            for(Role role : roles){
+                if(role.getMenus().contains(menu)){
+                    role.getMenus().remove(menu);
+                }
+            }
+            roleRepository.saveAll(roles);
+            //用户下清除收藏菜单
+            List<User> users = menu.getUsers();
+            for(User user : users){
+                if(user.getCollects().contains(menu)){
+                    user.getCollects().remove(menu);
+                }
+            }
+            userRepository.saveAll(users);
 
             menu.setIsDelete(1);
             menuRepository.save(menu);
