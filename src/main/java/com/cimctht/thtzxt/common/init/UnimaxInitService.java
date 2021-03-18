@@ -21,6 +21,9 @@ public class UnimaxInitService implements ApplicationRunner {
     @Autowired
     private InitImplementsService initImplementsService;
 
+    @Autowired
+    private InitBasedataService initBasedataService;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         logger.info("项目初始化开始");
@@ -28,6 +31,7 @@ public class UnimaxInitService implements ApplicationRunner {
         initImplementsService.initBaseTableComment();
         initImplementsService.initSeq();
         initImplementsService.initAdmin();
+        initBasedataService.initBaseTableComment();
         logger.info("项目初始化结束");
     }
 

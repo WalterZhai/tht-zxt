@@ -13,6 +13,8 @@ import com.cimctht.thtzxt.system.entity.User;
 import com.cimctht.thtzxt.system.repository.MenuRepository;
 import com.cimctht.thtzxt.system.repository.RoleRepository;
 import com.cimctht.thtzxt.system.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -30,6 +32,8 @@ import java.util.Map;
  */
 @Service
 public class RoleService implements RoleServiceImpl {
+
+    static final Logger logger = LoggerFactory.getLogger(RoleService.class);
 
     @Autowired
     private RoleRepository roleRepository;

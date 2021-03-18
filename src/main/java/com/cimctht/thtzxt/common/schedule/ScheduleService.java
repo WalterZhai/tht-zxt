@@ -1,5 +1,8 @@
 package com.cimctht.thtzxt.common.schedule;
 
+import com.cimctht.thtzxt.basedata.Impl.DepartServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,17 +12,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class ScheduleService {
 
-    // @Autowired
-    // SyncService syncService;
+    @Autowired
+    DepartServiceImpl departServiceImpl;
 
     // @Scheduled(cron="0 0 12 * * ?")
     // public void syncEmployee() {
     //     syncService.syncEmployee();
     // }
     //
-    // @Scheduled(cron="0 0 11 * * ?")
-    // public void syncDepart() {
-    //     syncService.syncDepart();
-    // }
+    @Scheduled(cron="0 0 11 * * ?")
+    public void syncDepart() {
+        departServiceImpl.syncDepart();
+    }
 
 }

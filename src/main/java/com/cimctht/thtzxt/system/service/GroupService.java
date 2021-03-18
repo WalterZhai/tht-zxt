@@ -8,11 +8,14 @@ import com.cimctht.thtzxt.common.utils.StringUtils;
 import com.cimctht.thtzxt.system.Impl.GroupServiceImpl;
 import com.cimctht.thtzxt.system.bo.SimpleGroupBo;
 import com.cimctht.thtzxt.system.bo.SimpleUserBo;
+import com.cimctht.thtzxt.system.controller.GroupController;
 import com.cimctht.thtzxt.system.entity.Group;
 import com.cimctht.thtzxt.system.entity.User;
 import com.cimctht.thtzxt.system.repository.GroupRepository;
 import com.cimctht.thtzxt.system.repository.UserRepository;
 import org.apache.axis2.util.ArrayStack;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,6 +34,8 @@ import java.util.Map;
  */
 @Service
 public class GroupService implements GroupServiceImpl {
+
+    static final Logger logger = LoggerFactory.getLogger(GroupService.class);
 
     @Autowired
     private GroupRepository groupRepository;

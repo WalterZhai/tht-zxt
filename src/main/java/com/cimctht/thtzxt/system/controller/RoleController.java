@@ -6,7 +6,6 @@ import com.cimctht.thtzxt.common.constant.SysConstant;
 import com.cimctht.thtzxt.common.entity.JsonResult;
 import com.cimctht.thtzxt.common.entity.TableEntity;
 import com.cimctht.thtzxt.common.exception.UnimaxException;
-import com.cimctht.thtzxt.common.utils.EntityUtils;
 import com.cimctht.thtzxt.common.utils.StringUtils;
 import com.cimctht.thtzxt.system.Impl.RoleServiceImpl;
 import com.cimctht.thtzxt.system.bo.SimpleRoleBo;
@@ -14,13 +13,14 @@ import com.cimctht.thtzxt.system.entity.Role;
 import com.cimctht.thtzxt.system.entity.User;
 import com.cimctht.thtzxt.system.repository.RoleRepository;
 import com.cimctht.thtzxt.system.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +31,8 @@ import java.util.Map;
  */
 @RestController
 public class RoleController {
+
+    static final Logger logger = LoggerFactory.getLogger(RoleController.class);
 
     @Autowired
     private RoleServiceImpl roleServiceImpl;

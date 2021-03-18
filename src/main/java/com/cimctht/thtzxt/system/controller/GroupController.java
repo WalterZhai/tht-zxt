@@ -13,6 +13,8 @@ import com.cimctht.thtzxt.system.entity.Group;
 import com.cimctht.thtzxt.system.entity.User;
 import com.cimctht.thtzxt.system.repository.GroupRepository;
 import com.cimctht.thtzxt.system.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +31,8 @@ import java.util.Map;
  */
 @RestController
 public class GroupController {
+
+    static final Logger logger = LoggerFactory.getLogger(GroupController.class);
 
     @Autowired
     private GroupServiceImpl groupServiceImpl;

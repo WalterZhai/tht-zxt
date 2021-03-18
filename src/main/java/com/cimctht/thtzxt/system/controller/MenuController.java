@@ -15,6 +15,8 @@ import com.cimctht.thtzxt.system.entity.User;
 import com.cimctht.thtzxt.system.repository.MenuRepository;
 import com.cimctht.thtzxt.system.repository.RoleRepository;
 import com.cimctht.thtzxt.system.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +33,8 @@ import java.util.List;
  */
 @RestController
 public class MenuController {
+
+    static final Logger logger = LoggerFactory.getLogger(MenuController.class);
 
     @Autowired
     private MenuRepository menuRepository;
