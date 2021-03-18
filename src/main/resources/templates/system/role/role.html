@@ -56,7 +56,7 @@
             ,size: 'sm'
             ,height: 'full-80'
             ,cols: [
-                [ //表头
+                [
                     {checkbox: true}
                     , {field: 'id', title: 'ID', width: 80, hide: true}
                     , {field: 'code', title: '角色编码', width: 120}
@@ -237,7 +237,7 @@
                             success:function(result){
                                 if(result.state == 1){
                                     layer.close(index);
-                                    refreshTab();
+                                    queryTab();
                                 }else{
                                     layer.msg(result.message,{icon: 5});
                                 }

@@ -18,7 +18,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-
+/**
+ * @author Walter(翟笑天)
+ * @date 2020/10/10
+ */
 public class EntityUtils {
 
     static final Logger logger = LoggerFactory.getLogger(EntityUtils.class);

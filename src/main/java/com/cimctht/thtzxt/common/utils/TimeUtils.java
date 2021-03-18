@@ -7,7 +7,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-
+/**
+ * @author Walter(翟笑天)
+ * @date 2020/10/10
+ */
 public class TimeUtils {
 	
 	/**

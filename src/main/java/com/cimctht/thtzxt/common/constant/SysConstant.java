@@ -1,5 +1,9 @@
 package com.cimctht.thtzxt.common.constant;
 
+/**
+ * @author Walter(翟笑天)
+ * @date 2020/10/10
+ */
 public interface SysConstant {
 
 	/** 默认登录密码 **/
