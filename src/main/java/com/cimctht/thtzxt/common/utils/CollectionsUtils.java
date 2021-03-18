@@ -12,7 +12,7 @@ public class CollectionsUtils {
 	/**
 	 * @comment 字符串数组转字符串list
 	 * @author Walter(翟笑天)
-	 * @date 2021/3/17
+	 * @date 2020/10/10
 	 */
 	public static List<String> convertArrays2ListByString(String[] arr){
 		List<String> list = new ArrayList<String>();

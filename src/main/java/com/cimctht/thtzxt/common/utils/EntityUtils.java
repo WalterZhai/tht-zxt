@@ -30,7 +30,7 @@ public class EntityUtils {
     /**
      * @comment 删除标识添加
      * @author Walter(翟笑天)
-     * @date 2021/3/17
+     * @date 2020/10/10
      */
     public static void insertDelete(Object o){
         delEntity(o);
@@ -39,7 +39,7 @@ public class EntityUtils {
     /**
      * @comment 删除标识添加(数组)
      * @author Walter(翟笑天)
-     * @date 2021/3/17
+     * @date 2020/10/10
      */
     public static void insertDeleteAll(List list) {
         if(list.size()==0) {
@@ -53,7 +53,7 @@ public class EntityUtils {
     /**
      * @comment 写入实体基本信息
      * @author Walter(翟笑天)
-     * @date 2021/3/17
+     * @date 2020/10/10
      */
     public static void insertBasicInfo(Object o){
         if(judgeIsNewEntity(o)) {
@@ -66,7 +66,7 @@ public class EntityUtils {
     /**
      * @comment 写入实体基本信息(数组)
      * @author Walter(翟笑天)
-     * @date 2021/3/17
+     * @date 2020/10/10
      */
     public static void insertBasicInfoAll(List list) {
         if(list.size()==0) {
@@ -80,7 +80,7 @@ public class EntityUtils {
     /**
      * @comment 判断Entity是否有gid，有gid则是更新，没有gid则是新增
      * @author Walter(翟笑天)
-     * @date 2021/3/17
+     * @date 2020/10/10
      */
     public static boolean judgeIsNewEntity(Object o) {
         Object id = getFieldValueByName("id", o);
@@ -97,7 +97,7 @@ public class EntityUtils {
     /**
      * @comment 新建时自动填Entity信息
      * @author Walter(翟笑天)
-     * @date 2021/3/17
+     * @date 2020/10/10
      */
     public static Object delEntity(Object o) {
         //获得session
@@ -128,7 +128,7 @@ public class EntityUtils {
     /**
      * @comment 新建时自动填Entity信息
      * @author Walter(翟笑天)
-     * @date 2021/3/17
+     * @date 2020/10/10
      */
     public static Object newEntity(Object o) {
         //获得session
@@ -168,7 +168,7 @@ public class EntityUtils {
     /**
      * @comment 修改时自动填Entity信息
      * @author Walter(翟笑天)
-     * @date 2021/3/17
+     * @date 2020/10/10
      */
     public static Object modifyEntity(Object o) {
         //获得session
@@ -196,7 +196,7 @@ public class EntityUtils {
     /**
      * @comment 根据属性名获取属性值
      * @author Walter(翟笑天)
-     * @date 2021/3/17
+     * @date 2020/10/10
      */
     public static Object getFieldValueByName(String fieldName, Object o) {
         try {
@@ -213,7 +213,7 @@ public class EntityUtils {
     /**
      * @comment 获取属性名数组
      * @author Walter(翟笑天)
-     * @date 2021/3/17
+     * @date 2020/10/10
      */
     public static String[] getFiledName(Object o) {
         Field[] fields = o.getClass().getDeclaredFields();
@@ -227,7 +227,7 @@ public class EntityUtils {
     /**
      * @comment 获取属性类型(type)，属性名(name)，属性值(value)的map组成的list
      * @author Walter(翟笑天)
-     * @date 2021/3/17
+     * @date 2020/10/10
      */
     public static List<Map<String, Object>> getFiledInfo(Object o) {
         List<Map<String, Object>> list = new ArrayList<>();

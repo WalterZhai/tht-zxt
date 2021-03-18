@@ -13,7 +13,7 @@ public class StringUtils {
 	/**
 	 * @comment 将string 按分隔符分隔返回list
 	 * @author Walter(翟笑天)
-	 * @date 2021/3/17
+	 * @date 2020/10/10
 	 */
 	public static List<String> transString2ListString(String str,String reg) {
 		List<String> list = new ArrayList<String>();
@@ -27,7 +27,7 @@ public class StringUtils {
 	/**
 	 * @comment 判断是否为null或者空字符串（""）
 	 * @author Walter(翟笑天)
-	 * @date 2021/3/17
+	 * @date 2020/10/10
 	 */
 	public static boolean isEmpty(String str) {
 		if("".equals(str)) {
@@ -41,7 +41,7 @@ public class StringUtils {
 	/**
 	 * @comment 将list<String>修改成?,?,?的形式
 	 * @author Walter(翟笑天)
-	 * @date 2021/3/17
+	 * @date 2020/10/10
 	 */
 	public static String list2String(List<String> list) {
 		String s = "";
@@ -58,7 +58,7 @@ public class StringUtils {
 	/**
 	 * @comment 将list<String>改成in后面的形式
 	 * @author Walter(翟笑天)
-	 * @date 2021/3/17
+	 * @date 2020/10/10
 	 */
 	public static String list2InString(List<String> list) {
 		String s = "";
@@ -76,7 +76,7 @@ public class StringUtils {
 	/**
 	 * @comment 将String[]改成in后面的形式
 	 * @author Walter(翟笑天)
-	 * @date 2021/3/17
+	 * @date 2020/10/10
 	 */
 	public static String arr2InString(String[] arr) {
 		String s = "";
@@ -93,7 +93,7 @@ public class StringUtils {
 	/**
 	 * @comment 生成32位UUID
 	 * @author Walter(翟笑天)
-	 * @date 2021/3/17
+	 * @date 2020/10/10
 	 */
 	public static String generteUUID() {
 		 return UUID.randomUUID().toString().replace("-", "").toLowerCase();
@@ -102,7 +102,7 @@ public class StringUtils {
 	/**
 	 * @comment 左补位(同C#)
 	 * @author Walter(翟笑天)
-	 * @date 2021/3/17
+	 * @date 2020/10/10
 	 */
 	public static String padLeft(String s,Integer len, String c) {
 		if(s.length()>=len) {
@@ -118,7 +118,7 @@ public class StringUtils {
 	/**
 	 * @comment 右补位(同C#)
 	 * @author Walter(翟笑天)
-	 * @date 2021/3/17
+	 * @date 2020/10/10
 	 */
 	public static String padRight(String s,Integer len, String c) {
 		if(s.length()>=len) {
@@ -134,7 +134,7 @@ public class StringUtils {
 	/**
 	 * @comment 判断字符串不为空
 	 * @author Walter(翟笑天)
-	 * @date 2021/3/17
+	 * @date 2020/10/10
 	 */
 	public static boolean isNotEmpty(String str) {
 		boolean flag = isEmpty(str);
@@ -148,7 +148,7 @@ public class StringUtils {
 	/**
 	 * @comment 将String改为 % string % 模式
 	 * @author Walter(翟笑天)
-	 * @date 2021/3/17
+	 * @date 2020/10/10
 	 */
 	public static String string2LikeParam(String s) {
 		return "%" + s + "%";
