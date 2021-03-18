@@ -68,7 +68,7 @@ public class InitImplementsService {
             sql.append("LAST_ACCESS_TIME           number not null, ");
             sql.append("MAX_INACTIVE_INTERVAL           INT not null, ");
             sql.append("EXPIRY_TIME           number not null, ");
-            sql.append("PRINCIPAL_NAME           VARCHAR2(100) not null, ");
+            sql.append("PRINCIPAL_NAME           VARCHAR2(100), ");
             sql.append("CONSTRAINT SPRING_SESSION_PK PRIMARY KEY (PRIMARY_ID) ");
             sql.append(")");
             unimaxEntityManager.createNativeQuery(sql.toString()).executeUpdate();
@@ -527,7 +527,7 @@ public class InitImplementsService {
             menu2 = new Menu();
             menu2.setCode(SysConstant.SYSTEM_MENU_CODE_PREFIX + StringUtils.padLeft(menuRepository.queryCodeSeqNext().toString(),3,"0"));
             menu2.setName(SysConstant.MENU_TASK_NAME);
-            menu3.setParentMenu(menu1);
+            menu2.setParentMenu(menu1);
             menu2.setSeq(3);
             menu2.setType(0);
             menu2.setIcon(SysConstant.LAYUI_ICON_FILE);
