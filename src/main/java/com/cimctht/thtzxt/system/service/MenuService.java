@@ -54,12 +54,13 @@ public class MenuService implements MenuServiceImpl {
             }
         }
         //遍历所有菜单，不在ids内的去除
+        List<Menu> result = new ArrayList<>();
         for(Menu menu : menus){
             if(ids.contains(menu.getId())){
-                recursiveExclusion(menu,ids);
+                result.add(recursiveExclusion(menu,ids));
             }
         }
-        return menus;
+        return result;
     }
 
     //递归排除
@@ -241,25 +242,15 @@ public class MenuService implements MenuServiceImpl {
         Menu menu = menuRepository.findMenuById(menuId);
         //找到父菜单
         Menu parentMenu = menu.getParentMenu();
-        //找到同父菜单下的所有子菜单
-        List<Menu> children = parentMenu.getChildMenus();
-        //目标位置,原本位置大于1，对整体修改
+        //原本位置大于1,才进行修改
         if(menu.getSeq()>1){
             Integer target = menu.getSeq()-1;
-            List<Menu> result = new ArrayList<>();
-            Integer seq = 1;
-            for(Menu child : children){
-                if(!child.equals(menu)){
-                    if(seq==target){
-                        menu.setSeq(target);
-                    }else{
-                        menu.setSeq(seq);
-                    }
-                    seq += 1;
-                }
-                result.add(child);
-            }
-            menuRepository.saveAll(children);
+            //原本位置上的
+            Menu exist = menuRepository.findMenusByIsDeleteAndSeqAndParentMenuOrderBySeq(0,target,parentMenu);
+            exist.setSeq(menu.getSeq());
+            menuRepository.save(exist);
+            menu.setSeq(target);
+            menuRepository.save(menu);
         }
     }
 
@@ -269,26 +260,34 @@ public class MenuService implements MenuServiceImpl {
         //找到父菜单
         Menu parentMenu = menu.getParentMenu();
         //找到同父菜单下的所有子菜单
-        List<Menu> children = parentMenu.getChildMenus();
+        List<Menu> children = menuRepository.findMenusByIsDeleteAndParentMenuOrderBySeq(0,parentMenu);
         Integer last = children.get(children.size()-1).getSeq();
         if(menu.getSeq()<last){
             Integer target = menu.getSeq()+1;
-            List<Menu> result = new ArrayList<>();
-            Integer seq = 1;
-            for(Menu child : children){
-                if(!child.equals(menu)){
-                    if(seq==target){
-                        menu.setSeq(target);
-                    }else{
-                        menu.setSeq(seq);
-                    }
-                }
-                seq += 1;
-                result.add(child);
-            }
-            menuRepository.saveAll(children);
+            //原本位置上的
+            Menu exist = menuRepository.findMenusByIsDeleteAndSeqAndParentMenuOrderBySeq(0,target,parentMenu);
+            exist.setSeq(menu.getSeq());
+            menuRepository.save(exist);
+            menu.setSeq(target);
+            menuRepository.save(menu);
         }
 
+    }
+
+    @Override
+    public void sortChildrenSeq(Menu parentMenu) {
+        List<Menu> children;
+        if(parentMenu==null){
+            children = menuRepository.findMenusByIsDeleteAndParentMenuOrderBySeq(0,null);
+        }else{
+            children = parentMenu.getChildMenus();
+        }
+        Integer seq = 1;
+        for(Menu child : children){
+            child.setSeq(seq);
+            seq += 1;
+        }
+        menuRepository.saveAll(children);
     }
 
 }

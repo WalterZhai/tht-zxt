@@ -155,6 +155,9 @@ public class UserController {
                     throw new UnimaxException("admin用户无法删除！");
                 }
                 User user = userRepository.findUserById(bo.getId());
+                user.setRoles(new ArrayList<>());
+                user.setGroups(new ArrayList<>());
+                user.setCollects(new ArrayList<>());
                 user.setIsDelete(1);
                 users.add(user);
             }
@@ -196,6 +199,9 @@ public class UserController {
             if(SysConstant.ADMIN.equals(user.getLoginName())){
                 throw new UnimaxException("admin用户无法删除 ！");
             }
+            user.setRoles(new ArrayList<>());
+            user.setGroups(new ArrayList<>());
+            user.setCollects(new ArrayList<>());
             user.setIsDelete(1);
             userRepository.save(user);
             return new JsonResult("删除成功");

@@ -62,7 +62,10 @@ public class RoleController {
                 if(SysConstant.SYSTEM_ROLE_NAME.equals(bo.getName())){
                     throw new UnimaxException("系统管理员角色无法删除!");
                 }
-                list.add(roleRepository.findRoleById(bo.getId()));
+                Role role = roleRepository.findRoleById(bo.getId());
+                role.setMenus(new ArrayList<>());
+                role.setIsDelete(1);
+                list.add(role);
             }
             roleRepository.saveAll(list);
             return new JsonResult("删除成功");
@@ -79,6 +82,7 @@ public class RoleController {
             if(SysConstant.SYSTEM_ROLE_NAME.equals(role.getName())){
                 throw new UnimaxException("系统管理员角色无法删除!");
             }
+            role.setMenus(new ArrayList<>());
             role.setIsDelete(1);
             roleRepository.save(role);
             return new JsonResult("删除成功");

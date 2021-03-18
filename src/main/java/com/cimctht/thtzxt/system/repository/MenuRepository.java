@@ -35,4 +35,6 @@ public interface MenuRepository extends JpaRepository<Menu,String> {
 
     @Query(nativeQuery = true, value =" select nvl(max(seq),0) from SYS_MENU t where t.is_delete=0 and t.parent_id is null ")
     Integer queryMaxSeqByParentMenuIsNull();
+
+    Menu findMenusByIsDeleteAndSeqAndParentMenuOrderBySeq(Integer isDelete, Integer seq, Menu menu);
 }

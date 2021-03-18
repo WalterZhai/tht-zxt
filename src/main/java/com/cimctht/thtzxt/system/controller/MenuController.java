@@ -2,9 +2,11 @@ package com.cimctht.thtzxt.system.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.cimctht.thtzxt.common.constant.SysConstant;
 import com.cimctht.thtzxt.common.entity.JsonResult;
 import com.cimctht.thtzxt.common.entity.TableEntity;
 import com.cimctht.thtzxt.common.exception.UnimaxException;
+import com.cimctht.thtzxt.common.utils.StringUtils;
 import com.cimctht.thtzxt.system.Impl.MenuServiceImpl;
 import com.cimctht.thtzxt.system.bo.SimpleMenuBo;
 import com.cimctht.thtzxt.system.entity.Menu;
@@ -129,6 +131,7 @@ public class MenuController {
         try{
             Menu parent = menuRepository.findMenuById(id);
             Menu menu = new Menu();
+            menu.setCode(SysConstant.SYSTEM_MENU_CODE_PREFIX + StringUtils.padLeft(menuRepository.queryCodeSeqNext().toString(),3,"0"));
             menu.setName(name);
             menu.setParentMenu(parent);
             menu.setHref(href);
@@ -170,8 +173,19 @@ public class MenuController {
             if(menu.getChildMenus().size()>0){
                 throw new UnimaxException("存在子菜单，无法删除！");
             }
+
+
+            Menu parent = menu.getParentMenu();
+            if(parent!=null){
+                parent.getChildMenus().remove(menu);
+                menuRepository.save(parent);
+            }
+
             menu.setIsDelete(1);
             menuRepository.save(menu);
+
+            //所有子菜单重新排序
+            menuServiceImpl.sortChildrenSeq(parent);
             return new JsonResult("删除成功");
         }catch (Exception e){
             return new JsonResult(new UnimaxException(e.getMessage()));

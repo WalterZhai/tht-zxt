@@ -29,4 +29,6 @@ public interface MenuServiceImpl {
     void rowUp(String menuId);
 
     void rowDown(String menuId);
+
+    void sortChildrenSeq(Menu parentMenu);
 }
