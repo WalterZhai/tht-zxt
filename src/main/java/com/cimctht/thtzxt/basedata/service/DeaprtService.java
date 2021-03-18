@@ -7,6 +7,7 @@ import com.cimctht.thtzxt.basedata.bo.DepartSyncBo;
 import com.cimctht.thtzxt.basedata.entity.Depart;
 import com.cimctht.thtzxt.basedata.repository.DepartRepository;
 import com.cimctht.thtzxt.basedata.repository.EmployeeRepository;
+import com.cimctht.thtzxt.common.constant.SysConstant;
 import com.cimctht.thtzxt.common.constant.ThtConstant;
 import com.cimctht.thtzxt.common.entity.TableEntity;
 import com.cimctht.thtzxt.common.exception.UnimaxException;
@@ -163,22 +164,12 @@ public class DeaprtService implements DepartServiceImpl {
                 d.setName(uParam);
                 uParam = rootElement.elementTextTrim("PARENT_ID");
                 bo.setParentCode(uParam);
-//                Depart p = new Depart();
-//                p.setId(uParam);
-//                d.setPdepart(p);
-                uParam = rootElement.elementTextTrim("MANAGER_POSITION_NAME");
-                d.setUda1(uParam);
 
-                Date date = new Date();
                 if(StringUtils.isEmpty(d.getId())){
-                    d.setCreateId("admin");
-                    d.setCreateDate(date);
-                    d.setModifyId("admin");
-                    d.setModifyDate(date);
-                    d.setIsDelete(0);
+                    d.setCreateId(SysConstant.ADMIN);
+                    d.setModifyId(SysConstant.ADMIN);
                 }else{
-                    d.setModifyId("admin");
-                    d.setModifyDate(date);
+                    d.setModifyId(SysConstant.ADMIN);
                 }
                 list.add(d);
                 listbo.add(bo);

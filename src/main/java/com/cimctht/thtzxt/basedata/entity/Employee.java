@@ -40,10 +40,10 @@ public class Employee extends BaseEntity {
     private Date careerBeginDate;
     @Column(name = "JOIN_COMPANY_DATE",columnDefinition = "DATE")
     private Date joinCompanyDate;
-    @Column(name = "REMARK")
+    @Column(name = "REMARK",columnDefinition = "VARCHAR(150)")
     private String remark;
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "DEPART_ID",columnDefinition = "VARCHAR(30)")
+    @JoinColumn(name = "DEPART_ID",columnDefinition = "VARCHAR(32)")
     private Depart depart;
 
     public String getCode() {

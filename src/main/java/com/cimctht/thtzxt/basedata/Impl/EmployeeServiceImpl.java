@@ -12,4 +12,6 @@ public interface EmployeeServiceImpl {
     void genEmployees(List<Employee> list);
 
     TableEntity employeeTableData(String id, Integer page, Integer limit);
+
+    void syncEmployee();
 }

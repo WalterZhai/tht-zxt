@@ -26,15 +26,15 @@ public class Depart extends BaseEntity {
     @OrderBy("code ASC")
     private List<Depart> childDeparts = new ArrayList<>();
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "SUPERVISOR_GID")
+    @JoinColumn(name = "SUPERVISOR_GID",columnDefinition = "VARCHAR(32)")
     private Employee supervisor;
-    @Column(name = "COMMU_ADDRESS")
+    @Column(name = "COMMU_ADDRESS",columnDefinition = "VARCHAR(200)")
     private String commuAddress;
-    @Column(name = "TELEPHONE")
+    @Column(name = "TELEPHONE",columnDefinition = "VARCHAR(30)")
     private String telephone;
-    @Column(name = "FAX")
+    @Column(name = "FAX",columnDefinition = "VARCHAR(30)")
     private String fax;
-    @Column(name = "REMARK")
+    @Column(name = "REMARK",columnDefinition = "VARCHAR(150)")
     private String remark;
 
     public String getCode() {

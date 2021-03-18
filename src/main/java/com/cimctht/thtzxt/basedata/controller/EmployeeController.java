@@ -89,4 +89,14 @@ public class EmployeeController {
         return table;
     }
 
+    @PostMapping(value = "/employee/syncEmployee")
+    public JsonResult syncEmployee(HttpServletRequest request) {
+        try{
+            employeeServiceImpl.syncEmployee();
+            return new JsonResult("人员同步成功！");
+        }catch(Exception e){
+            return new JsonResult(new UnimaxException(e.getMessage()));
+        }
+    }
+
 }

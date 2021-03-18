@@ -98,4 +98,14 @@ public class DepartController {
         }
     }
 
+    @PostMapping(value = "/depart/syncDepart")
+    public JsonResult syncDepart(HttpServletRequest request) {
+        try{
+            departServiceImpl.syncDepart();
+            return new JsonResult("人员同步成功！");
+        }catch(Exception e){
+            return new JsonResult(new UnimaxException(e.getMessage()));
+        }
+    }
+
 }

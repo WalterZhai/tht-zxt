@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>部门管理</title>
-    <script th:src="@{/static/layui/jquery.min.js}"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{/static/layui/css/layui.css}"/>
-    <script th:src="@{/static/layui/layui.js}"></script>
-    <script th:src="@{/static/assets/js/templet.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/layui/css/layui.css}"/>
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/assets/js/templet.js}"></script>
 </head>
 <body>
 
@@ -20,10 +20,13 @@
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <div class="layui-input-inline" style="width: auto;">
-                            <button type="button" class="layui-btn depart-refresh"><i class="layui-icon layui-icon-search"></i>刷新树</button>
+                            <button type="button" class="layui-btn layui-btn-sm depart-refresh"><i class="layui-icon layui-icon-search"></i>刷新树</button>
                         </div>
                         <div class="layui-input-inline" style="width: auto;">
-                            <button type="button" class="layui-btn depart-add"><i class="layui-icon layui-icon-add-1"></i>添加子部门</button>
+                            <button type="button" class="layui-btn layui-btn-sm depart-add"><i class="layui-icon layui-icon-add-1"></i>添加子部门</button>
+                        </div>
+                        <div class="layui-input-inline" style="width: auto;">
+                            <button type="button" class="layui-btn layui-btn-sm depart-sync"><i class="layui-icon layui-icon-add-1"></i>同步部门</button>
                         </div>
                     </div>
                 </div>
@@ -90,7 +93,7 @@
 
 
         layer.ready(function(){
-            ajaxLoadTree();
+            // ajaxLoadTree();
         });
 
 
@@ -139,6 +142,28 @@
                 }
             });
         });
+
+        //从集团同步部门信息
+        $('.depart-sync').on('click', function () {
+            var loading = layer.msg('正在同步...', {icon: 16, shade: 0.3, time:0});
+            $.ajax({
+                url:'/depart/syncDepart',
+                type:'post',
+                data:{},
+                beforeSend:function () {},
+                success:function(result){
+                    if(result.state == 1){
+                        layer.close(loading);
+                        refreshTab();
+                    }else{
+                        layer.close(loading);
+                        layer.msg(result.message,{icon: 5});
+                    }
+                },
+                complete: function () {},
+            });
+        });
+
 
         //行中按钮
         table.on('tool(tableList)',function (obj) {
