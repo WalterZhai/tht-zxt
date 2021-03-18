@@ -22,7 +22,7 @@ public class Menu extends BaseEntity {
     private String name;
     @Column(name = "HREF",columnDefinition = "VARCHAR(300)")
     private String href;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PARENT_ID",columnDefinition = "VARCHAR(32)")
     private Menu parentMenu;
     @Column(name = "SEQ",columnDefinition = "NUMBER(3)")

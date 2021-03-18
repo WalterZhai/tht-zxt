@@ -179,12 +179,10 @@ public class MenuController {
                 throw new UnimaxException("存在子菜单，无法删除！");
             }
 
-            //父菜单中清除子菜单
+            //清除父菜单
             Menu parent = menu.getParentMenu();
-            if(parent!=null){
-                parent.getChildMenus().remove(menu);
-                menuRepository.save(parent);
-            }
+            menu.setParentMenu(null);
+
             //角色中清除子菜单
             List<Role> roles = menu.getRoles();
             for(Role role : roles){

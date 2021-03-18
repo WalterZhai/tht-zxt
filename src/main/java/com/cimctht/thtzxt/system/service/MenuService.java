@@ -280,7 +280,7 @@ public class MenuService implements MenuServiceImpl {
         if(parentMenu==null){
             children = menuRepository.findMenusByIsDeleteAndParentMenuOrderBySeq(0,null);
         }else{
-            children = parentMenu.getChildMenus();
+            children = menuRepository.findMenusByIsDeleteAndParentMenuOrderBySeq(0,parentMenu);
         }
         Integer seq = 1;
         for(Menu child : children){

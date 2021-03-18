@@ -64,6 +64,14 @@ public class RoleController {
                 }
                 Role role = roleRepository.findRoleById(bo.getId());
                 role.setMenus(new ArrayList<>());
+                //用户里面删除角色关系
+                List<User> users = role.getUsers();
+                for(User user : users){
+                    if(user.getRoles().contains(role)){
+                        user.getRoles().remove(role);
+                    }
+                }
+                userRepository.saveAll(users);
                 role.setIsDelete(1);
                 list.add(role);
             }
@@ -83,6 +91,14 @@ public class RoleController {
                 throw new UnimaxException("系统管理员角色无法删除!");
             }
             role.setMenus(new ArrayList<>());
+            //用户里面删除角色关系
+            List<User> users = role.getUsers();
+            for(User user : users){
+                if(user.getRoles().contains(role)){
+                    user.getRoles().remove(role);
+                }
+            }
+            userRepository.saveAll(users);
             role.setIsDelete(1);
             roleRepository.save(role);
             return new JsonResult("删除成功");
