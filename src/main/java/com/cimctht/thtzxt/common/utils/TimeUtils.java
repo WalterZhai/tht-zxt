@@ -234,5 +234,26 @@ public class TimeUtils {
 
         return output;
     }
-	
+
+    /**
+     * @comment 日期转换为时间
+     * @author Walter(翟笑天)
+     * @date 2020/10/10
+     */
+    public static Date convertShortStringToDate(String input)
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date output;
+        try
+        {
+            output = sdf.parse(input);
+        } catch (Exception e)
+        {
+            throw new UnimaxException("时间格式错误" + e.getMessage());
+        }
+
+        return output;
+    }
+
 }

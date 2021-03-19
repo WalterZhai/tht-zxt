@@ -109,4 +109,10 @@ public interface SysConstant {
     /** 序列名称定义-用户组 **/
     String LAYUI_ICON_FILE = "layui-icon-file";
 
+    /** 序列名称定义-员工 **/
+    String EMPLOYEE_SEQ = "EMPLOYEE_SEQ";
+
+    /** 序列名称定义-部门 **/
+    String DEPART_SEQ = "DEPART_SEQ";
+
 }

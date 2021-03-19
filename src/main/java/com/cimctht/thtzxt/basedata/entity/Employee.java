@@ -45,6 +45,16 @@ public class Employee extends BaseEntity {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "DEPART_ID",columnDefinition = "VARCHAR(32)")
     private Depart depart;
+    @Column(name = "EDUCATION",columnDefinition = "VARCHAR(30)")
+    private String education;
+    @Column(name = "MAJOR",columnDefinition = "VARCHAR(30)")
+    private String major;
+    @Column(name = "JOB",columnDefinition = "VARCHAR(30)")
+    private String job;
+    @Column(name = "BANK_NUMBER",columnDefinition = "VARCHAR(50)")
+    private String bankNumber;
+    @Column(name = "CONTRACT_END_DATE",columnDefinition = "DATE")
+    private Date contractEndDate;
 
     public String getCode() {
         return code;
@@ -180,5 +190,45 @@ public class Employee extends BaseEntity {
 
     public void setDepart(Depart depart) {
         this.depart = depart;
+    }
+
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
+
+    public String getBankNumber() {
+        return bankNumber;
+    }
+
+    public void setBankNumber(String bankNumber) {
+        this.bankNumber = bankNumber;
+    }
+
+    public Date getContractEndDate() {
+        return contractEndDate;
+    }
+
+    public void setContractEndDate(Date contractEndDate) {
+        this.contractEndDate = contractEndDate;
     }
 }

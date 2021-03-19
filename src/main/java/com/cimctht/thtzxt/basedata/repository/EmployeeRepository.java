@@ -5,7 +5,9 @@ import com.cimctht.thtzxt.basedata.entity.Employee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
+import java.math.BigInteger;
 import java.util.List;
 
 public interface EmployeeRepository extends JpaRepository<Employee,String> {
@@ -15,4 +17,9 @@ public interface EmployeeRepository extends JpaRepository<Employee,String> {
     Page<Employee> findEmployeesByIsDeleteAndDepart(Integer isDelete, Depart d, Pageable pageable);
 
     List<Employee> findEmployeesByIsDelete(Integer isDelete);
+
+    @Query(nativeQuery = true, value =" select EMPLOYEE_SEQ.nextval from dual ")
+    BigInteger queryCodeSeqNext();
+
+    Employee findEmployeeById(String id);
 }

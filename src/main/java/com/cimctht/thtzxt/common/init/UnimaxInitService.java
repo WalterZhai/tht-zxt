@@ -32,6 +32,7 @@ public class UnimaxInitService implements ApplicationRunner {
         initImplementsService.initSeq();
         initImplementsService.initAdmin();
         initBasedataService.initBaseTableComment();
+        initBasedataService.initSeq();
         logger.info("项目初始化结束");
     }
 

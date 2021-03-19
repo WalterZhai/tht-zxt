@@ -1,6 +1,7 @@
 package com.cimctht.thtzxt.common.init;
 
 import cn.hutool.core.util.StrUtil;
+import com.cimctht.thtzxt.common.constant.SysConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.math.BigDecimal;
 
 /**
  * @author Walter(翟笑天)
@@ -121,7 +123,16 @@ public class InitBasedataService {
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
             sql = " comment on column BD_EMPLOYEE.depart_id is '所属部门' ";
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
-
+            sql = " comment on column BD_EMPLOYEE.bank_number is '银行卡号' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column BD_EMPLOYEE.contract_end_date is '合同截止日期' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column BD_EMPLOYEE.education is '学历' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column BD_EMPLOYEE.job is '职务' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column BD_EMPLOYEE.major is '专业' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
 
             sql = "comment on column BD_EMPLOYEE.gid is '主键' ";
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
@@ -144,6 +155,30 @@ public class InitBasedataService {
             sql = "comment on column BD_EMPLOYEE.uda4 is '备用4' ";
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
             sql = "comment on column BD_EMPLOYEE.uda5 is '备用5' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+        }
+
+    }
+
+
+    /**
+     * @comment 初始化员工、部门 sequence
+     * @author Walter(翟笑天)
+     * @date 2021/3/13
+     */
+    public void initSeq(){
+        //员工工号序列
+        String judgeSql = "select count(*) from user_sequences where sequence_name= '"+ SysConstant.EMPLOYEE_SEQ+"' ";
+        BigDecimal judge = (BigDecimal) unimaxEntityManager.createNativeQuery(judgeSql).getSingleResult();
+        if(judge.compareTo(BigDecimal.ZERO)==0){
+            String sql = " create sequence "+SysConstant.EMPLOYEE_SEQ+" minvalue 1 maxvalue 9999999999999999999999999999 start with 1 increment by 1 cache 20 ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+        }
+        //部门编码序列
+        judgeSql = "select count(*) from user_sequences where sequence_name= '"+SysConstant.DEPART_SEQ+"' ";
+        judge = (BigDecimal) unimaxEntityManager.createNativeQuery(judgeSql).getSingleResult();
+        if(judge.compareTo(BigDecimal.ZERO)==0){
+            String sql = " create sequence "+SysConstant.DEPART_SEQ+" minvalue 1 maxvalue 9999999999999999999999999999 start with 1 increment by 1 cache 20 ";
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
         }
 

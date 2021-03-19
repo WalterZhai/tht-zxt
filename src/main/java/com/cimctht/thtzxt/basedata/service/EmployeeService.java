@@ -1,6 +1,7 @@
 package com.cimctht.thtzxt.basedata.service;
 
 import com.cimctht.thtzxt.basedata.Impl.EmployeeServiceImpl;
+import com.cimctht.thtzxt.basedata.bo.SimpleEmployeeBo;
 import com.cimctht.thtzxt.basedata.entity.Depart;
 import com.cimctht.thtzxt.basedata.entity.Employee;
 import com.cimctht.thtzxt.basedata.repository.DepartRepository;
@@ -48,16 +49,24 @@ public class EmployeeService implements EmployeeServiceImpl {
     private DepartRepository departRepository;
 
     @Override
-    public TableEntity findEmployeesByIsDeleteAndCodeLikeAndNameLike(String name, String code, Integer page, Integer limit) {
+    public TableEntity employeeTableData(String code, String name, Integer page, Integer limit) {
         Pageable pageable = PageRequest.of(page-1,limit);
-        Page<Employee> pages = employeeRepository.findEmployeesByIsDeleteAndCodeLikeAndNameLike(0,"%"+code+"%","%"+name+"%",pageable);
-        return new TableEntity(pages.getContent(), MathsUtils.convertLong2BigDecimal(pages.getTotalElements()));
+        Page<Employee> pages = employeeRepository.findEmployeesByIsDeleteAndCodeLikeAndNameLike(0,StringUtils.string2LikeParam(code),StringUtils.string2LikeParam(name),pageable);
+        List<Employee> list = pages.getContent();
+        List<SimpleEmployeeBo> result = new ArrayList<>();
+        for(Employee employee : list){
+            result.add(new SimpleEmployeeBo(employee));
+        }
+        return new TableEntity(result, MathsUtils.convertLong2BigDecimal(pages.getTotalElements()));
     }
 
     @Override
-    public void genEmployees(List<Employee> list) {
-        List<User> listU = new ArrayList<User>();
-        for(Employee emp : list){
+    public void genEmployees(List<SimpleEmployeeBo> list) {
+        List<User> listU = new ArrayList<>();
+        for(SimpleEmployeeBo emp : list){
+            if(userRepository.findUserByLoginNameAndIsDelete(emp.getCode(),0)!=null){
+                continue;
+            }
             User u = new User();
             u.setName(emp.getName());
             u.setLoginName(emp.getCode());
@@ -65,7 +74,6 @@ public class EmployeeService implements EmployeeServiceImpl {
             u.setIsLocked(0);
             u.setEmail(emp.getEmail());
             u.setMobile(emp.getMobile());
-            EntityUtils.insertBasicInfo(u);
             listU.add(u);
         }
         userRepository.saveAll(listU);
