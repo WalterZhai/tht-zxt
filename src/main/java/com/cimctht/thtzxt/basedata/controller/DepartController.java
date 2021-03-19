@@ -142,6 +142,9 @@ public class DepartController {
         try{
             String id = request.getParameter("id");
             Depart depart = departRepository.findDepartById(id);
+            if(depart.getChildDeparts().size()>0){
+                throw new UnimaxException("存在子部门，无法删除！");
+            }
             depart.setParentDepart(null);
             depart.setIsDelete(1);
             departRepository.save(depart);
