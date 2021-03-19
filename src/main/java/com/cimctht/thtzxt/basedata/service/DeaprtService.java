@@ -48,7 +48,7 @@ public class DeaprtService implements DepartServiceImpl {
     @Override
     public JSONArray departAjaxLoadTree() {
         JSONArray resultArr = new JSONArray();
-        List<Depart> list = departRepository.queryDepartsByParentDepartAndIsDelete(null,0);
+        List<Depart> list = departRepository.findDepartsByParentDepartAndIsDelete(null,0);
         for(Depart d : list){
             JSONObject o = new JSONObject();
             o = recursionDepart(o,d);
@@ -61,7 +61,7 @@ public class DeaprtService implements DepartServiceImpl {
     public JSONObject recursionDepart(JSONObject o,Depart d){
         o.put("title",d.getName());
         o.put("id",d.getId());
-        List<Depart> list = departRepository.queryDepartsByParentDepartAndIsDelete(d,0);
+        List<Depart> list = departRepository.findDepartsByParentDepartAndIsDelete(d,0);
         if(list.size()>0){
             JSONArray arr = new JSONArray();
             for(Depart dchild : list){
@@ -80,35 +80,13 @@ public class DeaprtService implements DepartServiceImpl {
     public TableEntity departTableData(String id, Integer page, Integer limit) {
         Depart depart = departRepository.findDepartById(id);
         Pageable pageable = PageRequest.of(page-1,limit);
-        Page<Depart> pages = departRepository.queryDepartsByIsDeleteAndParentDepartOrderByCode(0,depart,pageable);
+        Page<Depart> pages = departRepository.findDepartsByIsDeleteAndParentDepartOrderByCode(0,depart,pageable);
         List<Depart> list = pages.getContent();
         List<SimpleDepartBo> result = new ArrayList<>();
         for(Depart d : list){
             result.add(new SimpleDepartBo(d));
         }
         return new TableEntity(result, MathsUtils.convertLong2BigDecimal(pages.getTotalElements()));
-    }
-
-    @Override
-    public void addDeaprt(String id, String code, String name, String uda1) {
-        Depart p = departRepository.findDepartById(id);
-        Depart d = new Depart();
-        d.setCode(code);
-        d.setName(name);
-        d.setUda1(uda1);
-        d.setParentDepart(p);
-        EntityUtils.insertBasicInfo(d);
-        departRepository.save(d);
-    }
-
-    @Override
-    public void editDeaprt(String id, String code, String name, String uda1) {
-        Depart d = departRepository.findDepartById(id);
-        d.setCode(code);
-        d.setName(name);
-        d.setUda1(uda1);
-        EntityUtils.insertBasicInfo(d);
-        departRepository.save(d);
     }
 
     @Override

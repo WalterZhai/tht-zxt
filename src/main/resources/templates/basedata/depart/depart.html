@@ -20,7 +20,7 @@
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <div class="layui-input-inline" style="width: auto;">
-                            <button type="button" class="layui-btn layui-btn-sm depart-refresh"><i class="layui-icon layui-icon-search"></i>刷新</button>
+                            <button type="button" class="layui-btn layui-btn-sm depart-refresh"><i class="layui-icon layui-icon-refresh"></i>刷新</button>
                         </div>
                         <div class="layui-input-inline" style="width: auto;">
                             <button type="button" class="layui-btn layui-btn-sm depart-add"><i class="layui-icon layui-icon-add-1"></i>添加</button>
@@ -94,6 +94,16 @@
             });
         };
 
+        //刷新表格
+        window.queryTab  = function(){
+            table.reload('tableList',{
+                url:'/depart/departTableData',
+                where:{
+                    id : id
+                }
+            });
+        };
+
 
         layer.ready(function(){
             ajaxLoadTree();
@@ -136,12 +146,12 @@
                 type : 2,
                 maxmin : true,
                 title : '添加菜单',
-                area : [ '500px', '400px' ],
+                area : [ '99%', '99%' ],
                 fix : false,
                 content : '/topage?url=basedata/depart/depart-add.html',
                 success:function(layero,index){
                     var body = layer.getChildFrame('body', index);
-                    body.find("input[name='id']").val(id);
+                    body.find("input[name='parentId']").val(id);
                 }
             });
         });
@@ -186,15 +196,10 @@
                 type : 2,
                 maxmin : true,
                 title : '修改部门信息',
-                area : [ '500px', '400px' ],
+                area : [ '99%', '99%' ],
                 fix : false,
-                content : '/topage?url=user/depart/depart-edit.html',
+                content : '/topage/departEntity?url=basedata/depart/depart-edit.html&id='+obj.id,
                 success:function(layero,index){
-                    var body = layer.getChildFrame('body', index);
-                    body.find("input[name='id']").val(obj.id);
-                    body.find("input[name='code']").val(obj.code);
-                    body.find("input[name='name']").val(obj.name);
-                    body.find("input[name='uda1']").val(obj.uda1);
                 }
             });
         }
@@ -207,7 +212,7 @@
                     url:'/depart/delDepart',
                     type:'post',
                     data:{
-                        obj:JSON.stringify(obj)
+                        id:obj.id
                     },
                     success:function(result){
                         if(result.state == 1){
@@ -229,9 +234,9 @@
                 type : 2,
                 maxmin : true,
                 title : '选择上级部门',
-                area : [ '100%', '80%' ],
+                area : [ '99%', '99%' ],
                 fix : false,
-                content : '/topage?url=user/depart/depart-change.html',
+                content : '/topage?url=basedata/depart/depart-change.html',
                 success:function(layero,index){
                     var iframeWin = window[layero.find('iframe')[0]['name']];
                     iframeWin.ajaxLoadTree1(obj.id);

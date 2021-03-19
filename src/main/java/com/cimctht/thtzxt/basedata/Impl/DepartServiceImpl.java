@@ -9,9 +9,5 @@ public interface DepartServiceImpl {
 
     TableEntity departTableData(String id, Integer page, Integer limit);
 
-    void addDeaprt(String id, String code, String name, String uda1);
-
-    void editDeaprt(String id, String code, String name, String uda1);
-
     void syncDepart();
 }

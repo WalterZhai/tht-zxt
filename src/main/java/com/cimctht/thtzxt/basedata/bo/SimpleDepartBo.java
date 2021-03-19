@@ -13,6 +13,7 @@ public class SimpleDepartBo {
     private String code;
     private String name;
     private String parentDepartName;
+    private String supervisorId;
     private String supervisorName;
     private String commuAddress;
     private String telephone;
@@ -38,6 +39,7 @@ public class SimpleDepartBo {
         this.code = depart.getCode();
         this.name = depart.getName();
         this.parentDepartName = depart.getParentDepart()==null?"":depart.getParentDepart().getName();
+        this.supervisorId = depart.getSupervisor()==null?"":depart.getSupervisor().getId();
         this.supervisorName = depart.getSupervisor()==null?"":depart.getSupervisor().getName();
         this.commuAddress = depart.getCommuAddress();
         this.telephone = depart.getTelephone();
@@ -207,5 +209,13 @@ public class SimpleDepartBo {
 
     public void setUda5(String uda5) {
         this.uda5 = uda5;
+    }
+
+    public String getSupervisorId() {
+        return supervisorId;
+    }
+
+    public void setSupervisorId(String supervisorId) {
+        this.supervisorId = supervisorId;
     }
 }

@@ -13,11 +13,11 @@ public interface DepartRepository extends JpaRepository<Depart,String> {
 
     Depart findDepartByCode(String code);
 
-    List<Depart> queryDepartsByParentDepartAndIsDelete(Depart d, Integer isDelete);
+    List<Depart> findDepartsByParentDepartAndIsDelete(Depart d, Integer isDelete);
 
     Depart findDepartById(String id);
 
-    Page<Depart> queryDepartsByIsDeleteAndParentDepartOrderByCode(Integer isDelete, Depart d, Pageable pageable);
+    Page<Depart> findDepartsByIsDeleteAndParentDepartOrderByCode(Integer isDelete, Depart d, Pageable pageable);
 
     List<Depart> findDepartsByIsDelete(Integer isDelete);
 
