@@ -5,9 +5,9 @@ import com.cimctht.thtzxt.common.entity.TableEntity;
 
 public interface DepartServiceImpl {
 
-    JSONArray ajaxLoadTree();
+    JSONArray departAjaxLoadTree();
 
-    TableEntity queryMenusByIsDeleteAndPmenu(String id, Integer page, Integer limit);
+    TableEntity departTableData(String id, Integer page, Integer limit);
 
     void addDeaprt(String id, String code, String name, String uda1);
 

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.cimctht.thtzxt.basedata.Impl.DepartServiceImpl;
 import com.cimctht.thtzxt.basedata.bo.DepartSyncBo;
+import com.cimctht.thtzxt.basedata.bo.SimpleDepartBo;
 import com.cimctht.thtzxt.basedata.entity.Depart;
 import com.cimctht.thtzxt.basedata.repository.DepartRepository;
 import com.cimctht.thtzxt.basedata.repository.EmployeeRepository;
@@ -45,7 +46,7 @@ public class DeaprtService implements DepartServiceImpl {
 
 
     @Override
-    public JSONArray ajaxLoadTree() {
+    public JSONArray departAjaxLoadTree() {
         JSONArray resultArr = new JSONArray();
         List<Depart> list = departRepository.queryDepartsByParentDepartAndIsDelete(null,0);
         for(Depart d : list){
@@ -76,11 +77,16 @@ public class DeaprtService implements DepartServiceImpl {
     }
 
     @Override
-    public TableEntity queryMenusByIsDeleteAndPmenu(String id, Integer page, Integer limit) {
-        Depart d = departRepository.findDepartById(id);
+    public TableEntity departTableData(String id, Integer page, Integer limit) {
+        Depart depart = departRepository.findDepartById(id);
         Pageable pageable = PageRequest.of(page-1,limit);
-        Page<Depart> pages = departRepository.queryDepartsByIsDeleteAndParentDepartOrderByCode(0,d,pageable);
-        return new TableEntity(pages.getContent(), MathsUtils.convertLong2BigDecimal(pages.getTotalElements()));
+        Page<Depart> pages = departRepository.queryDepartsByIsDeleteAndParentDepartOrderByCode(0,depart,pageable);
+        List<Depart> list = pages.getContent();
+        List<SimpleDepartBo> result = new ArrayList<>();
+        for(Depart d : list){
+            result.add(new SimpleDepartBo(d));
+        }
+        return new TableEntity(result, MathsUtils.convertLong2BigDecimal(pages.getTotalElements()));
     }
 
     @Override

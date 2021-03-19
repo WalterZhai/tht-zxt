@@ -19,6 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * @comment
+ * @author Walter(翟笑天)
+ * @date 2021/3/19
+ */
 @RestController
 public class DepartController {
 
@@ -31,21 +36,21 @@ public class DepartController {
     private DepartRepository departRepository;
 
 
-    @PostMapping(value = "/depart/ajaxLoadTree")
-    public JsonResult ajaxLoadTree(HttpServletRequest request) {
+    @PostMapping(value = "/depart/departAjaxLoadTree")
+    public JsonResult departAjaxLoadTree(HttpServletRequest request) {
         try{
-            JSONArray array = departServiceImpl.ajaxLoadTree();
+            JSONArray array = departServiceImpl.departAjaxLoadTree();
             return new JsonResult(array);
         }catch (Exception e){
             return new JsonResult(new UnimaxException("加载树形菜单失败!"));
         }
     }
 
-    @GetMapping(value = "/depart/tableData")
+    @GetMapping(value = "/depart/departTableData")
     public TableEntity departTableData(HttpServletRequest request, String id, Integer page, Integer limit) {
         TableEntity table;
         try{
-            table = departServiceImpl.queryMenusByIsDeleteAndPmenu(id,page,limit);
+            table = departServiceImpl.departTableData(id,page,limit);
         }catch (Exception e){
             table = new TableEntity(e);
         }

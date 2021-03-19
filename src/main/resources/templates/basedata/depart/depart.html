@@ -20,13 +20,13 @@
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <div class="layui-input-inline" style="width: auto;">
-                            <button type="button" class="layui-btn layui-btn-sm depart-refresh"><i class="layui-icon layui-icon-search"></i>刷新树</button>
+                            <button type="button" class="layui-btn layui-btn-sm depart-refresh"><i class="layui-icon layui-icon-search"></i>刷新</button>
                         </div>
                         <div class="layui-input-inline" style="width: auto;">
-                            <button type="button" class="layui-btn layui-btn-sm depart-add"><i class="layui-icon layui-icon-add-1"></i>添加子部门</button>
+                            <button type="button" class="layui-btn layui-btn-sm depart-add"><i class="layui-icon layui-icon-add-1"></i>添加</button>
                         </div>
                         <div class="layui-input-inline" style="width: auto;">
-                            <button type="button" class="layui-btn layui-btn-sm depart-sync"><i class="layui-icon layui-icon-add-1"></i>同步部门</button>
+                            <button type="button" class="layui-btn layui-btn-sm depart-sync"><i class="layui-icon layui-icon-download-circle"></i>同步部门</button>
                         </div>
                     </div>
                 </div>
@@ -53,17 +53,19 @@
 
         table.render({
             elem: '#tableList'
-            ,url: '/depart/tableData' //数据接口
+            ,url: '/depart/departTableData' //数据接口
             ,title: '子部门明细表'
             ,page: {curr:1} //开启分页
-            ,limit:10
+            ,limit:20
+            ,size: 'sm'
+            ,height: 'full-80'
             ,cols: [
                 [ //表头
                     {field: 'id', title: 'ID', width:80 ,hide:true}
-                    ,{field: 'code', title: '部门编码', width:100}
+                    ,{field: 'code', title: '部门编码', width:120}
                     ,{field: 'name', title: '部门名称', width:200}
-                    ,{field: 'pdepart', title: '父部门', width:250,templet:'<div>{{d.pdepart==null?"":d.pdepart.name}}</div>'}
-                    ,{field: 'uda1', title: '部门负责人', width:200}
+                    ,{field: 'parentDepartName', title: '父部门', width:200}
+                    ,{field: 'supervisorName', title: '部门负责人', width:120}
                     ,{field: '',title: '功能操作',width:300,toolbar:'#bar'}
                 ]
             ]
@@ -76,15 +78,16 @@
         //重新加载树和表格
         $('.depart-refresh').on('click', function () {
             ajaxLoadTree();
+            id = "";
             refreshTab();
         });
 
         //刷新表格
         window.refreshTab  = function(){
             table.reload('tableList',{
-                url:'/depart/tableData',
+                url:'/depart/departTableData',
                 page: {curr:1},
-                limit:10,
+                limit:20,
                 where:{
                     id : id
                 }
@@ -93,14 +96,14 @@
 
 
         layer.ready(function(){
-            // ajaxLoadTree();
+            ajaxLoadTree();
         });
 
 
 
         function ajaxLoadTree() {
             $.ajax({
-                url:'/depart/ajaxLoadTree',
+                url:'/depart/departAjaxLoadTree',
                 type:'post',
                 data:{},
                 success:function(result){
@@ -135,7 +138,7 @@
                 title : '添加菜单',
                 area : [ '500px', '400px' ],
                 fix : false,
-                content : '/topage?url=user/depart/depart-add.html',
+                content : '/topage?url=basedata/depart/depart-add.html',
                 success:function(layero,index){
                     var body = layer.getChildFrame('body', index);
                     body.find("input[name='id']").val(id);
