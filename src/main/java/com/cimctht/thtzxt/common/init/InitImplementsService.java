@@ -353,7 +353,7 @@ public class InitImplementsService {
             menu2.setParentMenu(menu1);
             menu2.setSeq(1);
             menu2.setType(0);
-            menu2.setIcon(SysConstant.LAYUI_ICON_FILE);
+            menu2.setIcon(SysConstant.LAYUI_ICON_LAYER);
             menu2.setCreateId(SysConstant.ADMIN);
             menu2.setModifyId(SysConstant.ADMIN);
             role.getMenus().add(menu2);
@@ -366,7 +366,7 @@ public class InitImplementsService {
             menu2.setParentMenu(menu1);
             menu2.setSeq(2);
             menu2.setType(0);
-            menu2.setIcon(SysConstant.LAYUI_ICON_FILE);
+            menu2.setIcon(SysConstant.LAYUI_ICON_LAYER);
             menu2.setCreateId(SysConstant.ADMIN);
             menu2.setModifyId(SysConstant.ADMIN);
             role.getMenus().add(menu2);
@@ -379,7 +379,7 @@ public class InitImplementsService {
             menu2.setParentMenu(menu1);
             menu2.setSeq(3);
             menu2.setType(0);
-            menu2.setIcon(SysConstant.LAYUI_ICON_FILE);
+            menu2.setIcon(SysConstant.LAYUI_ICON_LAYER);
             menu2.setCreateId(SysConstant.ADMIN);
             menu2.setModifyId(SysConstant.ADMIN);
             role.getMenus().add(menu2);
@@ -392,7 +392,7 @@ public class InitImplementsService {
             menu2.setParentMenu(menu1);
             menu2.setSeq(4);
             menu2.setType(0);
-            menu2.setIcon(SysConstant.LAYUI_ICON_FILE);
+            menu2.setIcon(SysConstant.LAYUI_ICON_LAYER);
             menu2.setCreateId(SysConstant.ADMIN);
             menu2.setModifyId(SysConstant.ADMIN);
             role.getMenus().add(menu2);
@@ -431,7 +431,7 @@ public class InitImplementsService {
             menu3.setHref("topage?url=basedata/employee/employee.html");
             menu3.setSeq(1);
             menu3.setType(0);
-            menu3.setIcon(SysConstant.LAYUI_ICON_FILE);
+            menu3.setIcon(SysConstant.LAYUI_ICON_LAYER);
             menu3.setCreateId(SysConstant.ADMIN);
             menu3.setModifyId(SysConstant.ADMIN);
             role.getMenus().add(menu3);
@@ -444,7 +444,7 @@ public class InitImplementsService {
             menu3.setHref("topage?url=basedata/employee/depart-employee.html");
             menu3.setSeq(2);
             menu3.setType(0);
-            menu3.setIcon(SysConstant.LAYUI_ICON_FILE);
+            menu3.setIcon(SysConstant.LAYUI_ICON_LAYER);
             menu3.setCreateId(SysConstant.ADMIN);
             menu3.setModifyId(SysConstant.ADMIN);
             role.getMenus().add(menu3);
@@ -457,7 +457,7 @@ public class InitImplementsService {
             menu3.setHref("topage?url=basedata/depart/depart.html");
             menu3.setSeq(3);
             menu3.setType(0);
-            menu3.setIcon(SysConstant.LAYUI_ICON_FILE);
+            menu3.setIcon(SysConstant.LAYUI_ICON_LAYER);
             menu3.setCreateId(SysConstant.ADMIN);
             menu3.setModifyId(SysConstant.ADMIN);
             role.getMenus().add(menu3);
@@ -493,7 +493,7 @@ public class InitImplementsService {
             menu3.setHref("topage?url=basedata/message/message.html");
             menu3.setSeq(1);
             menu3.setType(0);
-            menu3.setIcon(SysConstant.LAYUI_ICON_FILE);
+            menu3.setIcon(SysConstant.LAYUI_ICON_LAYER);
             menu3.setCreateId(SysConstant.ADMIN);
             menu3.setModifyId(SysConstant.ADMIN);
             role.getMenus().add(menu3);
@@ -518,7 +518,7 @@ public class InitImplementsService {
             menu3.setHref("topage?url=basedata/process/process.html");
             menu3.setSeq(1);
             menu3.setType(0);
-            menu3.setIcon(SysConstant.LAYUI_ICON_FILE);
+            menu3.setIcon(SysConstant.LAYUI_ICON_LAYER);
             menu3.setCreateId(SysConstant.ADMIN);
             menu3.setModifyId(SysConstant.ADMIN);
             role.getMenus().add(menu3);
@@ -543,7 +543,7 @@ public class InitImplementsService {
             menu3.setHref("topage?url=basedata/task/task.html");
             menu3.setSeq(1);
             menu3.setType(0);
-            menu3.setIcon(SysConstant.LAYUI_ICON_FILE);
+            menu3.setIcon(SysConstant.LAYUI_ICON_LAYER);
             menu3.setCreateId(SysConstant.ADMIN);
             menu3.setModifyId(SysConstant.ADMIN);
             role.getMenus().add(menu3);

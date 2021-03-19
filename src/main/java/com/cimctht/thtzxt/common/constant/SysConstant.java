@@ -106,8 +106,11 @@ public interface SysConstant {
     /** -1 **/
     Integer CONSTANT_NEGATIVE_ONE = 0;
 
-    /** 序列名称定义-用户组 **/
+    /** 图标-文件 **/
     String LAYUI_ICON_FILE = "layui-icon-file";
+
+    /** 图标-窗口 **/
+    String LAYUI_ICON_LAYER = "layui-icon-layer";
 
     /** 序列名称定义-员工 **/
     String EMPLOYEE_SEQ = "EMPLOYEE_SEQ";
