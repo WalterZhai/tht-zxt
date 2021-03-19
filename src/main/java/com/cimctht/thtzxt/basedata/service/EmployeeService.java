@@ -80,11 +80,16 @@ public class EmployeeService implements EmployeeServiceImpl {
     }
 
     @Override
-    public TableEntity employeeTableData(String id, Integer page, Integer limit) {
+    public TableEntity departEmpTableData(String id, Integer page, Integer limit) {
         Depart d = departRepository.findDepartById(id);
         Pageable pageable = PageRequest.of(page-1,limit);
         Page<Employee> pages = employeeRepository.findEmployeesByIsDeleteAndDepart(0,d,pageable);
-        return new TableEntity(pages.getContent(), MathsUtils.convertLong2BigDecimal(pages.getTotalElements()));
+        List<Employee> list = pages.getContent();
+        List<SimpleEmployeeBo> result = new ArrayList<>();
+        for(Employee employee : list){
+            result.add(new SimpleEmployeeBo(employee));
+        }
+        return new TableEntity(result, MathsUtils.convertLong2BigDecimal(pages.getTotalElements()));
     }
 
     @Override

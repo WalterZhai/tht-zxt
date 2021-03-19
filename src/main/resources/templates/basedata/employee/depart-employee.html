@@ -33,18 +33,21 @@
         table.render({
             elem: '#tableList'
             ,url: '/employee/departEmpTableData' //数据接口
-            ,title: '部门下人员'
+            ,title: '部门员工'
             ,page: {curr:1} //开启分页
-            ,limit:10
+            ,limit:20
+            ,size: 'sm'
+            ,height: 'full-80'
             ,cols: [
-                [ //表头
-                    {field: 'id', title: 'ID', width:80 ,hide:true}
-                    ,{field: 'code', title: '工号', width:120}
-                    ,{field: 'name', title: '姓名', width:120}
-                    ,{field: 'usedName', title: '曾用名', width:120}
-                    ,{field: 'sex', title: '性别', width:120}
-                    ,{field: 'mobile', title: '移动电话', width:120}
-                    ,{field: 'depart', title: '部门', width:120,templet:'<div>{{d.depart==null?"":d.depart.name}}</div>'}
+                [
+                    {field: 'id', title: 'ID', width: 80, hide: true}
+                    , {field: 'code', title: '工号', width: 120}
+                    , {field: 'name', title: '姓名', width: 120}
+                    , {field: 'sex', title: '性别', width: 120}
+                    , {field: 'officeTele', title: '办公电话', width: 120}
+                    , {field: 'mobile', title: '移动电话', width: 120}
+                    , {field: 'email', title: '电子邮箱', width: 120}
+                    , {field: 'departName', title: '所属部门', width: 120}
                 ]
             ]
             ,where:{
@@ -65,8 +68,7 @@
         function refreshTab(){
             table.reload('tableList',{
                 url:'/employee/departEmpTableData',
-                page: true,
-                limit:10,
+                page: {curr:1},
                 where:{
                     id : id
                 }
@@ -82,7 +84,7 @@
 
         function ajaxLoadTree() {
             $.ajax({
-                url:'/depart/ajaxLoadTree',
+                url:'/depart/departAjaxLoadTree',
                 type:'post',
                 data:{},
                 success:function(result){

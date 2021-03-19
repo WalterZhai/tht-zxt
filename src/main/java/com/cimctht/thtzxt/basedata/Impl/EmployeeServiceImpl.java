@@ -12,7 +12,7 @@ public interface EmployeeServiceImpl {
 
     void genEmployees(List<SimpleEmployeeBo> list);
 
-    TableEntity employeeTableData(String id, Integer page, Integer limit);
+    TableEntity departEmpTableData(String id, Integer page, Integer limit);
 
     void syncEmployee();
 }

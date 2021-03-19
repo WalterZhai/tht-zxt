@@ -90,10 +90,10 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "/employee/departEmpTableData")
-    public TableEntity employeeTableData(HttpServletRequest request, String id, Integer page, Integer limit) {
+    public TableEntity departEmpTableData(HttpServletRequest request, String id, Integer page, Integer limit) {
         TableEntity table;
         try{
-            table = employeeServiceImpl.employeeTableData(id,page,limit);
+            table = employeeServiceImpl.departEmpTableData(id,page,limit);
         }catch (Exception e){
             table = new TableEntity(e);
         }
