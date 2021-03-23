@@ -6,6 +6,12 @@ package com.cimctht.thtzxt.common.constant;
  */
 public interface SysConstant {
 
+    /** 项目初始化状态 **/
+    String INIT_STATE_OPEN = "open";
+
+    /** 项目初始化状态 **/
+    String INIT_STATE_CLOSE = "close";
+
 	/** 默认登录密码 **/
     String PASSWORD = "123456";
 
@@ -117,5 +123,7 @@ public interface SysConstant {
 
     /** 序列名称定义-部门 **/
     String DEPART_SEQ = "DEPART_SEQ";
+
+
 
 }
