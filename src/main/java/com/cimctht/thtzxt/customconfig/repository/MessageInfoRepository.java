@@ -19,7 +19,7 @@ public interface MessageInfoRepository  extends JpaRepository<MessageInfo,String
 
     List<MessageInfo> findMessageInfosByIsDeleteAndUserCode(Integer isDelete, String userCode);
 
-    Page<MessageInfo> queryMessageInfosByIsDeleteAndIsSendAndUserCodeOrderByIsReadAscCreateDateDesc(Integer isDelete, Integer isSend, String userCode, Pageable pageable);
+    Page<MessageInfo> findMessageInfosByIsDeleteAndIsSendAndUserCodeOrderByIsReadAscCreateDateDesc(Integer isDelete, Integer isSend, String userCode, Pageable pageable);
 
     MessageInfo findMessageInfoById(String id);
 

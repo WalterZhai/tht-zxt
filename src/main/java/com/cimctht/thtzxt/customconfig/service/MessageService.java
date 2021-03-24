@@ -273,7 +273,7 @@ public class MessageService implements MessageServiceImpl {
     @Override
     public TableEntity tableDataMessageInfo(String username,Integer page,Integer limit) {
         Pageable pageable = PageRequest.of(page-1,limit);
-        Page<MessageInfo> pages = messageInfoRepository.queryMessageInfosByIsDeleteAndIsSendAndUserCodeOrderByIsReadAscCreateDateDesc(0, 0, username, pageable);
+        Page<MessageInfo> pages = messageInfoRepository.findMessageInfosByIsDeleteAndIsSendAndUserCodeOrderByIsReadAscCreateDateDesc(0, 0, username, pageable);
         return new TableEntity(pages.getContent(), MathsUtils.convertLong2BigDecimal(pages.getTotalElements()));
     }
 
