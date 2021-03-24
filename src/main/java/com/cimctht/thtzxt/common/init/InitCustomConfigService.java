@@ -35,13 +35,17 @@ public class InitCustomConfigService {
      * @date 2021/3/13
      */
     public void InitCustomConfigComment(){
-        //部门表
+        //信息主表
         String judgeSql = "select c.comments from dba_tab_comments c where c.owner='"+oracleOwner+"' and c.TABLE_NAME='CCF_MESSAGE'";
         String judge = (String) unimaxEntityManager.createNativeQuery(judgeSql).getSingleResult();
         if(StrUtil.hasEmpty(judge)){
             String sql = "comment on table CCF_MESSAGE is '站内信息主表' ";
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
 
+            sql = "comment on column CCF_MESSAGE.code is '发送人编码' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column CCF_MESSAGE.name is '发送人名称' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
             sql = "comment on column CCF_MESSAGE.title is '标题' ";
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
             sql = "comment on column CCF_MESSAGE.content is '内容' ";
@@ -74,7 +78,7 @@ public class InitCustomConfigService {
             sql = "comment on column CCF_MESSAGE.uda5 is '备用5' ";
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
         }
-        //员工表
+        //信息副表
         judgeSql = "select c.comments from dba_tab_comments c where c.owner='"+oracleOwner+"' and c.TABLE_NAME='CCF_MESSAGE_INFO'";
         judge = (String) unimaxEntityManager.createNativeQuery(judgeSql).getSingleResult();
         if(StrUtil.hasEmpty(judge)){

@@ -42,6 +42,7 @@
 				[ //表头
 					{title: '序号', templet: '#xuhao', width: 60}
 					,{field: 'id', title: 'ID', width:80 ,hide:true}
+					, {field: 'name', title: '发送人', width: 120}
 					,{field: 'message', title: '消息标题', width:120,templet:'<div>{{d.message.title}}</div>'}
 					,{field: 'message', title: '消息内容', width:150,templet:'<div>{{d.message.content}}</div>'}
 					,{field: 'isRead', title: '是否已读', width:120,templet: function (d) {

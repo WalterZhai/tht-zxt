@@ -125,8 +125,11 @@ public class MessageService implements MessageServiceImpl {
 
     @Override
     @Transactional
-    public void addMessageInfo(String title, String content, Integer type, JSONArray arr) {
+    public void addMessageInfo(String title, String content, Integer type, JSONArray arr, String username) {
+        User sendMan = userRepository.findUserByLoginNameAndIsDelete(username,0);
         Message message = new Message();
+        message.setCode(sendMan.getLoginName());
+        message.setName(sendMan.getName());
         message.setTitle(title);
         message.setContent(content);
         message.setIsType(type);

@@ -59,12 +59,13 @@ public class MessageController {
 
     @PostMapping(value = "/message/addMessageInfo")
     public JsonResult addMessageInfo(HttpServletRequest request,Integer type) {
+        String username = (String) request.getSession().getAttribute("username");
         String title = request.getParameter("frm[title]");
         String content = request.getParameter("frm[content]");
         String data = request.getParameter("data");
         JSONArray arr = JSON.parseArray(data);
         try{
-            messageServiceImpl.addMessageInfo(title,content,type,arr);
+            messageServiceImpl.addMessageInfo(title,content,type,arr,username);
             return new JsonResult();
         }catch (Exception e){
             return new JsonResult(new UnimaxException(e.getMessage()));

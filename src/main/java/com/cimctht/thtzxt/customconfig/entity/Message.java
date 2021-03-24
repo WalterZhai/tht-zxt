@@ -15,6 +15,10 @@ import javax.persistence.Table;
 @Table(name="CCF_MESSAGE")
 public class Message extends BaseEntity {
 
+    @Column(name = "CODE",columnDefinition = "VARCHAR(30)")
+    private String code;
+    @Column(name = "NAME",columnDefinition = "VARCHAR(30)")
+    private String name;
     @Column(name = "TITLE",columnDefinition = "VARCHAR(100)")
     private String title;
     @Column(name = "CONTENT",columnDefinition = "VARCHAR(1000)")
@@ -23,6 +27,22 @@ public class Message extends BaseEntity {
     private Integer isType;
     @Column(name = "IS_SEND",columnDefinition = "number(1)")
     private Integer isSend;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getTitle() {
         return title;

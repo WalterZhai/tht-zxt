@@ -272,7 +272,7 @@ layui.use(['jquery','element', 'layer'], function () {
             type : 2,
             maxmin : true,
             title : '信息查看',
-            area : [ '601px', '500px' ],
+            area : [ '721px', '500px' ],
             fix : false,
             content : '/topage?url=system/index/read-message.html'
         });

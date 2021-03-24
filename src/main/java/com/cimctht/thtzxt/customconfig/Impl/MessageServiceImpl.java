@@ -19,7 +19,7 @@ public interface MessageServiceImpl {
 
     Map<String,Object> laodTrans();
 
-    void addMessageInfo(String title, String content, Integer type, JSONArray arr);
+    void addMessageInfo(String title, String content, Integer type, JSONArray arr, String username);
 
     void editMessage(String id, String title, String content);
 
