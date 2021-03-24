@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>信息管理</title>
-    <script th:src="@{/layui/jquery.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/index.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/layui/css/layui.css}"/>
     <script th:src="@{/layui/layui.js}"></script>
     <script th:src="@{/assets/js/templet.js}"></script>
@@ -14,40 +14,28 @@
 <form class="layui-form toolbar">
     <div class="layui-form-item">
         <div class="layui-inline">
-            <div class="layui-input-inline">
-                <input type="text" name="title" placeholder="请输入标题" autocomplete="off" class="layui-input" id="searchTitle">
-            </div>
-        </div>
-        <!-- 状态下拉单选 -->
-        <div class="layui-inline">
-            <div class="layui-input-inline">
-                <!-- 下拉单选 -->
-                <select name="type" class="layui-input" lay-verify="" lay-filter="selectcity" id="sendType">
-                    <option value="">请选择类型</option>
-                    <option value="1">发送给所有用户</option>
-                    <option value="2">发送给角色下用户</option>
-                    <option value="3">发送给指定用户</option>
-                    <option value="4">发送给用户组</option>
-                </select>
-            </div>
-        </div>
-        <div class="layui-inline">
-            <div class="layui-input-inline">
-                <!-- 下拉单选 -->
-                <select name="type"class="layui-input" lay-verify="" lay-filter="selectcity" id="isSend">
-                    <option value="">请选择是否已发送</option>
-                    <option value="0">未发送</option>
-                    <option value="1">已发送</option>
-                </select>
-            </div>
+            <input type="text" name="title" placeholder="标题" autocomplete="off" class="search-size" id="title">
+            <select name="type" lay-verify="" lay-filter="selectcity" id="type" class="search-size" lay-ignore>
+                <option value="">请选择类型</option>
+                <option value="0">发送给所有用户</option>
+                <option value="1">发送给角色下用户</option>
+                <option value="2">发送给指定用户</option>
+                <option value="3">发送给用户组</option>
+            </select>
+            <select name="type" lay-verify="" lay-filter="selectcity" id="isSend" class="search-size" lay-ignore>
+                <option value="">请选择发送</option>
+                <option value="0">未发送</option>
+                <option value="1">已发送</option>
+            </select>
         </div>
         <div class="layui-inline">
             <div class="layui-input-inline" style="width: auto;">
-                <button type="button" class="layui-btn table-refresh"><i class="layui-icon layui-icon-search"></i>查询</button>
-                <button type="button" class="layui-btn table-add"><i class="layui-icon layui-icon-add-1"></i>新建消息</button>
-                <button type="button" class="layui-btn layui-btn-danger table-dels"><i class="layui-icon layui-icon-delete"></i>批量删除</button>
-                <button type="button" class="layui-btn table-send"><i class="layui-icon layui-icon-email"></i>发送</button>
-                <button type="button" class="layui-btn table-cancel"><i class="layui-icon layui-icon-return"></i>撤回</button>
+                <button type="button" class="layui-btn layui-btn-sm table-refresh"><i class="layui-icon layui-icon-search"></i>刷新</button>
+                <button type="button" class="layui-btn layui-btn-sm table-add"><i class="layui-icon layui-icon-add-1"></i>新建消息</button>
+                <button type="button" class="layui-btn layui-btn-sm layui-btn-danger table-dels"><i class="layui-icon layui-icon-delete"></i>批量删除</button>
+                <button type="button" class="layui-btn layui-btn-sm table-query"><i class="layui-icon layui-icon-search"></i>查询</button>
+                <button type="button" class="layui-btn layui-btn-sm table-send"><i class="layui-icon layui-icon-email"></i>发送</button>
+                <button type="button" class="layui-btn layui-btn-sm table-cancel"><i class="layui-icon layui-icon-return"></i>撤回</button>
             </div>
         </div>
     </div>
@@ -61,6 +49,10 @@
     <button type="button" class="layui-btn layui-btn-xs" lay-event="row-edit"><i class="layui-icon layui-icon-edit"></i>编辑内容</button>
     <button type="button" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="row-delete"><i class="layui-icon layui-icon-delete"></i>删除</button>
 
+</script>
+
+<script type="text/html" id="xuhao">
+    {{d.LAY_TABLE_INDEX+1}}
 </script>
 
 </body>
@@ -78,36 +70,36 @@
 
         table.render({
             elem: '#tableList'
-            ,url: '/message/tableData' //数据接口
+            ,url: '/message/messageTableData' //数据接口
             ,title: '消息表'
             ,page: {curr:1} //开启分页
-            ,limit:10
+            ,limit:20
             ,cols: [
                 [ //表头
-                {checkbox : true}
-                ,{field: 'id', title: 'ID', width:80 ,hide:true}
-                ,{field: 'mesTitle', title: '消息标题', width:120}
-                ,{field: 'mesContent', title: '消息内容', width:350}
-                ,{field: 'isType', title: '发送类型', width:120}
-                ,{field: 'typeExplain', title: '类型说明', width:150}
-                ,{field: 'isSend', title: '发送状态', width:120}
-                ,{field: '',title: '功能操作',width:300,toolbar:'#bar'}
+                    {title: '序号', templet: '#xuhao', width: 60}
+                    ,{checkbox: true}
+                    , {field: 'id', title: 'ID', width: 80, hide: true}
+                    , {field: 'title', title: '消息标题', width: 120}
+                    , {field: 'content', title: '消息内容', width: 240}
+                    , {field: 'isType', title: '发送类型', width: 120}
+                    , {field: 'isSend', title: '发送状态', width: 120}
+                    , {field: '', title: '功能操作', width: 240, toolbar: '#bar'}
                 ]
             ]
             ,where:{
-                searchTitle : $("#searchTitle").val(),
-                sendType : $("#sendType").val(),
+                title : $("#title").val(),
+                type : $("#type").val(),
                 isSend : $("#isSend").val()
             }
             ,done: function(res, curr, count){
                 $("[data-field='isType']").children().each(function () {
-                    if ($(this).text() == '1') {
+                    if ($(this).text() == '0') {
                         $(this).text('所有人');
-                    } else if ($(this).text() == '2') {
+                    } else if ($(this).text() == '1') {
                         $(this).text('角色');
-                    } else if ($(this).text() == '3') {
+                    } else if ($(this).text() == '2') {
                         $(this).text('用户');
-                    } else if ($(this).text() == '4') {
+                    } else if ($(this).text() == '3') {
                         $(this).text('用户组');
                     }
                 });
@@ -122,27 +114,43 @@
         });
 
 
-        //重新加载表格
+        //刷新
         $('.table-refresh').on('click', function () {
             refreshTab();
         });
 
-        //刷新表格
+        //刷新
         window.refreshTab  = function(){
+            $("#title").val("");
+            $("#type").val("");
+            $("#isSend").val("");
             table.reload('tableList',{
-                url:'/message/tableData',
+                url:'/message/messageTableData',
                 page: {curr:1},
-                limit:10,
                 where:{
-                    searchTitle : $("#searchTitle").val(),
-                    sendType : $("#sendType").val(),
+                    title : $("#title").val(),
+                    type : $("#type").val(),
                     isSend : $("#isSend").val()
                 }
             });
         };
 
+        //查询
+        $('.table-query').on('click', function () {
+            queryTab();
+        });
 
-
+        //查询
+        window.queryTab  = function(){
+            table.reload('tableList',{
+                url:'/message/messageTableData',
+                where:{
+                    title : $("#title").val(),
+                    type : $("#type").val(),
+                    isSend : $("#isSend").val()
+                }
+            });
+        };
 
         //添加新消息
         $('.table-add').on('click', function () {
@@ -150,9 +158,9 @@
                 type : 2,
                 maxmin : true,
                 title : '新建消息',
-                area : [ '100%', '98%' ],
+                area : [ '99%', '99%' ],
                 fix : false,
-                content : '/topage?url=message/message/message-add.html'
+                content : '/topage?url=customconfig/message/message-add.html'
             });
 
         });
@@ -161,6 +169,9 @@
         $('.table-dels').on('click', function () {
             var checkStatus = table.checkStatus('tableList')
                 ,data = checkStatus.data;
+            if(data.length==0){
+                return layer.msg("至少选中一条数据！",{icon: 5});
+            }
             $.each(data,function(index,value){
                 if(value.isSend==1){
                     return layer.msg("只有未发送的才能删除！",{icon: 5});
@@ -208,14 +219,14 @@
                 type : 2,
                 maxmin : true,
                 title : '修改内容',
-                area : [ '600px', '300px' ],
+                area : [ '99%', '99%' ],
                 fix : false,
-                content : '/topage?url=message/message/message-edit.html',
+                content : '/topage?url=customconfig/message/message-edit.html',
                 success:function(layero,index){
                     var body = layer.getChildFrame('body', index);
                     body.find("input[name='id']").val(obj.id);
-                    body.find("input[name='title']").val(obj.mesTitle);
-                    body.find("textarea[name='content']").val(obj.mesContent);
+                    body.find("input[name='title']").val(obj.title);
+                    body.find("textarea[name='content']").val(obj.content);
                 }
             });
         }
@@ -231,7 +242,7 @@
                     url:'/message/delMessage',
                     type:'post',
                     data:{
-                        obj:JSON.stringify(obj)
+                        id:obj.id
                     },
                     success:function(result){
                         if(result.state == 1){
@@ -254,6 +265,9 @@
         $('.table-send').on('click', function () {
             var checkStatus = table.checkStatus('tableList')
                 ,data = checkStatus.data;
+            if(data.length==0){
+                return layer.msg("至少选中一条数据！",{icon: 5});
+            }
             $.each(data,function(index,value){
                 if(value.isSend==1){
                     return layer.msg("只有未发送的才能发送！",{icon: 5});
@@ -267,7 +281,7 @@
                 },
                 success:function(result){
                     if(result.state == 1){
-                        refreshTab();
+                        queryTab();
                     }else{
                         layer.msg(result.message,{icon: 5});
                     }
@@ -279,6 +293,9 @@
         $('.table-cancel').on('click', function () {
             var checkStatus = table.checkStatus('tableList')
                 ,data = checkStatus.data;
+            if(data.length==0){
+                return layer.msg("至少选中一条数据！",{icon: 5});
+            }
             $.each(data,function(index,value){
                 if(value.isSend==0){
                     return layer.msg("只有已发送的才能撤销！",{icon: 5});
@@ -292,7 +309,7 @@
                 },
                 success:function(result){
                     if(result.state == 1){
-                        refreshTab();
+                        queryTab();
                     }else{
                         layer.msg(result.message,{icon: 5});
                     }

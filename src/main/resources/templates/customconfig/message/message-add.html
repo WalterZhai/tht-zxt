@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>新建消息</title>
-	<script th:src="@{/layui/jquery.min.js}"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/index.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/layui/css/layui.css}"/>
 	<script th:src="@{/layui/layui.js}"></script>
 	<script th:src="@{/assets/js/templet.js}"></script>
@@ -20,19 +20,18 @@
 	</ul>
 	<div class="layui-tab-content">
 		<div class="layui-tab-item layui-show">
-			<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;">
-				<div class="layui-form-item">
-					<label class="layui-form-label">消息标题</label>
-					<div class="layui-input-block">
-						<input type="text" name="title" required  lay-verify="required" placeholder="请输入消息标题" autocomplete="off" class="layui-input">
-					</div>
-				</div>
-				<div class="layui-form-item">
-					<label class="layui-form-label">消息内容</label>
-					<div class="layui-input-block">
-						<textarea name="content" required  lay-verify="required" placeholder="请输入消息内容" class="layui-textarea"></textarea>
-					</div>
-				</div>
+			<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;" id="form01">
+
+				<label class="label-size label-color">消息标题*</label>
+				<input type="text" name="title" required  lay-verify="required" autocomplete="off" class="input-size-big">
+
+				<br>
+
+				<label class="label-size label-color">消息内容*</label>
+				<textarea name="content" required  lay-verify="required" class="input-textarea-size"></textarea>
+
+				<hr class="layui-bg-green">
+
 				<div class="layui-form-item">
 					<div class="layui-input-block">
 						<button class="layui-btn" lay-submit lay-filter="formSubmit1">确定</button>
@@ -41,22 +40,21 @@
 			</form>
 		</div>
 		<div class="layui-tab-item">
-			<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;">
+			<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;" id="form02">
 				<div class="layui-form-item">
 					<div id="transfer2"></div>
 				</div>
-				<div class="layui-form-item">
-					<label class="layui-form-label">消息标题</label>
-					<div class="layui-input-block">
-						<input type="text" name="title" required  lay-verify="required" placeholder="请输入消息标题" autocomplete="off" class="layui-input">
-					</div>
-				</div>
-				<div class="layui-form-item">
-					<label class="layui-form-label">消息内容</label>
-					<div class="layui-input-block">
-						<textarea name="content" required  lay-verify="required" placeholder="请输入消息内容" class="layui-textarea"></textarea>
-					</div>
-				</div>
+
+				<label class="label-size label-color">消息标题*</label>
+				<input type="text" name="title" required  lay-verify="required" autocomplete="off" class="input-size-big">
+
+				<br>
+
+				<label class="label-size label-color">消息内容*</label>
+				<textarea name="content" required  lay-verify="required" class="input-textarea-size"></textarea>
+
+				<hr class="layui-bg-green">
+
 				<div class="layui-form-item">
 					<div class="layui-input-block">
 						<button class="layui-btn" lay-submit lay-filter="formSubmit2">确定</button>
@@ -65,22 +63,21 @@
 			</form>
 		</div>
 		<div class="layui-tab-item">
-			<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;">
+			<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;" id="form03">
 				<div class="layui-form-item">
 					<div id="transfer3"></div>
 				</div>
-				<div class="layui-form-item">
-					<label class="layui-form-label">消息标题</label>
-					<div class="layui-input-block">
-						<input type="text" name="title" required  lay-verify="required" placeholder="请输入消息标题" autocomplete="off" class="layui-input">
-					</div>
-				</div>
-				<div class="layui-form-item">
-					<label class="layui-form-label">消息内容</label>
-					<div class="layui-input-block">
-						<textarea name="content" required  lay-verify="required" placeholder="请输入消息内容" class="layui-textarea"></textarea>
-					</div>
-				</div>
+
+				<label class="label-size label-color">消息标题*</label>
+				<input type="text" name="title" required  lay-verify="required" autocomplete="off" class="input-size-big">
+
+				<br>
+
+				<label class="label-size label-color">消息内容*</label>
+				<textarea name="content" required  lay-verify="required" class="input-textarea-size"></textarea>
+
+				<hr class="layui-bg-green">
+
 				<div class="layui-form-item">
 					<div class="layui-input-block">
 						<button class="layui-btn" lay-submit lay-filter="formSubmit3">确定</button>
@@ -89,22 +86,21 @@
 			</form>
 		</div>
 		<div class="layui-tab-item">
-			<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;">
+			<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;" id="form04">
 				<div class="layui-form-item">
 					<div id="transfer4"></div>
 				</div>
-				<div class="layui-form-item">
-					<label class="layui-form-label">消息标题</label>
-					<div class="layui-input-block">
-						<input type="text" name="title" required  lay-verify="required" placeholder="请输入消息标题" autocomplete="off" class="layui-input">
-					</div>
-				</div>
-				<div class="layui-form-item">
-					<label class="layui-form-label">消息内容</label>
-					<div class="layui-input-block">
-						<textarea name="content" required  lay-verify="required" placeholder="请输入消息内容" class="layui-textarea"></textarea>
-					</div>
-				</div>
+
+				<label class="label-size label-color">消息标题*</label>
+				<input type="text" name="title" required  lay-verify="required" autocomplete="off" class="input-size-big">
+
+				<br>
+
+				<label class="label-size label-color">消息内容*</label>
+				<textarea name="content" required  lay-verify="required" class="input-textarea-size"></textarea>
+
+				<hr class="layui-bg-green">
+
 				<div class="layui-form-item">
 					<div class="layui-input-block">
 						<button class="layui-btn" lay-submit lay-filter="formSubmit4">确定</button>
@@ -118,11 +114,12 @@
 </body>
 
 <script>
-	layui.use(['form','layer','element','transfer'], function(){
+	layui.use(['form','layer','element','transfer','jquery'], function(){
 		var form = layui.form;
 		var layer = layui.layer;
 		var element = layui.element;
 		var transfer = layui.transfer;
+		var $ = layui.jquery;
 
 		//页面加载时加载所有穿梭框内容
 		layer.ready(function(){
@@ -151,7 +148,7 @@
 				elem: '#transfer2'  //绑定元素
 				,title: ['未选中','选中']
 				,showSearch:true
-				,height:400
+				,height:300
 				,data:map.roles
 				,id: 'id2' //定义索引
 			});
@@ -159,7 +156,7 @@
 				elem: '#transfer3'  //绑定元素
 				,title: ['未选中','选中']
 				,showSearch:true
-				,height:400
+				,height:300
 				,data:map.users
 				,id: 'id3' //定义索引
 			});
@@ -167,7 +164,7 @@
 				elem: '#transfer4'  //绑定元素
 				,title: ['未选中','选中']
 				,showSearch:true
-				,height:400
+				,height:300
 				,data:map.groups
 				,id: 'id4' //定义索引
 			});
@@ -180,14 +177,14 @@
 				url:'/message/addMessageInfo',
 				type:'post',
 				data:{
-					type : 1,
+					type : 0,
 					frm:data.field
 				},
 				success:function(result){
 					if(result.state == 1){
 						var index = parent.layer.getFrameIndex(window.name);
 						parent.layer.close(index);
-						window.parent.refreshTab();
+						window.parent.queryTab();
 					}else{
 						layer.msg(result.message,{icon: 5});
 					}
@@ -205,7 +202,7 @@
 				url:'/message/addMessageInfo',
 				type:'post',
 				data:{
-					type : 2,
+					type : 1,
 					frm:data.field,
 					data : JSON.stringify(getData)
 				},
@@ -213,7 +210,7 @@
 					if(result.state == 1){
 						var index = parent.layer.getFrameIndex(window.name);
 						parent.layer.close(index);
-						window.parent.refreshTab();
+						window.parent.queryTab();
 					}else{
 						layer.msg(result.message,{icon: 5});
 					}
@@ -231,7 +228,7 @@
 				url:'/message/addMessageInfo',
 				type:'post',
 				data:{
-					type : 3,
+					type : 2,
 					frm:data.field,
 					data : JSON.stringify(getData)
 				},
@@ -239,7 +236,7 @@
 					if(result.state == 1){
 						var index = parent.layer.getFrameIndex(window.name);
 						parent.layer.close(index);
-						window.parent.refreshTab();
+						window.parent.queryTab();
 					}else{
 						layer.msg(result.message,{icon: 5});
 					}
@@ -257,7 +254,7 @@
 				url:'/message/addMessageInfo',
 				type:'post',
 				data:{
-					type : 4,
+					type : 3,
 					frm:data.field,
 					data : JSON.stringify(getData)
 				},
@@ -265,7 +262,7 @@
 					if(result.state == 1){
 						var index = parent.layer.getFrameIndex(window.name);
 						parent.layer.close(index);
-						window.parent.refreshTab();
+						window.parent.queryTab();
 					}else{
 						layer.msg(result.message,{icon: 5});
 					}

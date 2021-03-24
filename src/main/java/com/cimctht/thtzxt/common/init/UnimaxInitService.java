@@ -26,6 +26,9 @@ public class UnimaxInitService implements ApplicationRunner {
     @Autowired
     private InitBasedataService initBasedataService;
 
+    @Autowired
+    private InitCustomConfigService initCustomConfigService;
+
     @Value("${unimax.init.auto}")
     private String state;
 
@@ -33,12 +36,16 @@ public class UnimaxInitService implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         if(SysConstant.INIT_STATE_OPEN.equals(state)){
             logger.info("项目初始化开始");
+            //
             initImplementsService.initSpringSessionTable();
             initImplementsService.initBaseTableComment();
             initImplementsService.initSeq();
             initImplementsService.initAdmin();
+            //
             initBasedataService.initBaseTableComment();
             initBasedataService.initSeq();
+            //
+            initCustomConfigService.InitCustomConfigComment();
             logger.info("项目初始化结束");
         }else if(SysConstant.INIT_STATE_CLOSE.equals(state)){
             logger.info("项目初始化关闭");

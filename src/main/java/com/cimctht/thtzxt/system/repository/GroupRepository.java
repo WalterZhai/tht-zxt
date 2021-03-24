@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  * @author Walter(翟笑天)
@@ -23,4 +24,6 @@ public interface GroupRepository extends JpaRepository<Group,String> {
     BigInteger queryCodeSeqNext();
 
     Page<Group> findGroupsByIsDeleteAndCodeLikeAndNameLikeOrderByCode(Integer isDelete, String code, String name, Pageable pageable);
+
+    List<Group> findGroupsByIsDelete(Integer isDelete);
 }

@@ -274,7 +274,7 @@ layui.use(['jquery','element', 'layer'], function () {
             title : '信息查看',
             area : [ '601px', '500px' ],
             fix : false,
-            content : '/topage?url=user/index/read-message.html'
+            content : '/topage?url=system/index/read-message.html'
         });
 
     });

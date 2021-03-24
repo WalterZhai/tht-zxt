@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>修改内容</title>
-	<script th:src="@{/layui/jquery.min.js}"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/index.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/layui/css/layui.css}"/>
 	<script th:src="@{/layui/layui.js}"></script>
 	<script th:src="@{/assets/js/templet.js}"></script>
@@ -13,18 +13,17 @@
 
 <form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;">
 	<input class="layui-input" name="id" type="hidden">
-	<div class="layui-form-item">
-		<label class="layui-form-label">消息标题</label>
-		<div class="layui-input-block">
-			<input type="text" name="title" required  lay-verify="required" placeholder="请输入消息标题" autocomplete="off" class="layui-input">
-		</div>
-	</div>
-	<div class="layui-form-item">
-		<label class="layui-form-label">消息内容</label>
-		<div class="layui-input-block">
-			<textarea name="content" required  lay-verify="required" placeholder="请输入消息内容" class="layui-textarea"></textarea>
-		</div>
-	</div>
+
+	<label class="label-size label-color">消息标题*</label>
+	<input type="text" name="title" required  lay-verify="required" autocomplete="off" class="input-size-big">
+
+	<br>
+
+	<label class="label-size label-color">消息内容*</label>
+	<textarea name="content" required  lay-verify="required" class="input-textarea-size"></textarea>
+
+	<hr class="layui-bg-green">
+
 	<div class="layui-form-item">
 		<div class="layui-input-block">
 			<button class="layui-btn" lay-submit lay-filter="formSubmitEdit">确定</button>
@@ -35,9 +34,10 @@
 </body>
 
 <script>
-	layui.use(['form','layer'], function(){
+	layui.use(['form','layer','jquery'], function(){
 		var form = layui.form;
 		var layer = layui.layer;
+		var $ = layui.jquery;
 
 		//监听提交
 		form.on('submit(formSubmitEdit)', function(data){
@@ -51,7 +51,7 @@
 					if(result.state == 1){
 						var index = parent.layer.getFrameIndex(window.name);
 						parent.layer.close(index);
-						window.parent.refreshTab();
+						window.parent.queryTab();
 					}else{
 						layer.msg(result.message,{icon: 5});
 					}

@@ -4,24 +4,20 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>信息查看</title>
-	<script th:src="@{/layui/jquery.min.js}"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/index.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/layui/css/layui.css}"/>
 	<script th:src="@{/layui/layui.js}"></script>
 	<script th:src="@{/assets/js/templet.js}"></script>
 </head>
 <body>
-<div class="layui-form-item">
-	<label class="layui-form-label">消息标题</label>
-	<div class="layui-input-block">
-		<input type="text" name="title" required  lay-verify="required" placeholder="请输入消息标题" autocomplete="off" class="layui-input" disabled="true">
-	</div>
-</div>
-<div class="layui-form-item">
-	<label class="layui-form-label">消息内容</label>
-	<div class="layui-input-block">
-		<textarea name="content" required  lay-verify="required" placeholder="请输入消息内容" class="layui-textarea"  disabled="true"></textarea>
-	</div>
-</div>
+
+<label class="label-size label-color">消息标题*</label>
+<input type="text" name="title" required  lay-verify="required" autocomplete="off" class="input-size-big" readonly="readonly">
+
+<br>
+
+<label class="label-size label-color">消息内容*</label>
+<textarea name="content" required  lay-verify="required" class="input-textarea-size" readonly="readonly"></textarea>
 
 </body>
 

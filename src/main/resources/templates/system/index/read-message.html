@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>读取信息</title>
-	<script th:src="@{/layui/jquery.min.js}"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/index.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/layui/css/layui.css}"/>
 	<script th:src="@{/layui/layui.js}"></script>
 	<script th:src="@{/assets/js/templet.js}"></script>
@@ -32,7 +32,7 @@
 			,title: '消息表'
 			,height:'500'
 			,page: {curr:1} //开启分页
-			,limit:10
+			,limit:20
 			,cols: [
 				[ //表头
 					{field: 'id', title: 'ID', width:80 ,hide:true}
@@ -57,7 +57,7 @@
 			table.reload('tableList',{
 				url:'/message/tableDataMessageInfo',
 				page: true,
-				limit:10,
+				limit:20,
 				height:'500'
 			});
 		};
@@ -79,7 +79,7 @@
 				title : '消息查看',
 				area : ['500px','400px'],
 				fix : false,
-				content : '/topage?url=user/index/read-message-deatil.html',
+				content : '/topage?url=system/index/read-message-deatil.html',
 				success:function(layero,index){
 					var body = layer.getChildFrame('body', index);
 					body.find("input[name='title']").val(obj.message.mesTitle);
@@ -95,7 +95,7 @@
 				url:'/message/messageRead',
 				type:'post',
 				data:{
-					obj:JSON.stringify(obj)
+					id:obj.id
 				},
 				success:function(result){
 					if(result.state == 1){

@@ -1,6 +1,5 @@
 package com.cimctht.thtzxt.basedata.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.cimctht.thtzxt.basedata.Impl.DepartServiceImpl;
 import com.cimctht.thtzxt.basedata.bo.SimpleDepartBo;
@@ -8,11 +7,9 @@ import com.cimctht.thtzxt.basedata.entity.Depart;
 import com.cimctht.thtzxt.basedata.entity.Employee;
 import com.cimctht.thtzxt.basedata.repository.DepartRepository;
 import com.cimctht.thtzxt.basedata.repository.EmployeeRepository;
-import com.cimctht.thtzxt.basedata.service.DeaprtService;
 import com.cimctht.thtzxt.common.entity.JsonResult;
 import com.cimctht.thtzxt.common.entity.TableEntity;
 import com.cimctht.thtzxt.common.exception.UnimaxException;
-import com.cimctht.thtzxt.common.utils.EntityUtils;
 import com.cimctht.thtzxt.common.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
