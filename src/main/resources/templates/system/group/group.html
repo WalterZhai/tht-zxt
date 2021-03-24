@@ -46,6 +46,10 @@
     <button type="button" class="layui-btn layui-btn-xs layui-btn-normal" lay-event="row-relUser"><i class="layui-icon layui-icon-share"></i>关联用户</button>
 </script>
 
+<script type="text/html" id="xuhao">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
 </body>
 <script>
 
@@ -67,7 +71,8 @@
             ,size: 'sm'
             ,cols: [
                 [
-                    {type: 'radio'}
+                    {title: '序号', templet: '#xuhao', width: 60}
+                    , {type: 'radio'}
                     , {field: 'id', title: 'ID', width: 80, hide: true}
                     , {field: 'code', title: '用户组编码', width: 120}
                     , {field: 'name', title: '用户组名称', width: 120}
@@ -141,7 +146,8 @@
             ,height:300
             ,cols: [
                 [
-                    {field: 'id', title: 'ID', width: 80, hide: true}
+                    {title: '序号', templet: '#xuhao', width: 60}
+                    , {field: 'id', title: 'ID', width: 80, hide: true}
                     , {field: 'name', title: '真实名', width: 120}
                     , {field: 'loginName', title: '登录名', width: 120}
                     , {field: 'email', title: '电子邮箱', width: 120}

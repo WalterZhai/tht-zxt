@@ -38,6 +38,11 @@
     <button type="button" class="layui-btn layui-btn-xs layui-btn-normal" lay-event="row-relUser"><i class="layui-icon layui-icon-share"></i>用户关联</button>
 </script>
 
+<script type="text/html" id="xuhao">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+
 </body>
 <script>
 
@@ -57,7 +62,8 @@
             ,height: 'full-80'
             ,cols: [
                 [
-                    {checkbox: true}
+                    {title: '序号', templet: '#xuhao', width: 60}
+                    , {checkbox: true}
                     , {field: 'id', title: 'ID', width: 80, hide: true}
                     , {field: 'code', title: '角色编码', width: 120}
                     , {field: 'name', title: '角色名称', width: 120}

@@ -39,6 +39,10 @@
         <button type="button" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="row-delete"><i class="layui-icon layui-icon-delete"></i>删除</button>
     </script>
 
+    <script type="text/html" id="xuhao">
+        {{d.LAY_TABLE_INDEX+1}}
+    </script>
+
 </body>
 <script>
 
@@ -60,14 +64,15 @@
             ,height: 'full-80'
             ,cols: [
                 [ //表头
-                    {field: 'id', title: 'ID', width:80 ,hide:true}
-                    ,{field: 'name', title: '菜单名', width:150}
-                    ,{field: 'pname', title: '父菜单', width:150}
-                    ,{field: 'href', title: '链接', width:200}
-                    ,{field: 'seq', title: '同父顺序', width:100}
-                    ,{field: 'type', title: '类型', width:80}
-                    ,{field: 'icon', title: '图标ID', width:120}
-                    ,{field: '',title: '功能操作',width:240,toolbar:'#bar'}
+                    {title: '序号', templet: '#xuhao', width: 60}
+                    , {field: 'id', title: 'ID', width: 80, hide: true}
+                    , {field: 'name', title: '菜单名', width: 150}
+                    , {field: 'pname', title: '父菜单', width: 150}
+                    , {field: 'href', title: '链接', width: 200}
+                    , {field: 'seq', title: '同父顺序', width: 100}
+                    , {field: 'type', title: '类型', width: 80}
+                    , {field: 'icon', title: '图标ID', width: 120}
+                    , {field: '', title: '功能操作', width: 240, toolbar: '#bar'}
                 ]
             ]
             ,where:{

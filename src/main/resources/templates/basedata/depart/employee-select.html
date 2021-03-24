@@ -32,6 +32,10 @@
 <!-- 数据表格 -->
 <table class="layui-table" id="tableList" lay-filter="tableList"></table>
 
+<script type="text/html" id="xuhao">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
 </body>
 <script>
 
@@ -52,7 +56,8 @@
             ,height: 'full-80'
             ,cols: [
                 [
-                    {type: 'radio'}
+                    {title: '序号', templet: '#xuhao', width: 60}
+                    , {type: 'radio'}
                     , {field: 'id', title: 'ID', width: 80, hide: true}
                     , {field: 'code', title: '工号', width: 120}
                     , {field: 'name', title: '姓名', width: 120}

@@ -39,6 +39,10 @@
     <button type="button" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="row-delete"><i class="layui-icon layui-icon-delete"></i>删除</button>
 </script>
 
+<script type="text/html" id="xuhao">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
 </body>
 <script>
 
@@ -59,7 +63,8 @@
             ,height: 'full-80'
             ,cols: [
                 [
-                    {checkbox: true}
+                    {title: '序号', templet: '#xuhao', width: 60}
+                    , {checkbox: true}
                     , {field: 'id', title: 'ID', width: 80, hide: true}
                     , {field: 'code', title: '工号', width: 120}
                     , {field: 'name', title: '姓名', width: 120}

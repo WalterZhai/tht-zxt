@@ -41,6 +41,11 @@
         <button type="button" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="row-change"><i class="layui-icon layui-icon-share"></i>更换上级部门</button>
     </script>
 
+    <script type="text/html" id="xuhao">
+        {{d.LAY_TABLE_INDEX+1}}
+    </script>
+
+
 </body>
 <script>
 
@@ -61,12 +66,13 @@
             ,height: 'full-80'
             ,cols: [
                 [ //表头
-                    {field: 'id', title: 'ID', width:80 ,hide:true}
-                    ,{field: 'code', title: '部门编码', width:120}
-                    ,{field: 'name', title: '部门名称', width:200}
-                    ,{field: 'parentDepartName', title: '父部门', width:200}
-                    ,{field: 'supervisorName', title: '部门负责人', width:120}
-                    ,{field: '',title: '功能操作',width:300,toolbar:'#bar'}
+                    {title: '序号', templet: '#xuhao', width: 60}
+                    , {field: 'id', title: 'ID', width: 80, hide: true}
+                    , {field: 'code', title: '部门编码', width: 120}
+                    , {field: 'name', title: '部门名称', width: 200}
+                    , {field: 'parentDepartName', title: '父部门', width: 200}
+                    , {field: 'supervisorName', title: '部门负责人', width: 120}
+                    , {field: '', title: '功能操作', width: 300, toolbar: '#bar'}
                 ]
             ]
             ,where:{

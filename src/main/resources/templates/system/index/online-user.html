@@ -24,6 +24,10 @@
 <!-- 数据表格 -->
 <table class="layui-table" id="tableList" lay-filter="tableList"></table>
 
+<script type="text/html" id="xuhao">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
 </body>
 <script>
 
@@ -41,10 +45,11 @@
             ,page: false
             ,cols: [
                 [ //表头
-                {field: 'NAME', title: '真实名', width:120}
-                ,{field: 'LOGINNAME', title: '登录名', width:120}
-                ,{field: 'CREATETIME', title: '登录时间', width:160,templet:'<div>{{ layui.laytpl.toDateString(d.CREATETIME,&quot;yyyy-MM-dd HH:mm:ss&quot;) }}</div>'}
-                ,{field: 'LASTACCESSTIME', title: '上次操作时间', width:160,templet:'<div>{{ layui.laytpl.toDateString(d.LASTACCESSTIME,&quot;yyyy-MM-dd HH:mm:ss&quot;) }}</div>'}
+                    {title: '序号', templet: '#xuhao', width: 60}
+                    ,{field: 'NAME', title: '真实名', width:120}
+                    ,{field: 'LOGINNAME', title: '登录名', width:120}
+                    ,{field: 'CREATETIME', title: '登录时间', width:160,templet:'<div>{{ layui.laytpl.toDateString(d.CREATETIME,&quot;yyyy-MM-dd HH:mm:ss&quot;) }}</div>'}
+                    ,{field: 'LASTACCESSTIME', title: '上次操作时间', width:160,templet:'<div>{{ layui.laytpl.toDateString(d.LASTACCESSTIME,&quot;yyyy-MM-dd HH:mm:ss&quot;) }}</div>'}
                 ]
             ]
             ,where:{}
