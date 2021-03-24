@@ -17,7 +17,7 @@ public interface MessageInfoRepository  extends JpaRepository<MessageInfo,String
 
     List<MessageInfo> findMessageInfosByIsDeleteAndMessage(Integer isDelete, Message message);
 
-    List<MessageInfo> findMessageInfosByIsDeleteAndUserCode(Integer isDelete, String userCode);
+    List<MessageInfo> findMessageInfosByIsDeleteAndUserCodeAndIsSendAndIsRead(Integer isDelete, String userCode, Integer isSend, Integer isRead);
 
     Page<MessageInfo> findMessageInfosByIsDeleteAndIsSendAndUserCodeOrderByIsReadAscCreateDateDesc(Integer isDelete, Integer isSend, String userCode, Pageable pageable);
 

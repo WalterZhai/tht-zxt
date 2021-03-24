@@ -18,13 +18,18 @@
 		<button type="button" class="layui-btn layui-btn-xs" lay-event="row-read"><i class="layui-icon layui-icon-read"></i>查看明细</button>
 	</script>
 
+<script type="text/html" id="xuhao">
+	{{d.LAY_TABLE_INDEX+1}}
+</script>
+
 </body>
 
 <script>
-	layui.use(['form','layer','table'], function(){
+	layui.use(['form','layer','table','jquery'], function(){
 		var form = layui.form;
 		var layer = layui.layer;
 		var table = layui.table;
+		var $ = layui.jquery;
 
 		table.render({
 			elem: '#tableList'
@@ -35,21 +40,22 @@
 			,limit:20
 			,cols: [
 				[ //表头
-					{field: 'id', title: 'ID', width:80 ,hide:true}
-					,{field: 'message', title: '消息标题', width:150,templet:'<div>{{d.message.mesTitle}}</div>'}
-					,{field: 'message', title: '消息内容', width:150,templet:'<div>{{d.message.mesContent}}</div>'}
-					,{field: 'isRead', title: '是否已读', width:150}
+					{title: '序号', templet: '#xuhao', width: 60}
+					,{field: 'id', title: 'ID', width:80 ,hide:true}
+					,{field: 'message', title: '消息标题', width:120,templet:'<div>{{d.message.title}}</div>'}
+					,{field: 'message', title: '消息内容', width:150,templet:'<div>{{d.message.content}}</div>'}
+					,{field: 'isRead', title: '是否已读', width:120,templet: function (d) {
+						if (d.isRead == 0) {
+							return '<span style="color:red;">未读</span>'
+						}
+						if (d.isRead == 1) {
+							return '<span style="color:green;">已读</span>'
+						}
+					}}
 					,{field: '',title: '功能操作',width:150,toolbar:'#bar'}
 				]
 			]
 			,done: function(res, curr, count){
-				$("[data-field='isRead']").children().each(function () {
-					if ($(this).text() == '0') {
-						$(this).text('未读');
-					} else if ($(this).text() == '1') {
-						$(this).text('已读');
-					}
-				});
 			}
 		});
 
@@ -82,8 +88,8 @@
 				content : '/topage?url=system/index/read-message-deatil.html',
 				success:function(layero,index){
 					var body = layer.getChildFrame('body', index);
-					body.find("input[name='title']").val(obj.message.mesTitle);
-					body.find("textarea[name='content']").val(obj.message.mesContent);
+					body.find("input[name='title']").val(obj.message.title);
+					body.find("textarea[name='content']").val(obj.message.content);
 					noteMessage(obj);
 				}
 			});
@@ -99,9 +105,26 @@
 				},
 				success:function(result){
 					if(result.state == 1){
+						inspectMessage();
 						refreshTab();
 					}else{
 						layer.msg(result.message,{icon: 5});
+					}
+				},
+			});
+		}
+
+		function inspectMessage(){
+			$.ajax({
+				url:'/message/inspectMessage',
+				type:'post',
+				data:{},
+				success:function(result){
+					if(result.state == 1){
+						if(result.data==0){
+							$("#message-notice-index",window.parent.document).empty('<span class="layui-badge-dot"></span>');
+						}
+					}else{
 					}
 				},
 			});
@@ -114,6 +137,7 @@
 				data:{},
 				success:function(result){
 					if(result.state == 1){
+						$("#message-notice-index",window.parent.document).empty('<span class="layui-badge-dot"></span>');
 						refreshTab();
 					}else{
 						layer.msg(result.message,{icon: 5});

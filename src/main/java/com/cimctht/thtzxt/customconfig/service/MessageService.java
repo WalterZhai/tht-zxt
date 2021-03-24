@@ -266,14 +266,14 @@ public class MessageService implements MessageServiceImpl {
 
     @Override
     public Integer inspectMessage(String username) {
-        List<MessageInfo> list = messageInfoRepository.findMessageInfosByIsDeleteAndUserCode(0,username);
+        List<MessageInfo> list = messageInfoRepository.findMessageInfosByIsDeleteAndUserCodeAndIsSendAndIsRead(0,username,1, 0);
         return list.size();
     }
 
     @Override
     public TableEntity tableDataMessageInfo(String username,Integer page,Integer limit) {
         Pageable pageable = PageRequest.of(page-1,limit);
-        Page<MessageInfo> pages = messageInfoRepository.findMessageInfosByIsDeleteAndIsSendAndUserCodeOrderByIsReadAscCreateDateDesc(0, 0, username, pageable);
+        Page<MessageInfo> pages = messageInfoRepository.findMessageInfosByIsDeleteAndIsSendAndUserCodeOrderByIsReadAscCreateDateDesc(0, 1, username, pageable);
         return new TableEntity(pages.getContent(), MathsUtils.convertLong2BigDecimal(pages.getTotalElements()));
     }
 
@@ -288,7 +288,7 @@ public class MessageService implements MessageServiceImpl {
 
     @Override
     public void messageReadAll(String username) {
-        List<MessageInfo> list = messageInfoRepository.findMessageInfosByIsDeleteAndUserCode(0, username);
+        List<MessageInfo> list = messageInfoRepository.findMessageInfosByIsDeleteAndUserCodeAndIsSendAndIsRead(0, username,1,0);
         for(MessageInfo messageInfo : list){
             messageInfo.setIsRead(1);
         }
