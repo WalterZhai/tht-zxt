@@ -21,6 +21,7 @@ import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.Model;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.task.Task;
 import org.activiti.image.impl.DefaultProcessDiagramGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
@@ -200,8 +201,10 @@ public class ProcessController {
     @GetMapping(value = "/act/test")
     public JsonResult ActTest(HttpServletRequest request){
         //List<Task> list = runServiceImpl.getTask("100001");
-        Boolean b = processServiceImpl.isEnd("100001");
+        //Boolean b = processServiceImpl.isEnd("100001");
         //runServiceImpl.completeTask("100006");
+        // List<Task> list = processServiceImpl.getTask("2506");
+        // processServiceImpl.completeTask("7502");
         return new JsonResult();
     }
 
@@ -307,7 +310,7 @@ public class ProcessController {
             String str = imgStr.toString();
 
             ModelMap Model = new ModelMap().addAttribute("file", str);
-            modelAndView= new ModelAndView("/file/picture/picture_view",Model);
+            modelAndView= new ModelAndView("/customconfig/process/process_view",Model);
         }catch (Exception e){
             throw new UnimaxException("查看失败！");
         } finally {
