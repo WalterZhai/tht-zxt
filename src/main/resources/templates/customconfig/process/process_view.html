@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>图片查看</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/layui/css/layui.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/index.css}"/>
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/assets/js/templet.js}"></script>
+</head>
+<body>
+
+    <img id='img1'/>
+
+
+</body>
+
+<script th:inline="javascript">
+
+    layui.use(['layer','jquery'],function(){
+        var layer = layui.layer;
+        var $ = layui.jquery;
+
+        layer.ready(function () {
+            var file = [[${file}]];
+            $('#img1').attr('src', file);
+        });
+
+    });
+
+</script>
+</html>
