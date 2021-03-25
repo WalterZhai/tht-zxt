@@ -35,9 +35,6 @@ public class InitImplementsService {
     @PersistenceContext(unitName = "unimaxPersistenceUnit")
     private EntityManager unimaxEntityManager;
 
-    @Value("${spring.datasource.unimax.username}")
-    private String oracleOwner;
-
     @Autowired
     private UserRepository userRepository;
 
@@ -109,7 +106,7 @@ public class InitImplementsService {
      */
     public void initBaseTableComment(){
         //用户表
-        String judgeSql = "select c.comments from dba_tab_comments c where c.owner='"+oracleOwner+"' and c.TABLE_NAME='SYS_USER'";
+        String judgeSql = "select c.comments from user_tab_comments c where c.TABLE_NAME='SYS_USER'";
         String judge = (String) unimaxEntityManager.createNativeQuery(judgeSql).getSingleResult();
         if(StrUtil.hasEmpty(judge)){
             String sql = "comment on table SYS_USER is '用户表' ";
@@ -150,7 +147,7 @@ public class InitImplementsService {
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
         }
         //角色表
-        judgeSql = "select c.comments from dba_tab_comments c where c.owner='"+oracleOwner+"' and c.TABLE_NAME='SYS_ROLE'";
+        judgeSql = "select c.comments from user_tab_comments c where c.TABLE_NAME='SYS_ROLE'";
         judge = (String) unimaxEntityManager.createNativeQuery(judgeSql).getSingleResult();
         if(StrUtil.hasEmpty(judge)){
             String sql = "comment on table SYS_ROLE is '角色表' ";
@@ -185,7 +182,7 @@ public class InitImplementsService {
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
         }
         //菜单表
-        judgeSql = "select c.comments from dba_tab_comments c where c.owner='"+oracleOwner+"' and c.TABLE_NAME='SYS_MENU'";
+        judgeSql = "select c.comments from user_tab_comments c where c.TABLE_NAME='SYS_MENU'";
         judge = (String) unimaxEntityManager.createNativeQuery(judgeSql).getSingleResult();
         if(StrUtil.hasEmpty(judge)){
             String sql = "comment on table SYS_MENU is '菜单表' ";
@@ -229,7 +226,7 @@ public class InitImplementsService {
         }
 
         //用户组表
-        judgeSql = "select c.comments from dba_tab_comments c where c.owner='"+oracleOwner+"' and c.TABLE_NAME='SYS_GROUP'";
+        judgeSql = "select c.comments from user_tab_comments c where c.TABLE_NAME='SYS_GROUP'";
         judge = (String) unimaxEntityManager.createNativeQuery(judgeSql).getSingleResult();
         if(StrUtil.hasEmpty(judge)){
             String sql = "comment on table SYS_GROUP is '用户组表' ";

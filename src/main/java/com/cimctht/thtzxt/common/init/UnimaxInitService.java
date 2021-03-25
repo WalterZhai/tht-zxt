@@ -48,7 +48,7 @@ public class UnimaxInitService implements ApplicationRunner {
             initCustomConfigService.InitCustomConfigComment();
             logger.info("项目初始化结束");
         }else if(SysConstant.INIT_STATE_CLOSE.equals(state)){
-            logger.info("项目初始化关闭");
+            logger.info("项目初始化未开启");
         }
     }
 

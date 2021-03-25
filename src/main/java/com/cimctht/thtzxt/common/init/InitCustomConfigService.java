@@ -25,9 +25,6 @@ public class InitCustomConfigService {
     @PersistenceContext(unitName = "unimaxPersistenceUnit")
     private EntityManager unimaxEntityManager;
 
-    @Value("${spring.datasource.unimax.username}")
-    private String oracleOwner;
-
 
     /**
      * @comment 初始化客户化配置表注释
@@ -36,7 +33,7 @@ public class InitCustomConfigService {
      */
     public void InitCustomConfigComment(){
         //信息主表
-        String judgeSql = "select c.comments from dba_tab_comments c where c.owner='"+oracleOwner+"' and c.TABLE_NAME='CCF_MESSAGE'";
+        String judgeSql = "select c.comments from user_tab_comments c where c.TABLE_NAME='CCF_MESSAGE'";
         String judge = (String) unimaxEntityManager.createNativeQuery(judgeSql).getSingleResult();
         if(StrUtil.hasEmpty(judge)){
             String sql = "comment on table CCF_MESSAGE is '站内信息主表' ";
@@ -79,7 +76,7 @@ public class InitCustomConfigService {
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
         }
         //信息副表
-        judgeSql = "select c.comments from dba_tab_comments c where c.owner='"+oracleOwner+"' and c.TABLE_NAME='CCF_MESSAGE_INFO'";
+        judgeSql = "select c.comments from user_tab_comments c where c.TABLE_NAME='CCF_MESSAGE_INFO'";
         judge = (String) unimaxEntityManager.createNativeQuery(judgeSql).getSingleResult();
         if(StrUtil.hasEmpty(judge)){
             String sql = "comment on table CCF_MESSAGE_INFO is '站内信息副表' ";

@@ -25,10 +25,6 @@ public class InitBasedataService {
     @PersistenceContext(unitName = "unimaxPersistenceUnit")
     private EntityManager unimaxEntityManager;
 
-    @Value("${spring.datasource.unimax.username}")
-    private String oracleOwner;
-
-
     /**
      * @comment 初始化基础表注释
      * @author Walter(翟笑天)
@@ -36,7 +32,7 @@ public class InitBasedataService {
      */
     public void initBaseTableComment(){
         //部门表
-        String judgeSql = "select c.comments from dba_tab_comments c where c.owner='"+oracleOwner+"' and c.TABLE_NAME='BD_DEPART'";
+        String judgeSql = "select c.comments from user_tab_comments c where c.TABLE_NAME='BD_DEPART'";
         String judge = (String) unimaxEntityManager.createNativeQuery(judgeSql).getSingleResult();
         if(StrUtil.hasEmpty(judge)){
             String sql = "comment on table BD_DEPART is '部门表' ";
@@ -83,7 +79,7 @@ public class InitBasedataService {
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
         }
         //员工表
-        judgeSql = "select c.comments from dba_tab_comments c where c.owner='"+oracleOwner+"' and c.TABLE_NAME='BD_EMPLOYEE'";
+        judgeSql = "select c.comments from user_tab_comments c where c.TABLE_NAME='BD_EMPLOYEE'";
         judge = (String) unimaxEntityManager.createNativeQuery(judgeSql).getSingleResult();
         if(StrUtil.hasEmpty(judge)){
             String sql = "comment on table BD_EMPLOYEE is '员工表' ";
