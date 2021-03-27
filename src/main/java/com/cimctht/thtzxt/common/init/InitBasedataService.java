@@ -162,6 +162,86 @@ public class InitBasedataService {
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
         }
 
+        //系统参数
+        judgeSql = "select c.comments from user_tab_comments c where c.TABLE_NAME='BD_SYSTEM_PARAMS'";
+        judge = (String) unimaxEntityManager.createNativeQuery(judgeSql).getSingleResult();
+        if(StrUtil.hasEmpty(judge)){
+            String sql = "comment on table BD_SYSTEM_PARAMS is '系统参数' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+
+            sql = " comment on column BD_SYSTEM_PARAMS.name is '参数名称' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column BD_SYSTEM_PARAMS.code is '参数编码' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column BD_SYSTEM_PARAMS.value is '参数值' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column BD_SYSTEM_PARAMS.description is '参数说明' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+
+            sql = "comment on column BD_SYSTEM_PARAMS.gid is '主键' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_SYSTEM_PARAMS.create_date is '创建时间' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_SYSTEM_PARAMS.create_id is '创建人' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_SYSTEM_PARAMS.modify_date is '修改日期' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_SYSTEM_PARAMS.modify_id is '修改人' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_SYSTEM_PARAMS.is_delete is '删除标识：0-未删除；1-删除' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_SYSTEM_PARAMS.uda1 is '备用1' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_SYSTEM_PARAMS.uda2 is '备用2' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_SYSTEM_PARAMS.uda3 is '备用3' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_SYSTEM_PARAMS.uda4 is '备用4' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_SYSTEM_PARAMS.uda5 is '备用5' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+        }
+
+        //员工表
+        judgeSql = "select c.comments from user_tab_comments c where c.TABLE_NAME='BD_PASSWORD_POLICY'";
+        judge = (String) unimaxEntityManager.createNativeQuery(judgeSql).getSingleResult();
+        if(StrUtil.hasEmpty(judge)){
+            String sql = "comment on table BD_PASSWORD_POLICY is '密码策略' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+
+            sql = " comment on column BD_PASSWORD_POLICY.name is '策略名称' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column BD_PASSWORD_POLICY.value is '正则值' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column BD_PASSWORD_POLICY.IS_USED is '0-正在使用；1-未使用' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column BD_PASSWORD_POLICY.DESCRIPTION is '策略说明' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+
+            sql = "comment on column BD_PASSWORD_POLICY.gid is '主键' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_PASSWORD_POLICY.create_date is '创建时间' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_PASSWORD_POLICY.create_id is '创建人' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_PASSWORD_POLICY.modify_date is '修改日期' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_PASSWORD_POLICY.modify_id is '修改人' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_PASSWORD_POLICY.is_delete is '删除标识：0-未删除；1-删除' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_PASSWORD_POLICY.uda1 is '备用1' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_PASSWORD_POLICY.uda2 is '备用2' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_PASSWORD_POLICY.uda3 is '备用3' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_PASSWORD_POLICY.uda4 is '备用4' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_PASSWORD_POLICY.uda5 is '备用5' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+        }
+
     }
 
 

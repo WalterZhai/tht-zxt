@@ -438,7 +438,7 @@ public class InitImplementsService {
             menu3.setCode(SysConstant.SYSTEM_MENU_CODE_PREFIX + StringUtils.padLeft(menuRepository.queryCodeSeqNext().toString(),3,"0"));
             menu3.setName(SysConstant.MENU_PASSWORD_NAME);
             menu3.setParentMenu(menu2);
-            menu3.setHref("topage?url=basedata/system/systemPassword.html");
+            menu3.setHref("topage?url=basedata/passwordPolicy/passwordPolicy.html");
             menu3.setSeq(2);
             menu3.setType(0);
             menu3.setIcon(SysConstant.LAYUI_ICON_LAYER);
