@@ -61,8 +61,17 @@ public interface SysConstant {
     /** 菜单编码-组织架构 **/
     String MENU_ORG_NAME = "组织架构";
 
+    /** 菜单编码-系统数据 **/
+    String MENU_DATA_NAME = "系统数据";
+
     /** 菜单编码-员工信息 **/
     String MENU_EMPLOYEE_NAME = "员工信息";
+
+    /** 菜单编码-系统参数 **/
+    String MENU_PARAMS_NAME = "系统参数";
+
+    /** 菜单编码-密码策略 **/
+    String MENU_PASSWORD_NAME = "密码策略";
 
     /** 菜单编码-部门员工 **/
     String MENU_DEPART_EMPLOYEE_NAME = "部门员工";
@@ -88,8 +97,17 @@ public interface SysConstant {
     /** 菜单编码-任务调度 **/
     String MENU_TASK_NAME = "任务调度";
 
+    /** 菜单编码-自定义项 **/
+    String MENU_CUSTOM_NAME = "自定义项";
+
     /** 菜单编码-任务管理 **/
     String MENU_TASK_MANAGER_NAME = "任务管理";
+
+    /** 菜单编码-自定义档案 **/
+    String MENU_CUSTOM_FILE_NAME = "自定义档案";
+
+    /** 菜单编码-单据号管理 **/
+    String MENU_DOCU_NUM_NAME = "单据号管理";
 
     /** 序列名称定义-角色 **/
     String ROLE_CODE_SEQ = "ROLE_CODE_SEQ";

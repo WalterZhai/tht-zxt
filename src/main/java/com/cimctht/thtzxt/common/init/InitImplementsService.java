@@ -408,10 +408,10 @@ public class InitImplementsService {
             menu1.setCreateId(SysConstant.ADMIN);
             menu1.setModifyId(SysConstant.ADMIN);
             role.getMenus().add(menu1);
-            //组织架构 菜单
+            //系统数据 菜单
             menu2 = new Menu();
             menu2.setCode(SysConstant.SYSTEM_MENU_CODE_PREFIX + StringUtils.padLeft(menuRepository.queryCodeSeqNext().toString(),3,"0"));
-            menu2.setName(SysConstant.MENU_ORG_NAME);
+            menu2.setName(SysConstant.MENU_DATA_NAME);
             menu2.setParentMenu(menu1);
             menu2.setSeq(1);
             menu2.setType(0);
@@ -420,8 +420,46 @@ public class InitImplementsService {
             menu2.setModifyId(SysConstant.ADMIN);
             role.getMenus().add(menu2);
             menu1.getChildMenus().add(menu2);
-            //员工信息 菜单
+            //系统参数 菜单
             Menu menu3 = new Menu();
+            menu3.setCode(SysConstant.SYSTEM_MENU_CODE_PREFIX + StringUtils.padLeft(menuRepository.queryCodeSeqNext().toString(),3,"0"));
+            menu3.setName(SysConstant.MENU_PARAMS_NAME);
+            menu3.setParentMenu(menu2);
+            menu3.setHref("topage?url=basedata/system/systemParams.html");
+            menu3.setSeq(1);
+            menu3.setType(0);
+            menu3.setIcon(SysConstant.LAYUI_ICON_LAYER);
+            menu3.setCreateId(SysConstant.ADMIN);
+            menu3.setModifyId(SysConstant.ADMIN);
+            role.getMenus().add(menu3);
+            menu2.getChildMenus().add(menu3);
+            //密码策略 菜单
+            menu3 = new Menu();
+            menu3.setCode(SysConstant.SYSTEM_MENU_CODE_PREFIX + StringUtils.padLeft(menuRepository.queryCodeSeqNext().toString(),3,"0"));
+            menu3.setName(SysConstant.MENU_PASSWORD_NAME);
+            menu3.setParentMenu(menu2);
+            menu3.setHref("topage?url=basedata/system/systemPassword.html");
+            menu3.setSeq(2);
+            menu3.setType(0);
+            menu3.setIcon(SysConstant.LAYUI_ICON_LAYER);
+            menu3.setCreateId(SysConstant.ADMIN);
+            menu3.setModifyId(SysConstant.ADMIN);
+            role.getMenus().add(menu3);
+            menu2.getChildMenus().add(menu3);
+            //组织架构 菜单
+            menu2 = new Menu();
+            menu2.setCode(SysConstant.SYSTEM_MENU_CODE_PREFIX + StringUtils.padLeft(menuRepository.queryCodeSeqNext().toString(),3,"0"));
+            menu2.setName(SysConstant.MENU_ORG_NAME);
+            menu2.setParentMenu(menu1);
+            menu2.setSeq(2);
+            menu2.setType(0);
+            menu2.setIcon(SysConstant.LAYUI_ICON_FILE);
+            menu2.setCreateId(SysConstant.ADMIN);
+            menu2.setModifyId(SysConstant.ADMIN);
+            role.getMenus().add(menu2);
+            menu1.getChildMenus().add(menu2);
+            //员工信息 菜单
+            menu3 = new Menu();
             menu3.setCode(SysConstant.SYSTEM_MENU_CODE_PREFIX + StringUtils.padLeft(menuRepository.queryCodeSeqNext().toString(),3,"0"));
             menu3.setName(SysConstant.MENU_EMPLOYEE_NAME);
             menu3.setParentMenu(menu2);
@@ -539,6 +577,44 @@ public class InitImplementsService {
             menu3.setParentMenu(menu2);
             menu3.setHref("topage?url=customconfig/task/task.html");
             menu3.setSeq(1);
+            menu3.setType(0);
+            menu3.setIcon(SysConstant.LAYUI_ICON_LAYER);
+            menu3.setCreateId(SysConstant.ADMIN);
+            menu3.setModifyId(SysConstant.ADMIN);
+            role.getMenus().add(menu3);
+            menu2.getChildMenus().add(menu3);
+            //自定义项 菜单
+            menu2 = new Menu();
+            menu2.setCode(SysConstant.SYSTEM_MENU_CODE_PREFIX + StringUtils.padLeft(menuRepository.queryCodeSeqNext().toString(),3,"0"));
+            menu2.setName(SysConstant.MENU_CUSTOM_NAME);
+            menu2.setParentMenu(menu1);
+            menu2.setSeq(4);
+            menu2.setType(0);
+            menu2.setIcon(SysConstant.LAYUI_ICON_FILE);
+            menu2.setCreateId(SysConstant.ADMIN);
+            menu2.setModifyId(SysConstant.ADMIN);
+            role.getMenus().add(menu2);
+            menu1.getChildMenus().add(menu2);
+            //自定义档案 菜单
+            menu3 = new Menu();
+            menu3.setCode(SysConstant.SYSTEM_MENU_CODE_PREFIX + StringUtils.padLeft(menuRepository.queryCodeSeqNext().toString(),3,"0"));
+            menu3.setName(SysConstant.MENU_CUSTOM_FILE_NAME);
+            menu3.setParentMenu(menu2);
+            menu3.setHref("topage?url=customconfig/custom/customFile.html");
+            menu3.setSeq(1);
+            menu3.setType(0);
+            menu3.setIcon(SysConstant.LAYUI_ICON_LAYER);
+            menu3.setCreateId(SysConstant.ADMIN);
+            menu3.setModifyId(SysConstant.ADMIN);
+            role.getMenus().add(menu3);
+            menu2.getChildMenus().add(menu3);
+            //单据号管理 菜单
+            menu3 = new Menu();
+            menu3.setCode(SysConstant.SYSTEM_MENU_CODE_PREFIX + StringUtils.padLeft(menuRepository.queryCodeSeqNext().toString(),3,"0"));
+            menu3.setName(SysConstant.MENU_DOCU_NUM_NAME);
+            menu3.setParentMenu(menu2);
+            menu3.setHref("topage?url=customconfig/custom/doucNum.html");
+            menu3.setSeq(2);
             menu3.setType(0);
             menu3.setIcon(SysConstant.LAYUI_ICON_LAYER);
             menu3.setCreateId(SysConstant.ADMIN);
