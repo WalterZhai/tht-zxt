@@ -1,9 +1,12 @@
 package com.cimctht.thtzxt.common.init;
 
 import cn.hutool.core.util.StrUtil;
+import com.cimctht.thtzxt.basedata.entity.SystemParams;
+import com.cimctht.thtzxt.basedata.repository.SystemParamsRepository;
 import com.cimctht.thtzxt.common.constant.SysConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Walter(翟笑天)
@@ -24,6 +29,9 @@ public class InitBasedataService {
 
     @PersistenceContext(unitName = "unimaxPersistenceUnit")
     private EntityManager unimaxEntityManager;
+
+    @Autowired
+    private SystemParamsRepository systemParamsRepository;
 
     /**
      * @comment 初始化基础表注释
@@ -178,6 +186,63 @@ public class InitBasedataService {
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
         }
 
+    }
+
+    /**
+     * @comment 初始化系统参数
+     * @author Walter(翟笑天)
+     * @date 2021/3/27
+     */
+    public void initSystemParams(){
+        SystemParams unimaxParams = systemParamsRepository.findSystemParamsByIsDeleteAndCode(0,SysConstant.PARAMS_UNIMAX);
+        if(unimaxParams==null){
+            List<SystemParams> list = new ArrayList<>();
+            //平台版本号
+            SystemParams systemParams = new SystemParams();
+            systemParams.setCode("UNIMAX_VERSION");
+            systemParams.setName("平台版本号");
+            systemParams.setValue("2.0.0");
+            systemParams.setDescription("平台版本号");
+            systemParams.setCreateId("admin");
+            systemParams.setModifyId("admin");
+            list.add(systemParams);
+            //数据库版本
+            systemParams = new SystemParams();
+            systemParams.setCode("DB_VERSION");
+            systemParams.setName("数据库版本");
+            systemParams.setValue("Oracle 11g");
+            systemParams.setDescription("数据库版本");
+            systemParams.setCreateId("admin");
+            systemParams.setModifyId("admin");
+            list.add(systemParams);
+            //JAVA版本
+            systemParams = new SystemParams();
+            systemParams.setCode("JAVA_VERSION");
+            systemParams.setName("JAVA版本");
+            systemParams.setValue("1.8");
+            systemParams.setDescription("JAVA版本");
+            systemParams.setCreateId("admin");
+            systemParams.setModifyId("admin");
+            list.add(systemParams);
+            //SPRING BOOT版本号
+            systemParams = new SystemParams();
+            systemParams.setCode("SPRING_BOOT");
+            systemParams.setName("SPRING BOOT版本号");
+            systemParams.setValue("2.1.0.RELEASE");
+            systemParams.setDescription("SPRING BOOT版本号");
+            systemParams.setCreateId("admin");
+            systemParams.setModifyId("admin");
+            list.add(systemParams);
+            //AUTHOR
+            systemParams = new SystemParams();
+            systemParams.setCode("AUTHOR");
+            systemParams.setName("作者");
+            systemParams.setValue("Walter(翟笑天)");
+            systemParams.setCreateId("admin");
+            systemParams.setModifyId("admin");
+            list.add(systemParams);
+            systemParamsRepository.saveAll(list);
+        }
     }
 
 

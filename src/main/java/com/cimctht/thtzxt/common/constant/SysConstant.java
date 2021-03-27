@@ -142,6 +142,7 @@ public interface SysConstant {
     /** 序列名称定义-部门 **/
     String DEPART_SEQ = "DEPART_SEQ";
 
-
+    /** 平台版本参数 **/
+    String PARAMS_UNIMAX = "UNIMAX_VERSION";
 
 }

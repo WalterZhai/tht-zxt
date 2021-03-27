@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>系统参数</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/layui/css/layui.css}"/>
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/assets/js/templet.js}"></script>
+</head>
+<body>
+
+<form class="layui-form toolbar">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <div class="layui-input-inline" style="width: auto;">
+                <button type="button" class="layui-btn layui-btn-sm table-refresh"><i class="layui-icon layui-icon-refresh"></i>刷新</button>
+                <button type="button" class="layui-btn layui-btn-sm table-add"><i class="layui-icon layui-icon-add-1"></i>增加</button>
+                <button type="button" class="layui-btn layui-btn-sm table-query"><i class="layui-icon layui-icon-search"></i>查询</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- 数据表格 -->
+<table class="layui-table" id="tableList" lay-filter="tableList"></table>
+
+
+<script type="text/html" id="bar">
+    <button type="button" class="layui-btn layui-btn-xs" lay-event="row-edit"><i class="layui-icon layui-icon-edit"></i>编辑</button>
+    <button type="button" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="row-delete"><i class="layui-icon layui-icon-delete"></i>删除</button>
+</script>
+
+<script type="text/html" id="xuhao">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+</body>
+<script>
+
+    layui.use(['jquery','table','form','laytpl','util'], function(){
+        var form = layui.form;
+        var table = layui.table;
+        var laytpl = layui.laytpl;
+        var $ = layui.$;
+        var layer = layui.layer;
+
+        table.render({
+            elem: '#tableList'
+            ,url: '/systemParams/systemParamsTableData' //数据接口
+            ,title: '系统参数'
+            ,page: {curr:1} //开启分页
+            ,limit:20
+            ,size: 'sm'
+            ,height: 'full-80'
+            ,cols: [
+                [
+                    {title: '序号', templet: '#xuhao', width: 60}
+                    , {field: 'id', title: 'ID', width: 80, hide: true}
+                    , {field: 'code', title: '参数编码', width: 240}
+                    , {field: 'name', title: '参数名称', width: 240}
+                    , {field: 'value', title: '参数值', width: 240}
+                    , {field: 'description', title: '参数说明', width: 240}
+                    , {field: '', title: '功能操作', width: 240, toolbar: '#bar'}
+                ]
+            ]
+            ,where:{}
+            ,done: function(res, curr, count){}
+        });
+
+
+        //刷新
+        $('.table-refresh').on('click', function () {
+            refreshTab();
+        });
+
+        //刷新
+        window.refreshTab  = function(){
+            table.reload('tableList',{
+                url:'/systemParams/systemParamsTableData',
+                page: {curr:1},
+                where:{}
+            });
+        };
+
+        //查询
+        $('.table-query').on('click', function () {
+            queryTab();
+        });
+
+        //查询
+        window.queryTab  = function(){
+            table.reload('tableList',{
+                url:'/systemParams/systemParamsTableData',
+                where:{}
+            });
+        };
+
+        //添加新参数
+        $('.table-add').on('click', function () {
+            layer.open({
+                type : 2,
+                maxmin : true,
+                title : '添加系统参数',
+                area : [ '99%', '99%' ],
+                fix : false,
+                content : '/topage?url=basedata/systemParams/systemParams-add.html'
+            });
+        });
+
+        //行中按钮
+        table.on('tool(tableList)',function (obj) {
+            var data = obj.data;
+            if(obj.event==='row-delete'){
+                rowDelete(data);
+            }else if(obj.event==='row-edit'){
+                rowEdit(data);
+            }
+        });
+
+        //行中按钮-删除
+        function rowDelete(obj) {
+            layer.confirm('确定要删除吗？', {
+                btn: ['确定', '取消']
+            },function(index, layero){
+                $.ajax({
+                    url:'/systemParams/delSystemParams',
+                    type:'post',
+                    data:{
+                        id:obj.id
+                    },
+                    beforeSend:function () {},
+                    success:function(result){
+                        if(result.state == 1){
+                            layer.close(index);
+                            refreshTab();
+                        }else{
+                            layer.close(index);
+                            layer.msg(result.message,{icon: 5});
+                        }
+                    },
+                    complete: function () {},
+                });
+            }, function(index){
+                layer.close(index);
+            });
+        }
+
+
+        function rowEdit(obj) {
+            layer.open({
+                type : 2,
+                maxmin : true,
+                title : '修改系统参数',
+                area : [ '99%', '99%' ],
+                fix : false,
+                content : '/topage/systemParamsEntity?url=basedata/systemParams/systemParams-edit.html&id='+obj.id,
+                success:function(layero,index){
+                }
+            });
+        }
+
+    });
+
+
+
+
+
+</script>
+<style>
+
+</style>
+</html>
