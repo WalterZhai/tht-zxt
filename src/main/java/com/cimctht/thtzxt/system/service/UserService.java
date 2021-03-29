@@ -2,6 +2,8 @@ package com.cimctht.thtzxt.system.service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.cimctht.thtzxt.basedata.entity.PasswordPolicy;
+import com.cimctht.thtzxt.basedata.repository.PasswordPolicyRepository;
 import com.cimctht.thtzxt.common.constant.SysConstant;
 import com.cimctht.thtzxt.common.entity.TableEntity;
 import com.cimctht.thtzxt.common.exception.UnimaxException;
@@ -52,6 +54,9 @@ public class UserService implements UserServiceImpl {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private PasswordPolicyRepository passwordPolicyRepository;
+
     @Override
     public TableEntity userTableData(String loginName, String name, Integer page, Integer limit) {
         Pageable pageable = PageRequest.of(page-1,limit);
@@ -81,6 +86,10 @@ public class UserService implements UserServiceImpl {
         }
         if(!pwd1.equals(user.getPassword())){
             throw new UnimaxException("登录密码错误!");
+        }
+        PasswordPolicy passwordPolicy = passwordPolicyRepository.findPasswordPolicyByIsDeleteAndIsUsed(0,0);
+        if(!pwd2.matches(passwordPolicy.getValue())){
+            throw new UnimaxException("密码策略不符合："+passwordPolicy.getDescription());
         }
         user.setPassword(pwd2);
         userRepository.save(user);

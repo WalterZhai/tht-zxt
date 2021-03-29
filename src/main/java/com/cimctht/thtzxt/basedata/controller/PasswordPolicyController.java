@@ -1,5 +1,6 @@
 package com.cimctht.thtzxt.basedata.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.cimctht.thtzxt.basedata.Impl.PasswordPolicyServiceImpl;
 import com.cimctht.thtzxt.basedata.entity.PasswordPolicy;
 import com.cimctht.thtzxt.basedata.repository.PasswordPolicyRepository;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class PasswordPolicyController {
@@ -74,7 +77,7 @@ public class PasswordPolicyController {
             passwordPolicy.setName(name);
             passwordPolicy.setValue(value);
             passwordPolicy.setDescription(description);
-            passwordPolicy.setIsUsed(0);
+            passwordPolicy.setIsUsed(1);
             passwordPolicyRepository.save(passwordPolicy);
             return new JsonResult("添加成功");
         }catch (Exception e){
@@ -97,6 +100,18 @@ public class PasswordPolicyController {
             return new JsonResult("修改成功");
         }catch (Exception e){
             return new JsonResult(new UnimaxException("修改失败"));
+        }
+    }
+
+    @PostMapping(value = "/passwordPolicy/usedPasswordPolicy")
+    public JsonResult usedPasswordPolicy(HttpServletRequest request) {
+        String arrs = request.getParameter("arrs");
+        List<PasswordPolicy> list = JSON.parseArray(arrs,PasswordPolicy.class);
+        try{
+            passwordPolicyServiceImpl.usedPasswordPolicy(list.get(0));
+            return new JsonResult("选用成功");
+        }catch (Exception e){
+            return new JsonResult(new UnimaxException(e.getMessage()));
         }
     }
 

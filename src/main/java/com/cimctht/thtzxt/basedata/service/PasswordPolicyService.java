@@ -13,6 +13,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PasswordPolicyService implements PasswordPolicyServiceImpl {
 
@@ -28,6 +30,18 @@ public class PasswordPolicyService implements PasswordPolicyServiceImpl {
         return new TableEntity(pages.getContent(), MathsUtils.convertLong2BigDecimal(pages.getTotalElements()));
     }
 
+    @Override
+    public void usedPasswordPolicy(PasswordPolicy passwordPolicy) {
+        List<PasswordPolicy> list = passwordPolicyRepository.findPasswordPoliciesByIsDelete(0);
+        for(PasswordPolicy pp : list){
+            if(passwordPolicy.equals(pp)){
+                pp.setIsUsed(0);
+            }else{
+                pp.setIsUsed(1);
+            }
+        }
+        passwordPolicyRepository.saveAll(list);
+    }
 
 
 }
