@@ -146,6 +146,6 @@ public interface SysConstant {
     String PARAMS_UNIMAX = "UNIMAX_VERSION";
 
     /** 单据号最大值 **/
-    String DOCUNUM_MAX_VALUE = "999999999999999999";
+    String DOCUNUM_MAX_VALUE = "999999999999";
 
 }
