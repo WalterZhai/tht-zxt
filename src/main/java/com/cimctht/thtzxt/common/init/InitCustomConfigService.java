@@ -250,6 +250,50 @@ public class InitCustomConfigService {
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
         }
 
+
+        //定时任务
+        judgeSql = "select c.comments from user_tab_comments c where c.TABLE_NAME='CCF_SCHEDULE_TASK'";
+        judge = (String) unimaxEntityManager.createNativeQuery(judgeSql).getSingleResult();
+        if(StrUtil.hasEmpty(judge)){
+            String sql = "comment on table CCF_SCHEDULE_TASK is '定时任务主表' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+
+            sql = " comment on column CCF_SCHEDULE_TASK.SERVICE_NAME is '调度对象' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column CCF_SCHEDULE_TASK.METHOD_NAME is '调度方法' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column CCF_SCHEDULE_TASK.CORN is 'corn表达式' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column CCF_SCHEDULE_TASK.IS_OPEN is '是否开启：0-开启；1-关闭' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column CCF_SCHEDULE_TASK.description is '说明' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+
+            sql = "comment on column CCF_SCHEDULE_TASK.gid is '主键' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column CCF_SCHEDULE_TASK.create_date is '创建时间' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column CCF_SCHEDULE_TASK.create_id is '创建人' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column CCF_SCHEDULE_TASK.modify_date is '修改日期' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column CCF_SCHEDULE_TASK.modify_id is '修改人' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column CCF_SCHEDULE_TASK.is_delete is '删除标识：0-未删除；1-删除' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column CCF_SCHEDULE_TASK.uda1 is '备用1' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column CCF_SCHEDULE_TASK.uda2 is '备用2' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column CCF_SCHEDULE_TASK.uda3 is '备用3' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column CCF_SCHEDULE_TASK.uda4 is '备用4' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column CCF_SCHEDULE_TASK.uda5 is '备用5' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+
+        }
+
     }
 
 
