@@ -21,9 +21,9 @@ public class DefinedFileDetail extends BaseEntity {
     private String code;
     @Column(name = "SEQ",columnDefinition = "NUMBER(5)")
     private Integer seq;
-    @Column(name = "SEQ",columnDefinition = "NUMBER(1)")
+    @Column(name = "IS_ACTIVE",columnDefinition = "NUMBER(1)")
     private Integer isActive;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PARENT_ID",columnDefinition = "VARCHAR(32)")
     private DefinedFile parentDefinedFile;
 

@@ -247,6 +247,84 @@ public class InitBasedataService {
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
         }
 
+        //自定义档案主表
+        judgeSql = "select c.comments from user_tab_comments c where c.TABLE_NAME='BD_DEFINED_FILE'";
+        judge = (String) unimaxEntityManager.createNativeQuery(judgeSql).getSingleResult();
+        if(StrUtil.hasEmpty(judge)){
+            String sql = "comment on table BD_DEFINED_FILE is '自定义档案主表' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+
+            sql = " comment on column BD_DEFINED_FILE.name is '档案名称' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column BD_DEFINED_FILE.code is '档案编码' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column BD_DEFINED_FILE.DESCRIPTION is '档案说明' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+
+            sql = "comment on column BD_DEFINED_FILE.gid is '主键' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_DEFINED_FILE.create_date is '创建时间' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_DEFINED_FILE.create_id is '创建人' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_DEFINED_FILE.modify_date is '修改日期' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_DEFINED_FILE.modify_id is '修改人' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_DEFINED_FILE.is_delete is '删除标识：0-未删除；1-删除' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_DEFINED_FILE.uda1 is '备用1' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_DEFINED_FILE.uda2 is '备用2' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_DEFINED_FILE.uda3 is '备用3' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_DEFINED_FILE.uda4 is '备用4' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_DEFINED_FILE.uda5 is '备用5' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+        }
+
+        //自定义档案副表
+        judgeSql = "select c.comments from user_tab_comments c where c.TABLE_NAME='BD_DEFINED_FILE_DETAIL'";
+        judge = (String) unimaxEntityManager.createNativeQuery(judgeSql).getSingleResult();
+        if(StrUtil.hasEmpty(judge)){
+            String sql = "comment on table BD_DEFINED_FILE_DETAIL is '自定义档案明细' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+
+            sql = " comment on column BD_DEFINED_FILE_DETAIL.name is '名称' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column BD_DEFINED_FILE_DETAIL.code is '编码' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column BD_DEFINED_FILE_DETAIL.seq is '顺序' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column BD_DEFINED_FILE_DETAIL.IS_ACTIVE is '是否激活：0-激活；1-未激活' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+
+            sql = "comment on column BD_DEFINED_FILE_DETAIL.gid is '主键' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_DEFINED_FILE_DETAIL.create_date is '创建时间' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_DEFINED_FILE_DETAIL.create_id is '创建人' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_DEFINED_FILE_DETAIL.modify_date is '修改日期' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_DEFINED_FILE_DETAIL.modify_id is '修改人' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_DEFINED_FILE_DETAIL.is_delete is '删除标识：0-未删除；1-删除' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_DEFINED_FILE_DETAIL.uda1 is '备用1' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_DEFINED_FILE_DETAIL.uda2 is '备用2' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_DEFINED_FILE_DETAIL.uda3 is '备用3' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_DEFINED_FILE_DETAIL.uda4 is '备用4' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column BD_DEFINED_FILE_DETAIL.uda5 is '备用5' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+        }
+
     }
 
 

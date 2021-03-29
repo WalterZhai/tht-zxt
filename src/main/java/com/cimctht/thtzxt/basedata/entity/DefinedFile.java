@@ -23,7 +23,7 @@ public class DefinedFile extends BaseEntity {
     private String code;
     @Column(name = "DESCRIPTION",columnDefinition = "VARCHAR(200)")
     private String description;
-    @OneToMany(mappedBy = "parentDefinedFile", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "parentDefinedFile", fetch = FetchType.EAGER)
     @OrderBy("seq ASC")
     private List<DefinedFileDetail> childDefinedFiles = new ArrayList<>();
 
