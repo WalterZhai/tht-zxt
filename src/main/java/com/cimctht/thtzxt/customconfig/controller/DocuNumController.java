@@ -115,5 +115,18 @@ public class DocuNumController {
         }
     }
 
+    @PostMapping(value = "/docuNum/nextDocuNum")
+    public JsonResult nextDocuNum(HttpServletRequest request) {
+        String id = request.getParameter("id");
+        try{
+            DocuNum docuNum = docuNumRepository.findDocuNumById(id);
+            docuNum.setCur(docuNum.getCur().add(docuNum.getStep()));
+            docuNumRepository.save(docuNum);
+            return new JsonResult(docuNum.getCur());
+        }catch (Exception e){
+            return new JsonResult(new UnimaxException("获取失败"));
+        }
+    }
+
 
 }
