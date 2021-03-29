@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>自定义档案</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/layui/css/layui.css}"/>
+    <script th:src="@{/layui/layui.js}"></script>
+    <script th:src="@{/assets/js/templet.js}"></script>
+</head>
+<body>
+
+<form class="layui-form toolbar">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <input type="text" name="code" placeholder="编码" autocomplete="off" class="search-size" id="code">
+            <input type="text" name="name" placeholder="名称" autocomplete="off" class="search-size" id="name">
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-inline" style="width: auto;">
+                <button type="button" class="layui-btn layui-btn-sm table-refresh"><i class="layui-icon layui-icon-refresh"></i>刷新</button>
+                <button type="button" class="layui-btn layui-btn-sm table-add"><i class="layui-icon layui-icon-add-1"></i>增加</button>
+                <button type="button" class="layui-btn layui-btn-sm table-query"><i class="layui-icon layui-icon-search"></i>查询</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- 数据表格 -->
+<div class="layui-row grid-demo grid-demo-bg1">
+    <div class="layui-col-md12">
+        <table class="layui-table" id="tableList" lay-filter="tableList"></table>
+    </div>
+    <div class="layui-col-md12">
+        <table class="layui-table" id="tableListDetail" lay-filter="tableList"></table>
+    </div>
+</div>
+
+
+
+<script type="text/html" id="bar">
+    <button type="button" class="layui-btn layui-btn-xs" lay-event="row-edit"><i class="layui-icon layui-icon-edit"></i>编辑</button>
+    <button type="button" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="row-delete"><i class="layui-icon layui-icon-delete"></i>删除</button>
+    <button type="button" class="layui-btn layui-btn-xs layui-btn-normal" lay-event="row-detail"><i class="layui-icon layui-icon-share"></i>明细编辑</button>
+</script>
+
+<script type="text/html" id="xuhao">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+</body>
+<script>
+
+    layui.use(['jquery','table','form','laytpl','util'], function(){
+        var form = layui.form;
+        var table = layui.table;
+        var laytpl = layui.laytpl;
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var selectid = "";
+
+        table.render({
+            elem: '#tableList'
+            ,url: '/definedFile/definedFileTableData' //数据接口
+            ,title: '自定义档案表'
+            ,page: {curr:1} //开启分页
+            ,height:'full-400'
+            ,limit:20
+            ,size: 'sm'
+            ,cols: [
+                [
+                    {title: '序号', templet: '#xuhao', width: 60}
+                    , {type: 'radio'}
+                    , {field: 'id', title: 'ID', width: 80, hide: true}
+                    , {field: 'code', title: '档案编码', width: 120}
+                    , {field: 'name', title: '档案名称', width: 120}
+                    , {field: 'description', title: '档案说明', width: 120}
+                    , {field: '', title: '功能操作', width: 400, toolbar: '#bar'}
+                ]
+            ]
+            ,where:{
+                code : $("#code").val(),
+                name : $("#name").val()
+            }
+        });
+
+
+        //刷新
+        $('.table-refresh').on('click', function () {
+            refreshTab();
+            selectid = "";
+            refreshTabDetail();
+        });
+
+        //刷新
+        window.refreshTab  = function(){
+            $("#code").val("");
+            $("#name").val("");
+            table.reload('tableList',{
+                url:'/definedFile/definedFileTableData',
+                page: {curr:1},
+                where:{
+                    code : $("#code").val(),
+                    name : $("#name").val()
+                }
+            });
+        };
+
+        //查询
+        $('.table-query').on('click', function () {
+            queryTab();
+            selectid = "";
+            refreshTabDetail();
+        });
+
+        //查询
+        window.queryTab  = function(){
+            table.reload('tableList',{
+                url:'/definedFile/definedFileTableData',
+                where:{
+                    code : $("#code").val(),
+                    name : $("#name").val()
+                }
+            });
+        };
+
+
+        //单机主表格一行事件
+        table.on('row(tableList)', function(obj){
+            selectid = obj.data.id;
+            //选中行样式
+            obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');
+            //选中radio样式
+            obj.tr.find('i[class="layui-anim layui-icon"]').trigger("click");
+            refreshTabDetail();
+        });
+
+        table.render({
+            elem: '#tableListDetail'
+            ,url: '/definedFileDetail/definedFileDetailTableData' //数据接口
+            ,title: '自定义档案明细表'
+            ,page: {curr:1} //开启分页
+            ,limit:20
+            ,height:300
+            ,cols: [
+                [
+                    {title: '序号', templet: '#xuhao', width: 60}
+                    , {field: 'id', title: 'ID', width: 80, hide: true}
+                    , {field: 'code', title: '编码', width: 120}
+                    , {field: 'name', title: '名称', width: 120}
+                    , {field: 'seq', title: '顺序', width: 120}
+                    , {field: 'isActive', title: '是否激活', width: 120}
+                ]
+            ]
+            ,where:{
+                selectid : selectid
+            }
+            ,done: function(res, curr, count){
+                $("[data-field='isActive']").children().each(function () {
+                    if ($(this).text() == '0') {
+                        $(this).text('是');
+                    } else if ($(this).text() == '1') {
+                        $(this).text('否');
+                    }
+                });
+            }
+        });
+
+        //刷新从表格
+        window.refreshTabDetail = function(){
+            table.reload('tableListDetail',{
+                url:'/definedFileDetail/definedFileDetailTableData',
+                page: {curr:1},
+                limit:20,
+                where:{
+                    selectid : selectid
+                }
+            });
+        };
+
+
+
+        //添加档案
+        $('.table-add').on('click', function () {
+            layer.open({
+                type : 1,
+                maxmin : true,
+                title : '添加自定义档案',
+                area : [ '50%', '50%' ],
+                fix : false,
+                content :
+                    '<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;">'+
+                    '<label class="label-size label-color">档案名称*</label>' +
+                    '<input type="text" name="name" required  lay-verify="required" autocomplete="off" class="input-size">' +
+                    '<br>'+
+                    '<label class="label-size label-color">档案编码*</label>' +
+                    '<input type="text" name="code" required  lay-verify="required" autocomplete="off" class="input-size">' +
+                    '<br>'+
+                    '<label class="label-size">档案说明</label>' +
+                    '<input type="text" name="description" autocomplete="off" class="input-size">' +
+                    '<hr class="layui-bg-green">'+
+                    '<div class="layui-form-item" style="text-align: center">' +
+                    '<div class="layui-inline">'+
+                    '<button class="layui-btn" lay-submit lay-filter="formSubmit">立即提交</button>'+
+                    '</div>'+
+                    '</div>'+
+                    '</form>',
+                success: function(layero, index){
+                    //添加角色提交
+                    form.on('submit(formSubmit)', function(data){
+                        $.ajax({
+                            url:'/definedFile/addDefinedFile',
+                            type:'post',
+                            data:data.field,
+                            async: false,
+                            success:function(result){
+                                if(result.state == 1){
+                                    layer.close(index);
+                                    queryTab();
+                                }else{
+                                    layer.msg(result.message,{icon: 5});
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+
+        });
+
+
+
+        //行中按钮
+        table.on('tool(tableList)',function (obj) {
+            var data = obj.data;
+            if(obj.event==='row-edit'){
+                rowEdit(data);
+            }else if(obj.event==='row-delete'){
+                rowDelete(data);
+            }else if(obj.event==='row-detail'){
+                definedFileDetail(data);
+            }
+        });
+
+        //行中按钮-编辑
+        function rowEdit(obj) {
+            layer.open({
+                type : 1,
+                maxmin : true,
+                title : '修改自定义档案',
+                area : [ '50%', '50%' ],
+                fix : false,
+                content :
+                    '<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;">'+
+                    '<input name="id" type="hidden" >'+
+                    '<label class="label-size label-color">档案名称*</label>' +
+                    '<input type="text" name="name" required  lay-verify="required" autocomplete="off" class="input-size">' +
+                    '<br>'+
+                    '<label class="label-size label-color">档案编码*</label>' +
+                    '<input type="text" name="code" required  lay-verify="required" autocomplete="off" class="input-size">' +
+                    '<br>'+
+                    '<label class="label-size">档案说明</label>' +
+                    '<input type="text" name="description" autocomplete="off" class="input-size">' +
+                    '<hr class="layui-bg-green">'+
+                    '<div class="layui-form-item" style="text-align: center">' +
+                    '<div class="layui-inline">'+
+                    '<button class="layui-btn" lay-submit lay-filter="formSubmitEdit">立即提交</button>'+
+                    '</div>'+
+                    '</div>'+
+                    '</form>',
+                success: function(layero, index){
+                    layero.find("input[name='id']").val(obj.id);
+                    layero.find("input[name='name']").val(obj.name);
+                    layero.find("input[name='code']").val(obj.code);
+                    layero.find("input[name='description']").val(obj.description);
+                    //添加角色提交
+                    form.on('submit(formSubmitEdit)', function(data){
+                        $.ajax({
+                            url:'/definedFile/editDefinedFile',
+                            type:'post',
+                            data:data.field,
+                            async: false,
+                            success:function(result){
+                                if(result.state == 1){
+                                    layer.close(index);
+                                    queryTab();
+                                }else{
+                                    layer.msg(result.message,{icon: 5});
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+        }
+        //行中按钮-删除
+        function rowDelete(obj) {
+            layer.confirm('确定要删除吗？', {
+                btn: ['确定', '取消']
+            },function(index, layero){
+                $.ajax({
+                    url:'/definedFile/delDefinedFile',
+                    type:'post',
+                    data:{
+                        id:obj.id
+                    },
+                    beforeSend:function () {},
+                    success:function(result){
+                        if(result.state == 1){
+                            layer.close(index);
+                            refreshTab();
+                        }else{
+                            layer.close(index);
+                            layer.msg(result.message,{icon: 5});
+                        }
+                    },
+                    complete: function () {},
+                });
+            }, function(index){
+                layer.close(index);
+            });
+        }
+
+        //自定义档案明细定义
+        function definedFileDetail(obj) {
+            layer.open({
+                type : 2,
+                maxmin : true,
+                title : '自定义档案明细定义',
+                area : ['99%','99%'],
+                fix : false,
+                content : '/topageid?url=customconfig/definedFile/definedFileDetail.html&id='+obj.id,
+                success:function(layero,index){
+                    // var iframeWin = window[layero.find('iframe')[0]['name']];
+                    // iframeWin.ajaxLoadTransfer(data.id);
+                }
+            });
+        }
+
+
+    });
+
+
+
+
+
+</script>
+<style>
+
+</style>
+</html>

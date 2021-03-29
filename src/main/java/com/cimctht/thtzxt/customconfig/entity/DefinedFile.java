@@ -1,4 +1,4 @@
-package com.cimctht.thtzxt.basedata.entity;
+package com.cimctht.thtzxt.customconfig.entity;
 
 
 import com.cimctht.thtzxt.common.entity.BaseEntity;
@@ -23,9 +23,6 @@ public class DefinedFile extends BaseEntity {
     private String code;
     @Column(name = "DESCRIPTION",columnDefinition = "VARCHAR(200)")
     private String description;
-    @OneToMany(mappedBy = "parentDefinedFile", fetch = FetchType.EAGER)
-    @OrderBy("seq ASC")
-    private List<DefinedFileDetail> childDefinedFiles = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -51,11 +48,4 @@ public class DefinedFile extends BaseEntity {
         this.description = description;
     }
 
-    public List<DefinedFileDetail> getChildDefinedFiles() {
-        return childDefinedFiles;
-    }
-
-    public void setChildDefinedFiles(List<DefinedFileDetail> childDefinedFiles) {
-        this.childDefinedFiles = childDefinedFiles;
-    }
 }
