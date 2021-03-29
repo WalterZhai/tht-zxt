@@ -1,7 +1,9 @@
 package com.cimctht.thtzxt.common.init;
 
 import cn.hutool.core.util.StrUtil;
+import com.cimctht.thtzxt.basedata.entity.PasswordPolicy;
 import com.cimctht.thtzxt.basedata.entity.SystemParams;
+import com.cimctht.thtzxt.basedata.repository.PasswordPolicyRepository;
 import com.cimctht.thtzxt.basedata.repository.SystemParamsRepository;
 import com.cimctht.thtzxt.common.constant.SysConstant;
 import org.slf4j.Logger;
@@ -32,6 +34,9 @@ public class InitBasedataService {
 
     @Autowired
     private SystemParamsRepository systemParamsRepository;
+
+    @Autowired
+    private PasswordPolicyRepository passwordPolicyRepository;
 
     /**
      * @comment 初始化基础表注释
@@ -202,7 +207,7 @@ public class InitBasedataService {
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
         }
 
-        //员工表
+        //密码策略表
         judgeSql = "select c.comments from user_tab_comments c where c.TABLE_NAME='BD_PASSWORD_POLICY'";
         judge = (String) unimaxEntityManager.createNativeQuery(judgeSql).getSingleResult();
         if(StrUtil.hasEmpty(judge)){
@@ -323,6 +328,27 @@ public class InitBasedataService {
             list.add(systemParams);
             systemParamsRepository.saveAll(list);
         }
+
+        List<PasswordPolicy> list = passwordPolicyRepository.findPasswordPoliciesByIsDelete(0);
+        if(list==null || list.size()==0){
+            PasswordPolicy passwordPolicy = new PasswordPolicy();
+            passwordPolicy.setName("简单策略");
+            passwordPolicy.setValue("^[a-zA-Z0-9]+$");
+            passwordPolicy.setDescription("一个或多个字符或数字。");
+            passwordPolicy.setIsUsed(0);
+            passwordPolicy.setCreateId("admin");
+            passwordPolicy.setModifyId("admin");
+            passwordPolicyRepository.save(passwordPolicy);
+            passwordPolicy = new PasswordPolicy();
+            passwordPolicy.setName("复杂策略");
+            passwordPolicy.setValue("^[a-zA-Z]+[0-9]+$");
+            passwordPolicy.setDescription("以字符开头，数值结尾。");
+            passwordPolicy.setIsUsed(1);
+            passwordPolicy.setCreateId("admin");
+            passwordPolicy.setModifyId("admin");
+            passwordPolicyRepository.save(passwordPolicy);
+        }
+
     }
 
 
