@@ -1,5 +1,10 @@
 package com.cimctht.thtzxt.basedata.bo;
 
+/**
+ * @comment
+ * @author Walter(翟笑天)
+ * @date 2021/3/19
+ */
 public class DepartSyncBo {
 
     private String childCode;

@@ -16,6 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * @comment
+ * @author Walter(翟笑天)
+ * @date 2021/3/19
+ */
 @RestController
 public class SystemParamsController {
 

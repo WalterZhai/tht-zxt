@@ -10,6 +10,11 @@ import org.springframework.data.jpa.repository.Query;
 import java.math.BigInteger;
 import java.util.List;
 
+/**
+ * @comment
+ * @author Walter(翟笑天)
+ * @date 2021/3/19
+ */
 public interface EmployeeRepository extends JpaRepository<Employee,String> {
 
     Page<Employee> findEmployeesByIsDeleteAndCodeLikeAndNameLike(Integer isDelete, String code, String name, Pageable pageable);
