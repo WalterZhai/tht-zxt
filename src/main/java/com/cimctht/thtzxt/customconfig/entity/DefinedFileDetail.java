@@ -12,7 +12,7 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name="BD_DEFINED_FILE_DETAIL")
+@Table(name="CCF_DEFINED_FILE_DETAIL")
 public class DefinedFileDetail extends BaseEntity {
 
     @Column(name = "NAME",columnDefinition = "VARCHAR(30)")

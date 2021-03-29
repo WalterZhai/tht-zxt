@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 @Entity
-@Table(name="BD_DEFINED_FILE")
+@Table(name="CCF_DEFINED_FILE")
 public class DefinedFile extends BaseEntity {
 
     @Column(name = "NAME",columnDefinition = "VARCHAR(30)")
