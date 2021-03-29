@@ -205,6 +205,10 @@ public class InitBasedataService {
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
             sql = "comment on column BD_SYSTEM_PARAMS.uda5 is '备用5' ";
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+
+            //给code创建唯一键
+            sql = "ALTER TABLE BD_SYSTEM_PARAMS ADD CONSTRAINT uniq_bd_sp_code UNIQUE(CODE) ENABLE NOVALIDATE ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
         }
 
         //密码策略表

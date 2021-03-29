@@ -17,7 +17,7 @@ public class DefinedFileDetail extends BaseEntity {
 
     @Column(name = "NAME",columnDefinition = "VARCHAR(30)")
     private String name;
-    @Column(name = "CODE",columnDefinition = "VARCHAR(30)")
+    @Column(name = "CODE", columnDefinition = "VARCHAR(30)")
     private String code;
     @Column(name = "SEQ",columnDefinition = "NUMBER(5)")
     private Integer seq;

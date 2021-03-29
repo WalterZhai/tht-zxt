@@ -21,7 +21,7 @@ public class SystemParams extends BaseEntity {
 
     @Column(name = "NAME",columnDefinition = "VARCHAR(30)")
     private String name;
-    @Column(name = "CODE",columnDefinition = "VARCHAR(30)")
+    @Column(name = "CODE", columnDefinition = "VARCHAR(30)")
     private String code;
     @Column(name = "VALUE",columnDefinition = "VARCHAR(200)")
     private String value;

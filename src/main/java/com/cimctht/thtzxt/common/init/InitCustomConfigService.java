@@ -149,6 +149,10 @@ public class InitCustomConfigService {
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
             sql = "comment on column CCF_DEFINED_FILE.uda5 is '备用5' ";
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+
+            //给code创建唯一键
+            sql = "ALTER TABLE CCF_DEFINED_FILE ADD CONSTRAINT uniq_ccf_df_code UNIQUE(CODE) ENABLE NOVALIDATE ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
         }
 
         //自定义档案副表
@@ -192,6 +196,57 @@ public class InitCustomConfigService {
             sql = "comment on column CCF_DEFINED_FILE_DETAIL.uda4 is '备用4' ";
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
             sql = "comment on column CCF_DEFINED_FILE_DETAIL.uda5 is '备用5' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+
+        }
+
+        //单据号管理
+        judgeSql = "select c.comments from user_tab_comments c where c.TABLE_NAME='CCF_DOCU_NUM'";
+        judge = (String) unimaxEntityManager.createNativeQuery(judgeSql).getSingleResult();
+        if(StrUtil.hasEmpty(judge)){
+            String sql = "comment on table CCF_DOCU_NUM is '单据号管理' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+
+            sql = " comment on column CCF_DOCU_NUM.name is '名称' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column CCF_DOCU_NUM.code is '编码' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column CCF_DOCU_NUM.min is '最小值' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column CCF_DOCU_NUM.max is '最大值' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column CCF_DOCU_NUM.step is '步长' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column CCF_DOCU_NUM.cur is '当前值' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = " comment on column CCF_DOCU_NUM.description is '说明' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+
+            sql = "comment on column CCF_DOCU_NUM.gid is '主键' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column CCF_DOCU_NUM.create_date is '创建时间' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column CCF_DOCU_NUM.create_id is '创建人' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column CCF_DOCU_NUM.modify_date is '修改日期' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column CCF_DOCU_NUM.modify_id is '修改人' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column CCF_DOCU_NUM.is_delete is '删除标识：0-未删除；1-删除' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column CCF_DOCU_NUM.uda1 is '备用1' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column CCF_DOCU_NUM.uda2 is '备用2' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column CCF_DOCU_NUM.uda3 is '备用3' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column CCF_DOCU_NUM.uda4 is '备用4' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+            sql = "comment on column CCF_DOCU_NUM.uda5 is '备用5' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
+
+            //给code创建唯一键
+            sql = "ALTER TABLE CCF_DOCU_NUM ADD CONSTRAINT uniq_ccf_dn_code UNIQUE(CODE) ENABLE NOVALIDATE ";
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
         }
 
