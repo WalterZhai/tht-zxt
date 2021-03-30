@@ -322,6 +322,7 @@ public class InitBasedataService {
             systemParams.setCreateId("admin");
             systemParams.setModifyId("admin");
             list.add(systemParams);
+            systemParamsRepository.saveAll(list);
         }
 
         List<PasswordPolicy> list = passwordPolicyRepository.findPasswordPoliciesByIsDelete(0);
