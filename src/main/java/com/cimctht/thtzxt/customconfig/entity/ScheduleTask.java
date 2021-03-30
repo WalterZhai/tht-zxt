@@ -17,6 +17,8 @@ import javax.persistence.Table;
 @Table(name="CCF_SCHEDULE_TASK")
 public class ScheduleTask extends BaseEntity {
 
+    @Column(name = "NAME",columnDefinition = "VARCHAR(200)")
+    private String name;
     @Column(name = "SERVICE_FULL_NAME",columnDefinition = "VARCHAR(400)")
     private String serviceFullName;
     @Column(name = "SERVICE_NAME",columnDefinition = "VARCHAR(200)")
@@ -29,6 +31,14 @@ public class ScheduleTask extends BaseEntity {
     private Integer isopen;
     @Column(name = "DESCRIPTION",columnDefinition = "VARCHAR(400)")
     private String description;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getServiceFullName() {
         return serviceFullName;

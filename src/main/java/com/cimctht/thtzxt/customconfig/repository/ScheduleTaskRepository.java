@@ -18,4 +18,6 @@ public interface ScheduleTaskRepository extends JpaRepository<ScheduleTask,Strin
     List<ScheduleTask> findScheduleTasksByIsDelete(Integer isDelete);
 
     ScheduleTask findScheduleTaskById(String id);
+
+    Page<ScheduleTask> findScheduleTasksByIsDeleteAndNameLikeOrderByCreateDate(Integer isDelete, String name, Pageable pageable);
 }
