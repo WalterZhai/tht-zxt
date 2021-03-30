@@ -17,16 +17,26 @@ import javax.persistence.Table;
 @Table(name="CCF_SCHEDULE_TASK")
 public class ScheduleTask extends BaseEntity {
 
+    @Column(name = "SERVICE_FULL_NAME",columnDefinition = "VARCHAR(400)")
+    private String serviceFullName;
     @Column(name = "SERVICE_NAME",columnDefinition = "VARCHAR(200)")
     private String serviceName;
     @Column(name = "METHOD_NAME",columnDefinition = "VARCHAR(200)")
     private String methodName;
-    @Column(name = "CORN",columnDefinition = "VARCHAR(200)")
-    private String corn;
+    @Column(name = "cron",columnDefinition = "VARCHAR(200)")
+    private String cron;
     @Column(name = "IS_OPEN",columnDefinition = "NUMBER(1)")
     private Integer isopen;
     @Column(name = "DESCRIPTION",columnDefinition = "VARCHAR(400)")
     private String description;
+
+    public String getServiceFullName() {
+        return serviceFullName;
+    }
+
+    public void setServiceFullName(String serviceFullName) {
+        this.serviceFullName = serviceFullName;
+    }
 
     public String getServiceName() {
         return serviceName;
@@ -44,12 +54,12 @@ public class ScheduleTask extends BaseEntity {
         this.methodName = methodName;
     }
 
-    public String getCorn() {
-        return corn;
+    public String getCron() {
+        return cron;
     }
 
-    public void setCorn(String corn) {
-        this.corn = corn;
+    public void setCron(String cron) {
+        this.cron = cron;
     }
 
     public Integer getIsopen() {

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  * @date 2020/10/10
  */
 @Component
-@Order(value = 1)
+@Order(value = 2)
 public class UnimaxInitService implements ApplicationRunner {
 
     static final Logger logger = LoggerFactory.getLogger(UnimaxInitService.class);

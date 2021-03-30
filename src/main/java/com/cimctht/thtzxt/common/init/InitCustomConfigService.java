@@ -258,11 +258,13 @@ public class InitCustomConfigService {
             String sql = "comment on table CCF_SCHEDULE_TASK is '定时任务主表' ";
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
 
+            sql = " comment on column CCF_SCHEDULE_TASK.SERVICE_FULL_NAME is '调度对象全路径' ";
+            unimaxEntityManager.createNativeQuery(sql).executeUpdate();
             sql = " comment on column CCF_SCHEDULE_TASK.SERVICE_NAME is '调度对象' ";
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
             sql = " comment on column CCF_SCHEDULE_TASK.METHOD_NAME is '调度方法' ";
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
-            sql = " comment on column CCF_SCHEDULE_TASK.CORN is 'corn表达式' ";
+            sql = " comment on column CCF_SCHEDULE_TASK.CRON is 'corn表达式' ";
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
             sql = " comment on column CCF_SCHEDULE_TASK.IS_OPEN is '是否开启：0-开启；1-关闭' ";
             unimaxEntityManager.createNativeQuery(sql).executeUpdate();
