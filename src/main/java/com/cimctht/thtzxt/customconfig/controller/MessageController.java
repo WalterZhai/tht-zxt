@@ -176,4 +176,16 @@ public class MessageController {
         }
     }
 
+    @PostMapping(value = "/message/feedback")
+    public JsonResult feedback(HttpServletRequest request,Integer type) {
+        String username = (String) request.getSession().getAttribute("username");
+        String feedback = request.getParameter("feedback");
+        try{
+            messageServiceImpl.messageFeedback(username,feedback);
+            return new JsonResult("已反馈");
+        }catch (Exception e){
+            return new JsonResult(new UnimaxException(e.getMessage()));
+        }
+    }
+
 }

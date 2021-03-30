@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>关于</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/index.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/layui/css/layui.css}"/>
+	<script th:src="@{/layui/layui.js}"></script>
+	<script th:src="@{/assets/js/templet.js}"></script>
+</head>
+<body>
+
+<div class="layui-collapse" >
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">基本使用说明</h2>
+		<div class="layui-colla-content">
+			<img style="width: 90%;height: 65%" src="/assets/images/explain.jpg">
+		</div>
+	</div>
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">作者</h2>
+		<div class="layui-colla-content">
+			<b>作者：</b>Walter（翟笑天）
+			<br>
+			<b>邮箱：</b>xiaotian.zhai@cimc.com
+		</div>
+	</div>
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">意见反馈</h2>
+		<div class="layui-colla-content">
+			<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;" id="form01">
+
+				<textarea name="content" id="feedback" required  lay-verify="required" class="input-textarea-size"></textarea>
+
+				<div class="layui-form-item">
+					<button class="layui-btn layui-btn-sm" lay-submit lay-filter="formSubmit1">提交</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+</body>
+<script>
+
+	layui.use(['form','layer','element','transfer','jquery'], function(){
+		var form = layui.form;
+		var layer = layui.layer;
+		var element = layui.element;
+		var transfer = layui.transfer;
+		var $ = layui.jquery;
+
+		form.on('submit(formSubmit1)', function(data){
+			$.ajax({
+				url:'/message/feedback',
+				type:'post',
+				data:{
+					feedback:$("#feedback").val()
+				},
+				success:function(result){
+					if(result.state == 1){
+						layer.msg(result.data,{icon: 1});
+					}else{
+						layer.msg(result.message,{icon: 5});
+					}
+				},
+			});
+		});
+
+	});
+
+</script>
+</html>

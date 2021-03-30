@@ -39,4 +39,6 @@ public interface MessageServiceImpl {
 
     void messageReadAll(String username);
 
+    void messageFeedback(String username, String feedback);
+
 }

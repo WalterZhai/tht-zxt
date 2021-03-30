@@ -298,5 +298,24 @@ public class MessageService implements MessageServiceImpl {
         messageInfoRepository.saveAll(list);
     }
 
+    @Override
+    public void messageFeedback(String username, String feedback) {
+        User sendMan = userRepository.findUserByLoginNameAndIsDelete(username,0);
+        Message message = new Message();
+        message.setCode(sendMan.getLoginName());
+        message.setName(sendMan.getName());
+        message.setTitle("用户意见反馈");
+        message.setContent(feedback);
+        message.setIsType(2);
+        message.setIsSend(1);
+        message = messageRepository.save(message);
+        MessageInfo messageInfo = new MessageInfo();
+        messageInfo.setUserCode("admin");
+        messageInfo.setIsRead(0);
+        messageInfo.setIsSend(1);
+        messageInfo.setMessage(message);
+        messageInfoRepository.save(messageInfo);
+    }
+
 
 }
