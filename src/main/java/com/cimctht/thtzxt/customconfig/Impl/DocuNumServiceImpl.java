@@ -1,6 +1,7 @@
 package com.cimctht.thtzxt.customconfig.Impl;
 
 import com.cimctht.thtzxt.common.entity.TableEntity;
+import com.cimctht.thtzxt.customconfig.entity.DocuNum;
 
 /**
  * @comment
@@ -10,5 +11,9 @@ import com.cimctht.thtzxt.common.entity.TableEntity;
 public interface DocuNumServiceImpl {
 
     TableEntity docuNumTableData(String code, String name, Integer page, Integer limit);
+
+    DocuNum next(DocuNum docuNum);
+
+    DocuNum next(String code);
 
 }

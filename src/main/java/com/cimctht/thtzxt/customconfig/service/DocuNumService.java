@@ -34,5 +34,20 @@ public class DocuNumService implements DocuNumServiceImpl {
         return new TableEntity(pages.getContent(), MathsUtils.convertLong2BigDecimal(pages.getTotalElements()));
     }
 
+    @Override
+    public DocuNum next(DocuNum docuNum) {
+        docuNum.setCur(docuNum.getCur().add(docuNum.getStep()));
+        docuNumRepository.save(docuNum);
+        return docuNum;
+    }
+
+    @Override
+    public DocuNum next(String code) {
+        DocuNum docuNum = docuNumRepository.findDocuNumsByIsDeleteAndCode(0,code);
+        docuNum.setCur(docuNum.getCur().add(docuNum.getStep()));
+        docuNumRepository.save(docuNum);
+        return docuNum;
+    }
+
 
 }

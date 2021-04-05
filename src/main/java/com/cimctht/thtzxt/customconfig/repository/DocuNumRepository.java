@@ -16,4 +16,5 @@ public interface DocuNumRepository extends JpaRepository<DocuNum,String> {
 
     DocuNum findDocuNumById(String id);
 
+    DocuNum findDocuNumsByIsDeleteAndCode(Integer isDelete, String code);
 }
