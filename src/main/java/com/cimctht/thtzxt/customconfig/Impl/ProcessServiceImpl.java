@@ -62,4 +62,11 @@ public interface ProcessServiceImpl {
      */
     boolean isEnd(String processInstanceId);
 
+    /**
+     * @comment 结束流程实例
+     * @author Walter(翟笑天)
+     * @date 2021/3/25
+     */
+    void endProcessInstance(String processInstanceId);
+
 }

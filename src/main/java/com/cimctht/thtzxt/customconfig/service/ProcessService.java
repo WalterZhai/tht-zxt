@@ -133,4 +133,9 @@ public class ProcessService implements ProcessServiceImpl {
         }
     }
 
+    @Override
+    public void endProcessInstance(String processInstanceId) {
+        runtimeService.deleteProcessInstance(processInstanceId, "结束");
+    }
+
 }

@@ -66,11 +66,11 @@ public class MenuService implements MenuServiceImpl {
     //递归排除
     public Menu recursiveExclusion(Menu menu,List<String> ids){
         if(menu.getChildMenus().size()>0){
-            for(Menu child : menu.getChildMenus()){
-                if(!ids.contains(child.getId())){
-                    menu.getChildMenus().remove(child);
-                }else{
-                    recursiveExclusion(child,ids);
+            for (int i = menu.getChildMenus().size() - 1; i > -1; i--) {
+                if (!ids.contains(menu.getChildMenus().get(i).getId())) {
+                    menu.getChildMenus().remove(menu.getChildMenus().get(i));
+                } else {
+                    recursiveExclusion(menu.getChildMenus().get(i), ids);
                 }
             }
         }
