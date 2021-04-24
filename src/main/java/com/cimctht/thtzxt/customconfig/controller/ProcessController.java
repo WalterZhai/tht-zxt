@@ -287,10 +287,11 @@ public class ProcessController {
             // 获取流程中已经执行的节点，按照执行先后顺序排序
             List<HistoricActivityInstance> historicActivityInstances = historyService.createHistoricActivityInstanceQuery().processInstanceId(processInstanceId)
                     .orderByHistoricActivityInstanceId().asc().list();
-            //判断最后一个类型是否是endEvent
-            HistoricActivityInstance last = historicActivityInstances.get(historicActivityInstances.size()-1);
-            if(!last.getActivityType().equals("endEvent")){
-                historicActivityInstances.remove(historicActivityInstances.size()-1);
+            //没有结束时间的去掉
+            for (int i = historicActivityInstances.size() - 1; i > -1; i--) {
+                if (historicActivityInstances.get(i).getEndTime() == null) {
+                    historicActivityInstances.remove(i);
+                }
             }
            // 高亮已经执行流程节点ID集合
             List<String> highLightedActivitiIds = new ArrayList<>();
