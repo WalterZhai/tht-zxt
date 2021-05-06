@@ -316,7 +316,7 @@ public class ProcessController {
             String str = imgStr.toString();
 
             ModelMap Model = new ModelMap().addAttribute("file", str);
-            modelAndView= new ModelAndView("/customconfig/process/process_view",Model);
+            modelAndView= new ModelAndView("customconfig/process/process_view",Model);
         }catch (Exception e){
             throw new UnimaxException("查看失败！");
         } finally {
