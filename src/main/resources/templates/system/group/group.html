@@ -13,17 +13,17 @@
 
 <form class="layui-form toolbar">
     <div class="layui-form-item">
-        <div class="layui-inline">
-            <input type="text" name="code" placeholder="用户组编码" autocomplete="off" class="search-size" id="code">
-            <input type="text" name="name" placeholder="用户组名称" autocomplete="off" class="search-size" id="name">
+        <div class="search-input-inline">
+            <input type="text" name="code" placeholder="用户组编码" autocomplete="off" class="layui-input" id="code">
         </div>
-        <div class="layui-inline">
-            <div class="layui-input-inline" style="width: auto;">
-                <button type="button" class="layui-btn layui-btn-sm table-refresh"><i class="layui-icon layui-icon-refresh"></i>刷新</button>
-                <button type="button" class="layui-btn layui-btn-sm table-add"><i class="layui-icon layui-icon-add-1"></i>增加</button>
-                <button type="button" class="layui-btn layui-btn-sm layui-btn-danger table-dels"><i class="layui-icon layui-icon-delete"></i>批量删除</button>
-                <button type="button" class="layui-btn layui-btn-sm table-query"><i class="layui-icon layui-icon-search"></i>查询</button>
-            </div>
+        <div class="search-input-inline">
+            <input type="text" name="name" placeholder="用户组名称" autocomplete="off" class="layui-input" id="name">
+        </div>
+        <div class="search-input-inline">
+            <button type="button" class="layui-btn layui-btn-sm table-refresh"><i class="layui-icon layui-icon-refresh"></i>刷新</button>
+            <button type="button" class="layui-btn layui-btn-sm table-add"><i class="layui-icon layui-icon-add-1"></i>新增</button>
+            <button type="button" class="layui-btn layui-btn-sm layui-btn-danger table-dels"><i class="layui-icon layui-icon-delete"></i>批量删除</button>
+            <button type="button" class="layui-btn layui-btn-sm table-query"><i class="layui-icon layui-icon-search"></i>查询</button>
         </div>
     </div>
 </form>
@@ -77,7 +77,7 @@
                     , {field: 'code', title: '用户组编码', width: 120}
                     , {field: 'name', title: '用户组名称', width: 120}
                     , {field: 'description', title: '用户组说明', width: 120}
-                    , {field: '', title: '功能操作', width: 400, toolbar: '#bar'}
+                    , {field: '', title: '功能操作', width: 240, toolbar: '#bar'}
                 ]
             ]
             ,where:{
@@ -180,46 +180,14 @@
         //添加新用户组
         $('.table-add').on('click', function () {
             layer.open({
-                type : 1,
+                type : 2,
                 maxmin : true,
-                title : '添加用户组',
+                skin: 'out-class',
+                title : '新增用户组',
                 area : [ '50%', '50%' ],
                 fix : false,
-                content :
-                    '<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;">'+
-                    '<label class="label-size label-color">用户组名称*</label>' +
-                    '<input type="text" name="name" required  lay-verify="required" autocomplete="off" class="input-size">' +
-                    '<br>'+
-                    '<label class="label-size">用途说明</label>' +
-                    '<input type="text" name="description" autocomplete="off" class="input-size">' +
-                    '<hr class="layui-bg-green">'+
-                    '<div class="layui-form-item" style="text-align: center">' +
-                    '<div class="layui-inline">'+
-                    '<button class="layui-btn" lay-submit lay-filter="formSubmit">立即提交</button>'+
-                    '</div>'+
-                    '</div>'+
-                    '</form>',
-                success: function(layero, index){
-                    //添加角色提交
-                    form.on('submit(formSubmit)', function(data){
-                        $.ajax({
-                            url:'/group/addGroup',
-                            type:'post',
-                            data:data.field,
-                            async: false,
-                            success:function(result){
-                                if(result.state == 1){
-                                    layer.close(index);
-                                    queryTab();
-                                }else{
-                                    layer.msg(result.message,{icon: 5});
-                                }
-                            }
-                        });
-                    });
-                }
+                content : '/topage?url=system/group/group-add.html'
             });
-
         });
 
 
@@ -270,50 +238,23 @@
         //行中按钮-编辑
         function rowEdit(obj) {
             layer.open({
-                type : 1,
+                type : 2,
                 maxmin : true,
+                skin: 'out-class',
                 title : '修改用户组',
                 area : [ '50%', '50%' ],
                 fix : false,
-                content :
-                    '<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;">'+
-                    '<input name="id" type="hidden" >'+
-                    '<label class="label-size label-color">用户组名称*</label>' +
-                    '<input type="text" name="name" required  lay-verify="required" autocomplete="off" class="input-size">' +
-                    '<br>'+
-                    '<label class="label-size">用途说明</label>' +
-                    '<input type="text" name="description" autocomplete="off" class="input-size">' +
-                    '<hr class="layui-bg-green">'+
-                    '<div class="layui-form-item" style="text-align: center">' +
-                    '<div class="layui-inline">'+
-                    '<button class="layui-btn" lay-submit lay-filter="formSubmitEdit">立即提交</button>'+
-                    '</div>'+
-                    '</div>'+
-                    '</form>',
+                content : '/topage?url=system/group/group-edit.html',
                 success: function(layero, index){
-                    layero.find("input[name='id']").val(obj.id);
-                    layero.find("input[name='name']").val(obj.name);
-                    layero.find("input[name='description']").val(obj.description);
-                    //添加角色提交
-                    form.on('submit(formSubmitEdit)', function(data){
-                        $.ajax({
-                            url:'/group/editGroup',
-                            type:'post',
-                            data:data.field,
-                            async: false,
-                            success:function(result){
-                                if(result.state == 1){
-                                    layer.close(index);
-                                    queryTab();
-                                }else{
-                                    layer.msg(result.message,{icon: 5});
-                                }
-                            }
-                        });
-                    });
+                    var body = layer.getChildFrame('body', index);
+                    var iframeWin = window[layero.find('iframe')[0]['name']];
+                    body.find("input[name='id']").val(obj.id);
+                    body.find("input[name='name']").val(obj.name);
+                    body.find("textarea[name='description']").val(obj.description);
                 }
             });
         }
+
         //行中按钮-删除
         function rowDelete(obj) {
             layer.confirm('确定要删除吗？', {
@@ -347,8 +288,9 @@
             layer.open({
                 type : 2,
                 maxmin : true,
+                skin: 'out-class',
                 title : '用户组关联用户',
-                area : ['99%','99%'],
+                area : ['50%','99%'],
                 fix : false,
                 content : '/topageid?url=system/group/group-rel-user.html&id='+obj.id,
                 success:function(layero,index){

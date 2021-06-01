@@ -11,26 +11,33 @@
 </head>
 <body>
 
-<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;">
+<form class="layui-form layui-form-pane padding02" action="" method="post" onsubmit="return false;">
+
+
 	<input class="layui-input" name="id" type="hidden" th:value="${user.id}">
+
 	<div class="layui-form-item">
-		<label class="layui-form-label">真实名</label>
-		<div class="layui-input-block">
-			<input type="text" th:value="${user.name}" name="name" required  lay-verify="required" placeholder="请输入真实名" autocomplete="off" class="layui-input"  th:readonly="true">
+		<label class="layui-form-label layui-bg-cyan">真实名</label>
+		<div class="layui-input-inline">
+			<input type="text" th:value="${user.name}" name="name" autocomplete="off" class="layui-input" readonly="readonly">
 		</div>
 	</div>
+
 	<div class="layui-form-item">
-		<label class="layui-form-label">电子邮箱</label>
-		<div class="layui-input-block">
-			<input type="text" th:value="${user.email}" name="email" placeholder="请输入电子邮箱" autocomplete="off" class="layui-input" >
+		<label class="layui-form-label layui-bg-cyan">电子邮箱</label>
+		<div class="layui-input-inline">
+			<input type="text" th:value="${user.email}" name="email" placeholder="请输入电子邮箱" autocomplete="off" class="layui-input">
 		</div>
 	</div>
+
 	<div class="layui-form-item">
-		<label class="layui-form-label">电话</label>
-		<div class="layui-input-block">
+		<label class="layui-form-label layui-bg-cyan">电话</label>
+		<div class="layui-input-inline">
 			<input type="text" th:value="${user.mobile}" name="mobile" placeholder="请输入电话" autocomplete="off" class="layui-input">
 		</div>
 	</div>
+
+	<hr class="layui-bg-green">
 	<div class="layui-form-item">
 		<div class="layui-input-block">
 			<button class="layui-btn layui-btn-sm" lay-submit lay-filter="formSubmit1">更新</button>

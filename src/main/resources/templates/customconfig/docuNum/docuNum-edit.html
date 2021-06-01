@@ -11,27 +11,41 @@
 </head>
 <body>
 
-<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;">
+<form class="layui-form layui-form-pane padding02" action="" method="post" onsubmit="return false;">
 
 	<input name="id" type="hidden" th:value="${docuNum.id}">
 
-	<label class="label-size label-color">编码*</label>
-	<input type="text" name="code" required  lay-verify="required" autocomplete="off" class="input-size" th:value="${docuNum.code}">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan layui-required">编码</label>
+		<div class="layui-input-inline">
+			<input type="text" name="code" lay-verify="required" autocomplete="off" class="layui-input" th:value="${docuNum.code}">
+		</div>
 
-	<label class="label-size label-color">名称*</label>
-	<input type="text" name="name" required  lay-verify="required" autocomplete="off" class="input-size" th:value="${docuNum.name}">
+		<label class="layui-form-label layui-bg-cyan layui-required">名称</label>
+		<div class="layui-input-inline">
+			<input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input" th:value="${docuNum.name}">
+		</div>
+	</div>
 
-	<br>
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan layui-required">最小值</label>
+		<div class="layui-input-inline">
+			<input type="number" name="min" lay-verify="required" autocomplete="off" class="layui-input" th:value="${docuNum.min}" readonly="readonly">
+		</div>
 
-	<label class="label-size label-color">步长*</label>
-	<input type="number" name="step" required  lay-verify="required" autocomplete="off" class="input-size" th:value="${docuNum.step}">
+		<label class="layui-form-label layui-bg-cyan layui-required">步长</label>
+		<div class="layui-input-inline">
+			<input type="number" name="step" lay-verify="required" autocomplete="off" class="layui-input" th:value="${docuNum.step}">
+		</div>
+	</div>
 
-	<br>
 
-	<label class="label-size">参数说明</label>
-	<input type="text" name="description" autocomplete="off" class="input-size" style="width: 400px" th:value="${docuNum.description}">
-
-	<br>
+	<div class="layui-form-item layui-form-text">
+		<label class="layui-form-label layui-bg-cyan">参数说明</label>
+		<div class="layui-input-block">
+			<textarea name="description" class="layui-textarea" th:text="${docuNum.description}"></textarea>
+		</div>
+	</div>
 
 	<hr class="layui-bg-green">
 

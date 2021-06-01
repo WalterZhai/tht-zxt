@@ -23,4 +23,8 @@ public interface MessageInfoRepository  extends JpaRepository<MessageInfo,String
 
     MessageInfo findMessageInfoById(String id);
 
+    Page<MessageInfo> findMessageInfosByMessage_IdAndIsDeleteAndUserCodeLike(String id, Integer isDelete, String userCode, Pageable pageable);
+
+    List<MessageInfo> findMessageInfosByIdIn(List<String> ids);
+
 }

@@ -12,8 +12,24 @@
 <body>
 
 <div id="depart-tree1"></div>
-<label class="layui-form-label">部门</label><input type="text" id="depart" required  lay-verify="required" placeholder="未选择部门" autocomplete="off" class="layui-input" style="width: 250px">
-<div class="layui-input-block"><button class="layui-btn submit-last">确定</button></div>
+
+<form class="layui-form layui-form-pane padding02" action="" method="post" onsubmit="return false;" id="form01">
+    <div class="layui-form-item">
+        <label class="layui-form-label layui-bg-cyan">选中部门</label>
+        <div class="layui-input-inline">
+            <input type="text" id="depart" lay-verify="required" placeholder="未选择部门" autocomplete="off" class="layui-input" style="width: 250px">
+        </div>
+    </div>
+
+    <hr class="layui-bg-green">
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-sm submit-last" >确定</button>
+        </div>
+    </div>
+
+</form>
+
 </body>
 <script>
 

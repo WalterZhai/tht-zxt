@@ -11,95 +11,144 @@
 </head>
 <body>
 
-<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;" id="form01">
+<form class="layui-form layui-form-pane padding02" action="" method="post" onsubmit="return false;" id="form01">
 
-	<label class="label-size label-color">姓名*</label>
-	<input type="text" name="name" required  lay-verify="required" autocomplete="off" class="input-size">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan layui-required">姓名</label>
+		<div class="layui-input-inline">
+			<input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input">
+		</div>
 
-	<label class="label-size">曾用名</label>
-	<input type="text" name="usedName" autocomplete="off" class="input-size">
+		<label class="layui-form-label layui-bg-cyan">曾用名</label>
+		<div class="layui-input-inline">
+			<input type="text" name="usedName" autocomplete="off" class="layui-input">
+		</div>
+	</div>
 
-	<br>
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan layui-required">性别</label>
+		<div class="layui-input-inline">
+			<input type="radio" name="sex" value="0" title="男" checked>
+			<input type="radio" name="sex" value="1" title="女">
+		</div>
 
-	<label class="label-size label-color">性别</label>
-	<input type="radio" name="sex" value="0" title="男" checked>
-	<input type="radio" name="sex" value="1" title="女">
+		<label class="layui-form-label layui-bg-cyan">身份证号</label>
+		<div class="layui-input-inline">
+			<input type="text" name="idCardNum" autocomplete="off" class="layui-input">
+		</div>
+	</div>
 
-	<label class="label-size">身份证号</label>
-	<input type="text" name="idCardNum" autocomplete="off" class="input-size">
 
-	<br>
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">社会保障号</label>
+		<div class="layui-input-inline">
+			<input type="text" name="socCardNum" autocomplete="off" class="layui-input">
+		</div>
 
-	<label class="label-size">社会保障号</label>
-	<input type="text" name="socCardNum" autocomplete="off" class="input-size">
+		<label class="layui-form-label layui-bg-cyan">出生日期</label>
+		<div class="layui-input-inline">
+			<input type="date" name="birthday" autocomplete="off" class="layui-input">
+		</div>
+	</div>
 
-	<label class="label-size">出生日期</label>
-	<input type="date" name="birthday" autocomplete="off" class="input-size">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">家庭地址</label>
+		<div class="layui-input-inline">
+			<input type="text" name="address" autocomplete="off" class="layui-input" style="width: 450px">
+		</div>
+	</div>
 
-	<br>
 
-	<label class="label-size">家庭地址</label>
-	<input type="text" name="address" autocomplete="off" class="input-size" style="width: 450px">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">邮政编码</label>
+		<div class="layui-input-inline">
+			<input type="text" name="zipcode" autocomplete="off" class="layui-input">
+		</div>
 
-	<br>
+		<label class="layui-form-label layui-bg-cyan">办公电话</label>
+		<div class="layui-input-inline">
+			<input type="text" name="officeTele" autocomplete="off" class="layui-input">
+		</div>
+	</div>
 
-	<label class="label-size">邮政编码</label>
-	<input type="text" name="zipcode" autocomplete="off" class="input-size">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">家庭电话</label>
+		<div class="layui-input-inline">
+			<input type="text" name="homeTele" autocomplete="off" class="layui-input">
+		</div>
 
-	<label class="label-size">办公电话</label>
-	<input type="text" name="officeTele" autocomplete="off" class="input-size">
+		<label class="layui-form-label layui-bg-cyan">手机号码</label>
+		<div class="layui-input-inline">
+			<input type="text" name="mobile" autocomplete="off" class="layui-input">
+		</div>
+	</div>
 
-	<br>
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">电子邮箱</label>
+		<div class="layui-input-inline">
+			<input type="text" name="email" autocomplete="off" class="layui-input">
+		</div>
 
-	<label class="label-size">家庭电话</label>
-	<input type="text" name="homeTele" autocomplete="off" class="input-size">
+		<label class="layui-form-label layui-bg-cyan">参加工作日期</label>
+		<div class="layui-input-inline">
+			<input type="date" name="careerBeginDate" autocomplete="off" class="layui-input">
+		</div>
+	</div>
 
-	<label class="label-size label-color">手机号码</label>
-	<input type="text" name="mobile" required  lay-verify="required" autocomplete="off" class="input-size">
 
-	<br>
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">入职日期</label>
+		<div class="layui-input-inline">
+			<input type="date" name="joinCompanyDate" autocomplete="off" class="layui-input">
+		</div>
 
-	<label class="label-size">电子邮箱</label>
-	<input type="text" name="email" autocomplete="off" class="input-size">
+		<label class="layui-form-label layui-bg-cyan">学历</label>
+		<div class="layui-input-inline">
+			<input type="text" name="education" autocomplete="off" class="layui-input">
+		</div>
+	</div>
 
-	<label class="label-size">参加工作日期</label>
-	<input type="date" name="careerBeginDate" autocomplete="off" class="input-size">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">专业</label>
+		<div class="layui-input-inline">
+			<input type="text" name="major" autocomplete="off" class="layui-input">
+		</div>
 
-	<br>
+		<label class="layui-form-label layui-bg-cyan">职务</label>
+		<div class="layui-input-inline">
+			<input type="text" name="job" autocomplete="off" class="layui-input">
+		</div>
+	</div>
 
-	<label class="label-size">入职日期</label>
-	<input type="date" name="joinCompanyDate" autocomplete="off" class="input-size">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">银行卡号</label>
+		<div class="layui-input-inline">
+			<input type="text" name="bankNumber" autocomplete="off" class="layui-input">
+		</div>
 
-	<label class="label-size">学历</label>
-	<input type="text" name="education" autocomplete="off" class="input-size">
+		<label class="layui-form-label layui-bg-cyan">合同截止日期</label>
+		<div class="layui-input-inline">
+			<input type="date" name="contractEndDate" autocomplete="off" class="layui-input">
+		</div>
+	</div>
 
-	<br>
+	<div class="layui-form-item layui-form-text">
+		<label class="layui-form-label layui-bg-cyan">备注</label>
+		<div class="layui-input-block">
+			<textarea name="remark" class="layui-textarea"></textarea>
+		</div>
+	</div>
 
-	<label class="label-size">专业</label>
-	<input type="text" name="major" autocomplete="off" class="input-size">
 
-	<label class="label-size">职务</label>
-	<input type="text" name="job" autocomplete="off" class="input-size">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">部门</label>
+		<div class="layui-input-inline">
+			<input type="hidden" name="departId" class="layui-input">
+			<input type="text" name="departName" autocomplete="off" class="layui-input" readonly="readonly">
+		</div>
 
-	<br>
-
-	<label class="label-size">银行卡号</label>
-	<input type="text" name="bankNumber" autocomplete="off" class="input-size">
-
-	<label class="label-size">合同截止日期</label>
-	<input type="date" name="contractEndDate" autocomplete="off" class="input-size">
-
-	<br>
-
-	<label class="label-size">备注</label>
-	<input type="text" name="remark" autocomplete="off" class="input-size" style="width: 450px">
-
-	<br>
-
-	<label class="label-size label-color">部门</label>
-	<input type="text" name="departId" class="input-size" hidden="true">
-	<input type="text" name="departName" required  lay-verify="required" autocomplete="off" class="input-size" readonly="readonly">
-	<button type="button" class="layui-btn layui-btn-xs load-depart">...</button>
+		<button type="button" class="layui-btn layui-btn-xs load-depart">...</button>
+	</div>
 
 
 	<hr class="layui-bg-green">
@@ -145,6 +194,7 @@
 			layer.open({
 				type : 2,
 				maxmin : true,
+				skin : 'out-class',
 				title : '选择部门',
 				area : ['99%','99%'],
 				fix : false,

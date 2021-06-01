@@ -13,16 +13,16 @@
 
 <form class="layui-form toolbar">
     <div class="layui-form-item">
-        <div class="layui-inline">
-            <input type="text" name="code" placeholder="编码" autocomplete="off" class="search-size" id="code">
-            <input type="text" name="name" placeholder="名称" autocomplete="off" class="search-size" id="name">
+        <div class="search-input-inline">
+            <input type="text" name="code" placeholder="编码" autocomplete="off" class="layui-input" id="code">
         </div>
-        <div class="layui-inline">
-            <div class="layui-input-inline" style="width: auto;">
-                <button type="button" class="layui-btn layui-btn-sm table-refresh"><i class="layui-icon layui-icon-refresh"></i>刷新</button>
-                <button type="button" class="layui-btn layui-btn-sm table-add"><i class="layui-icon layui-icon-add-1"></i>增加</button>
-                <button type="button" class="layui-btn layui-btn-sm table-query"><i class="layui-icon layui-icon-search"></i>查询</button>
-            </div>
+        <div class="search-input-inline">
+            <input type="text" name="name" placeholder="名称" autocomplete="off" class="layui-input" id="name">
+        </div>
+        <div class="search-input-inline">
+            <button type="button" class="layui-btn layui-btn-sm table-refresh"><i class="layui-icon layui-icon-refresh"></i>刷新</button>
+            <button type="button" class="layui-btn layui-btn-sm table-add"><i class="layui-icon layui-icon-add-1"></i>新增</button>
+            <button type="button" class="layui-btn layui-btn-sm table-query"><i class="layui-icon layui-icon-search"></i>查询</button>
         </div>
     </div>
 </form>
@@ -40,7 +40,7 @@
 
 
 <script type="text/html" id="bar">
-    <button type="button" class="layui-btn layui-btn-xs" lay-event="row-edit"><i class="layui-icon layui-icon-edit"></i>编辑</button>
+    <button type="button" class="layui-btn layui-btn-xs" lay-event="row-edit"><i class="layui-icon layui-icon-edit"></i>修改</button>
     <button type="button" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="row-delete"><i class="layui-icon layui-icon-delete"></i>删除</button>
     <button type="button" class="layui-btn layui-btn-xs layui-btn-normal" lay-event="row-detail"><i class="layui-icon layui-icon-share"></i>明细编辑</button>
 </script>
@@ -76,7 +76,7 @@
                     , {field: 'code', title: '档案编码', width: 120}
                     , {field: 'name', title: '档案名称', width: 120}
                     , {field: 'description', title: '档案说明', width: 120}
-                    , {field: '', title: '功能操作', width: 400, toolbar: '#bar'}
+                    , {field: '', title: '功能操作', width: 240, toolbar: '#bar'}
                 ]
             ]
             ,where:{
@@ -185,47 +185,13 @@
         //添加档案
         $('.table-add').on('click', function () {
             layer.open({
-                type : 1,
+                type : 2,
                 maxmin : true,
-                title : '添加自定义档案',
+                skin: 'out-class',
+                title : '新增自定义档案',
                 area : [ '50%', '50%' ],
                 fix : false,
-                content :
-                    '<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;">'+
-                    '<label class="label-size label-color">档案名称*</label>' +
-                    '<input type="text" name="name" required  lay-verify="required" autocomplete="off" class="input-size">' +
-                    '<br>'+
-                    '<label class="label-size label-color">档案编码*</label>' +
-                    '<input type="text" name="code" required  lay-verify="required" autocomplete="off" class="input-size">' +
-                    '<br>'+
-                    '<label class="label-size">档案说明</label>' +
-                    '<input type="text" name="description" autocomplete="off" class="input-size">' +
-                    '<hr class="layui-bg-green">'+
-                    '<div class="layui-form-item" style="text-align: center">' +
-                    '<div class="layui-inline">'+
-                    '<button class="layui-btn" lay-submit lay-filter="formSubmit">立即提交</button>'+
-                    '</div>'+
-                    '</div>'+
-                    '</form>',
-                success: function(layero, index){
-                    //添加角色提交
-                    form.on('submit(formSubmit)', function(data){
-                        $.ajax({
-                            url:'/definedFile/addDefinedFile',
-                            type:'post',
-                            data:data.field,
-                            async: false,
-                            success:function(result){
-                                if(result.state == 1){
-                                    layer.close(index);
-                                    queryTab();
-                                }else{
-                                    layer.msg(result.message,{icon: 5});
-                                }
-                            }
-                        });
-                    });
-                }
+                content : '/topage?url=customconfig/definedFile/definedFile-add.html'
             });
 
         });
@@ -247,51 +213,20 @@
         //行中按钮-编辑
         function rowEdit(obj) {
             layer.open({
-                type : 1,
+                type : 2,
                 maxmin : true,
+                skin: 'out-class',
                 title : '修改自定义档案',
                 area : [ '50%', '50%' ],
                 fix : false,
-                content :
-                    '<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;">'+
-                    '<input name="id" type="hidden" >'+
-                    '<label class="label-size label-color">档案名称*</label>' +
-                    '<input type="text" name="name" required  lay-verify="required" autocomplete="off" class="input-size">' +
-                    '<br>'+
-                    '<label class="label-size label-color">档案编码*</label>' +
-                    '<input type="text" name="code" required  lay-verify="required" autocomplete="off" class="input-size">' +
-                    '<br>'+
-                    '<label class="label-size">档案说明</label>' +
-                    '<input type="text" name="description" autocomplete="off" class="input-size">' +
-                    '<hr class="layui-bg-green">'+
-                    '<div class="layui-form-item" style="text-align: center">' +
-                    '<div class="layui-inline">'+
-                    '<button class="layui-btn" lay-submit lay-filter="formSubmitEdit">立即提交</button>'+
-                    '</div>'+
-                    '</div>'+
-                    '</form>',
-                success: function(layero, index){
-                    layero.find("input[name='id']").val(obj.id);
-                    layero.find("input[name='name']").val(obj.name);
-                    layero.find("input[name='code']").val(obj.code);
-                    layero.find("input[name='description']").val(obj.description);
-                    //添加角色提交
-                    form.on('submit(formSubmitEdit)', function(data){
-                        $.ajax({
-                            url:'/definedFile/editDefinedFile',
-                            type:'post',
-                            data:data.field,
-                            async: false,
-                            success:function(result){
-                                if(result.state == 1){
-                                    layer.close(index);
-                                    queryTab();
-                                }else{
-                                    layer.msg(result.message,{icon: 5});
-                                }
-                            }
-                        });
-                    });
+                content : '/topage?url=customconfig/definedFile/definedFile-edit.html',
+                success:function(layero,index){
+                    var body = layer.getChildFrame('body', index);
+                    var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+                    body.find("input[name='id']").val(obj.id);
+                    body.find("input[name='name']").val(obj.name);
+                    body.find("input[name='code']").val(obj.code);
+                    body.find("textarea[name='description']").val(obj.description);
                 }
             });
         }
@@ -328,6 +263,7 @@
             layer.open({
                 type : 2,
                 maxmin : true,
+                skin : 'out-class',
                 title : '自定义档案明细定义',
                 area : ['99%','99%'],
                 fix : false,

@@ -7,6 +7,8 @@ import com.cimctht.thtzxt.common.entity.TableEntity;
 import com.cimctht.thtzxt.common.exception.UnimaxException;
 import com.cimctht.thtzxt.customconfig.Impl.MessageServiceImpl;
 import com.cimctht.thtzxt.customconfig.entity.Message;
+import com.cimctht.thtzxt.customconfig.entity.MessageInfo;
+import com.cimctht.thtzxt.customconfig.repository.MessageInfoRepository;
 import com.cimctht.thtzxt.customconfig.repository.MessageRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +36,9 @@ public class MessageController {
 
     @Autowired
     private MessageRepository messageRepository;
+
+    @Autowired
+    private MessageInfoRepository messageInfoRepository;
 
     @GetMapping(value = "/message/messageTableData")
     public TableEntity messageTableData(HttpServletRequest request, String title, Integer type, Integer isSend, Integer page, Integer limit) {
@@ -183,6 +188,33 @@ public class MessageController {
         try{
             messageServiceImpl.messageFeedback(username,feedback);
             return new JsonResult("已反馈");
+        }catch (Exception e){
+            return new JsonResult(new UnimaxException(e.getMessage()));
+        }
+    }
+
+    @GetMapping(value = "/message/messageUserTableData")
+    public TableEntity messageUserTableData(HttpServletRequest request, String id, String code, Integer page, Integer limit) {
+        TableEntity table;
+        try{
+            table = messageServiceImpl.messageUserTableData(id, code, page, limit);
+        }catch (Exception e){
+            table = new TableEntity(e);
+        }
+        return table;
+    }
+
+    @PostMapping(value = "/message/delMessageInfos")
+    public JsonResult delMessageInfos(HttpServletRequest request) {
+        String arrs = request.getParameter("arrs");
+        List<String> ids = JSON.parseArray(arrs, String.class);
+        try{
+            List<MessageInfo> list = messageInfoRepository.findMessageInfosByIdIn(ids);
+            for(MessageInfo messageInfo : list){
+                messageInfo.setIsDelete(1);
+            }
+            messageInfoRepository.saveAll(list);
+            return new JsonResult();
         }catch (Exception e){
             return new JsonResult(new UnimaxException(e.getMessage()));
         }

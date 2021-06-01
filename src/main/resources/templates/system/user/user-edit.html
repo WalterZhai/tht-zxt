@@ -11,20 +11,29 @@
 </head>
 <body>
 
-<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;">
+<form class="layui-form layui-form-pane padding02" action="" method="post" onsubmit="return false;">
 
 	<input class="input-size" name="id" type="hidden">
 
-	<label class="label-size label-color">真实名*</label>
-	<input type="text" name="name" required  lay-verify="required" autocomplete="off" class="input-size">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan layui-required">真实名</label>
+		<div class="layui-input-inline">
+			<input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input">
+		</div>
 
-	<br>
+	</div>
 
-	<label class="label-size">电子邮箱</label>
-	<input type="text" name="email" autocomplete="off" class="input-size">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">电子邮箱</label>
+		<div class="layui-input-inline">
+			<input type="text" name="email" autocomplete="off" class="layui-input">
+		</div>
 
-	<label class="label-size">电话</label>
-	<input type="text" name="mobile" autocomplete="off" class="input-size">
+		<label class="layui-form-label layui-bg-cyan">电话</label>
+		<div class="layui-input-inline">
+			<input type="text" name="mobile" autocomplete="off" class="layui-input">
+		</div>
+	</div>
 
 	<hr class="layui-bg-green">
 	<div class="layui-form-item">

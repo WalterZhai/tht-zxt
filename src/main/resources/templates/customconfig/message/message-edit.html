@@ -11,22 +11,28 @@
 </head>
 <body>
 
-<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;">
+<form class="layui-form layui-form-pane padding02" action="" method="post" onsubmit="return false;">
 	<input class="layui-input" name="id" type="hidden">
 
-	<label class="label-size label-color">消息标题*</label>
-	<input type="text" name="title" required  lay-verify="required" autocomplete="off" class="input-size-big">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">消息标题</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" lay-verify="required" autocomplete="off" class="layui-input">
+		</div>
+	</div>
 
-	<br>
-
-	<label class="label-size label-color">消息内容*</label>
-	<textarea name="content" required  lay-verify="required" class="input-textarea-size"></textarea>
+	<div class="layui-form-item layui-form-text">
+		<label class="layui-form-label layui-bg-cyan">消息内容</label>
+		<div class="layui-input-block">
+			<textarea name="content" class="layui-textarea" lay-verify="required"></textarea>
+		</div>
+	</div>
 
 	<hr class="layui-bg-green">
 
 	<div class="layui-form-item">
 		<div class="layui-input-block">
-			<button class="layui-btn" lay-submit lay-filter="formSubmitEdit">确定</button>
+			<button class="layui-btn layui-btn-sm" lay-submit lay-filter="formSubmitEdit">确定</button>
 		</div>
 	</div>
 </form>

@@ -41,4 +41,5 @@ public interface MessageServiceImpl {
 
     void messageFeedback(String username, String feedback);
 
+    TableEntity messageUserTableData(String id, String code, Integer page, Integer limit);
 }

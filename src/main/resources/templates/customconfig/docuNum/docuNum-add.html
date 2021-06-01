@@ -11,29 +11,40 @@
 </head>
 <body>
 
-<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;">
+<form class="layui-form layui-form-pane padding02" action="" method="post" onsubmit="return false;">
 
 
-	<label class="label-size label-color">编码*</label>
-	<input type="text" name="code" required  lay-verify="required" autocomplete="off" class="input-size">
+	<div class="layui-form-item ">
+		<label class="layui-form-label layui-bg-cyan layui-required">编码</label>
+		<div class="layui-input-inline">
+			<input type="text" name="code" lay-verify="required" autocomplete="off" class="layui-input">
+		</div>
 
-	<label class="label-size label-color">名称*</label>
-	<input type="text" name="name" required  lay-verify="required" autocomplete="off" class="input-size">
+		<label class="layui-form-label layui-bg-cyan layui-required">名称</label>
+		<div class="layui-input-inline">
+			<input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input">
+		</div>
+	</div>
 
-	<br>
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan layui-required">最小值</label>
+		<div class="layui-input-inline">
+			<input type="number" name="min" lay-verify="required" autocomplete="off" class="layui-input">
+		</div>
 
-	<label class="label-size label-color">最小值*</label>
-	<input type="number" name="min" required  lay-verify="required" autocomplete="off" class="input-size">
+		<label class="layui-form-label layui-bg-cyan layui-required">步长</label>
+		<div class="layui-input-inline">
+			<input type="number" name="step" lay-verify="required" autocomplete="off" class="layui-input">
+		</div>
+	</div>
 
-	<label class="label-size label-color">步长*</label>
-	<input type="number" name="step" required  lay-verify="required" autocomplete="off" class="input-size">
 
-	<br>
-
-	<label class="label-size">参数说明</label>
-	<input type="text" name="description" autocomplete="off" class="input-size" style="width: 400px">
-
-	<br>
+	<div class="layui-form-item layui-form-text">
+		<label class="layui-form-label layui-bg-cyan">参数说明</label>
+		<div class="layui-input-block">
+			<textarea name="description" class="layui-textarea"></textarea>
+		</div>
+	</div>
 
 	<hr class="layui-bg-green">
 

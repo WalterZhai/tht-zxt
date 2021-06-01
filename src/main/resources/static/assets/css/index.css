@@ -3,6 +3,7 @@
     height:25px;
     width:100px;
     padding: 1px 3px 1px 3px;
+    border:1px solid #ccc;
 }
 
 .search-date-size {
@@ -28,7 +29,20 @@
 }
 
 .padding01 {
-    padding: 5px 0px 5px 0px;
+    padding: 5px 0 5px 0;
+}
+
+.padding02 {
+    padding: 5px 5px 5px 5px;
+}
+
+.padding03 {
+    padding: 0 5px 0 5px;
+}
+
+.margin01 {
+    margin-top: 10px;
+    margin-left: 20px
 }
 
 .input-size-big {
@@ -40,5 +54,25 @@
     width: 400px;
     height: 200px;
     margin: 2px 4px 2px 4px;
+}
+
+
+
+body .out-class .layui-layer-title {
+    background: #009688;
+    color: #fff;
+    border: none;
+}
+
+body .out-class .layui-layer-btn {
+    border-top: 1px solid #E9E7E7
+}
+
+body .out-class .layui-layer-btn a {
+    background: #fff;
+}
+
+body .out-class .layui-layer-btn .layui-layer-btn1 {
+    background: #fff;
 }
 

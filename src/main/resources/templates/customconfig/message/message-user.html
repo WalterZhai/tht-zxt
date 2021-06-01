@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>系统参数</title>
+    <title>发送用户明细</title>
     <link rel="stylesheet" type="text/css" th:href="@{/assets/css/index.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/layui/css/layui.css}"/>
     <script th:src="@{/layui/layui.js}"></script>
@@ -14,8 +14,11 @@
 <form class="layui-form toolbar">
     <div class="layui-form-item">
         <div class="search-input-inline">
-            <button type="button" class="layui-btn layui-btn-sm table-refresh"><i class="layui-icon layui-icon-refresh"></i>刷新</button>
-            <button type="button" class="layui-btn layui-btn-sm table-add"><i class="layui-icon layui-icon-add-1"></i>新增</button>
+            <input type="text" name="code" placeholder="工号" autocomplete="off" class="layui-input" id="code">
+        </div>
+        <div class="search-input-inline">
+            <button type="button" class="layui-btn layui-btn-sm table-refresh"><i class="layui-icon layui-icon-search"></i>刷新</button>
+            <button type="button" class="layui-btn layui-btn-sm layui-btn-danger table-dels"><i class="layui-icon layui-icon-delete"></i>批量删除</button>
             <button type="button" class="layui-btn layui-btn-sm table-query"><i class="layui-icon layui-icon-search"></i>查询</button>
         </div>
     </div>
@@ -24,18 +27,12 @@
 <!-- 数据表格 -->
 <table class="layui-table" id="tableList" lay-filter="tableList"></table>
 
-
-<script type="text/html" id="bar">
-    <button type="button" class="layui-btn layui-btn-xs" lay-event="row-edit"><i class="layui-icon layui-icon-edit"></i>编辑</button>
-    <button type="button" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="row-delete"><i class="layui-icon layui-icon-delete"></i>删除</button>
-</script>
-
 <script type="text/html" id="xuhao">
     {{d.LAY_TABLE_INDEX+1}}
 </script>
 
 </body>
-<script>
+<script th:inline="javascript">
 
     layui.use(['jquery','table','form','laytpl','util'], function(){
         var form = layui.form;
@@ -43,28 +40,46 @@
         var laytpl = layui.laytpl;
         var $ = layui.$;
         var layer = layui.layer;
+        var id = [[${id}]];
+
 
         table.render({
             elem: '#tableList'
-            ,url: '/systemParams/systemParamsTableData' //数据接口
-            ,title: '系统参数'
+            ,url: '/message/messageUserTableData' //数据接口
+            ,title: '消息发送人员列表'
             ,page: {curr:1} //开启分页
             ,limit:20
             ,size: 'sm'
             ,height: 'full-45'
             ,cols: [
-                [
+                [ //表头
                     {title: '序号', templet: '#xuhao', width: 60}
+                    ,{checkbox: true}
                     , {field: 'id', title: 'ID', width: 80, hide: true}
-                    , {field: 'code', title: '参数编码', width: 240}
-                    , {field: 'name', title: '参数名称', width: 240}
-                    , {field: 'value', title: '参数值', width: 240}
-                    , {field: 'description', title: '参数说明', width: 240}
-                    , {field: '', title: '功能操作', width: 150, toolbar: '#bar'}
+                    , {field: 'code', title: '接收人工号', width: 120}
+                    , {field: 'name', title: '接收人姓名', width: 120}
+                    ,{field: 'isSend', title: '是否发送', width:120,templet: function (d) {
+                        if (d.isSend == 0) {
+                            return '<span style="color:red;">未发送</span>'
+                        }
+                        if (d.isSend == 1) {
+                            return '<span style="color:green;">已发送</span>'
+                        }
+                    }}
+                    ,{field: 'isRead', title: '是否已读', width:120,templet: function (d) {
+                        if (d.isRead == 0) {
+                            return '<span style="color:red;">未读</span>'
+                        }
+                        if (d.isRead == 1) {
+                            return '<span style="color:green;">已读</span>'
+                        }
+                    }}
                 ]
             ]
-            ,where:{}
-            ,done: function(res, curr, count){}
+            ,where:{
+                id : id,
+                code : $("#code").val()
+            }
         });
 
 
@@ -75,10 +90,14 @@
 
         //刷新
         window.refreshTab  = function(){
+            $("#code").val("");
             table.reload('tableList',{
-                url:'/systemParams/systemParamsTableData',
+                url:'/message/messageUserTableData',
                 page: {curr:1},
-                where:{}
+                where:{
+                    id : id,
+                    code : $("#code").val()
+                }
             });
         };
 
@@ -90,44 +109,34 @@
         //查询
         window.queryTab  = function(){
             table.reload('tableList',{
-                url:'/systemParams/systemParamsTableData',
-                where:{}
+                url:'/message/messageUserTableData',
+                where:{
+                    id : id,
+                    code : $("#code").val()
+                }
             });
         };
 
-        //添加新参数
-        $('.table-add').on('click', function () {
-            layer.open({
-                type : 2,
-                maxmin : true,
-                skin: 'out-class',
-                title : '新增系统参数',
-                area : [ '50%', '50%' ],
-                fix : false,
-                content : '/topage?url=basedata/systemParams/systemParams-add.html'
-            });
-        });
 
-        //行中按钮
-        table.on('tool(tableList)',function (obj) {
-            var data = obj.data;
-            if(obj.event==='row-delete'){
-                rowDelete(data);
-            }else if(obj.event==='row-edit'){
-                rowEdit(data);
+        //批量删除
+        $('.table-dels').on('click', function () {
+            var checkStatus = table.checkStatus('tableList')
+                ,data = checkStatus.data;
+            if(data.length==0){
+                return layer.msg("至少选中一条数据！",{icon: 5});
             }
-        });
-
-        //行中按钮-删除
-        function rowDelete(obj) {
+            var arr = new Array();
+            for(var i in data){
+                arr.push(data[i].id);
+            }
             layer.confirm('确定要删除吗？', {
                 btn: ['确定', '取消']
             },function(index, layero){
                 $.ajax({
-                    url:'/systemParams/delSystemParams',
+                    url:'/message/delMessageInfos',
                     type:'post',
                     data:{
-                        id:obj.id
+                        arrs:JSON.stringify(arr)
                     },
                     beforeSend:function () {},
                     success:function(result){
@@ -144,22 +153,9 @@
             }, function(index){
                 layer.close(index);
             });
-        }
+        });
 
 
-        function rowEdit(obj) {
-            layer.open({
-                type : 2,
-                maxmin : true,
-                skin: 'out-class',
-                title : '修改系统参数',
-                area : [ '50%', '50%' ],
-                fix : false,
-                content : '/topage/systemParamsEntity?url=basedata/systemParams/systemParams-edit.html&id='+obj.id,
-                success:function(layero,index){
-                }
-            });
-        }
 
     });
 

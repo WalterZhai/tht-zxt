@@ -11,32 +11,43 @@
 </head>
 <body>
 
-<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;">
+<form class="layui-form layui-form-pane padding02" action="" method="post" onsubmit="return false;">
 
-	<label class="label-size label-color">名称*</label>
-	<input type="text" name="name" required  lay-verify="required" autocomplete="off" class="input-size">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan layui-required">名称</label>
+		<div class="layui-input-inline">
+			<input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input">
+		</div>
 
+		<label class="layui-form-label layui-bg-cyan layui-required">时间表达式</label>
+		<div class="layui-input-inline">
+			<input type="text" name="cron" lay-verify="required" autocomplete="off" class="layui-input">
+		</div>
+	</div>
 
-	<label class="label-size label-color">时间表达式*</label>
-	<input type="text" name="cron" required  lay-verify="required" autocomplete="off" class="input-size">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan layui-required">调度对象全名</label>
+		<div class="layui-input-inline">
+			<input type="text" name="serviceFullName" lay-verify="required" autocomplete="off" class="layui-input" style="width: 400px">
+		</div>
 
+	</div>
 
-	<br>
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan layui-required">调度方法</label>
+		<div class="layui-input-inline">
+			<input type="text" name="methodName" lay-verify="required" autocomplete="off" class="layui-input" style="width: 400px">
+		</div>
 
-	<label class="label-size label-color">调度对象全名*</label>
-	<input type="text" name="serviceFullName" required  lay-verify="required" autocomplete="off" class="input-size" style="width: 400px">
+	</div>
 
-	<br>
+	<div class="layui-form-item layui-form-text">
+		<label class="layui-form-label layui-bg-cyan">定时任务说明</label>
+		<div class="layui-input-block">
+			<textarea name="description" class="layui-textarea"></textarea>
+		</div>
+	</div>
 
-	<label class="label-size label-color">调度方法*</label>
-	<input type="text" name="methodName" required  lay-verify="required" autocomplete="off" class="input-size" style="width: 400px">
-
-	<br>
-
-	<label class="label-size">定时任务说明</label>
-	<input type="text" name="description" autocomplete="off" class="input-size" style="width: 400px">
-
-	<br>
 
 	<hr class="layui-bg-green">
 

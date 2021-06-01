@@ -317,5 +317,24 @@ public class MessageService implements MessageServiceImpl {
         messageInfoRepository.save(messageInfo);
     }
 
+    @Override
+    public TableEntity messageUserTableData(String id, String code, Integer page, Integer limit) {
+        Pageable pageable = PageRequest.of(page - 1, limit);
+        Page<MessageInfo> pages = messageInfoRepository.findMessageInfosByMessage_IdAndIsDeleteAndUserCodeLike(id, 0, StringUtils.string2LikeParam(code), pageable);
+        List<MessageInfo> result = pages.getContent();
+        List<Map<String,Object>> rt = new ArrayList<>();
+        for(MessageInfo messageInfo : result){
+            Map<String,Object> map = new HashMap<>();
+            map.put("id",messageInfo.getId());
+            map.put("code",messageInfo.getUserCode());
+            String userName = userRepository.queryUserNameByUserCode(messageInfo.getUserCode());
+            map.put("name",userName);
+            map.put("isSend",messageInfo.getIsSend());
+            map.put("isRead",messageInfo.getIsRead());
+            rt.add(map);
+        }
+        return new TableEntity(rt, MathsUtils.convertLong2BigDecimal(pages.getTotalElements()));
+    }
+
 
 }

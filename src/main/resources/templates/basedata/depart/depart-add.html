@@ -11,35 +11,51 @@
 </head>
 <body>
 
-<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;" id="form01">
+<form class="layui-form layui-form-pane padding02" action="" method="post" onsubmit="return false;" id="form01">
 
 	<input name="parentId" type="hidden">
 
-	<label class="label-size label-color">部门名称*</label>
-	<input type="text" name="name" required  lay-verify="required" autocomplete="off" class="input-size">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan layui-required">部门名称</label>
+		<div class="layui-input-inline">
+			<input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input">
+		</div>
 
-	<label class="label-size">通讯地址</label>
-	<input type="text" name="commuAddress" autocomplete="off" class="input-size">
+		<label class="layui-form-label layui-bg-cyan">通讯地址</label>
+		<div class="layui-input-inline">
+			<input type="text" name="commuAddress" autocomplete="off" class="layui-input">
+		</div>
+	</div>
 
-	<br>
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">部门电话</label>
+		<div class="layui-input-inline">
+			<input type="text" name="telephone" autocomplete="off" class="layui-input">
+		</div>
 
-	<label class="label-size">部门电话</label>
-	<input type="text" name="telephone" autocomplete="off" class="input-size">
+		<label class="layui-form-label layui-bg-cyan">传真</label>
+		<div class="layui-input-inline">
+			<input type="text" name="fax" autocomplete="off" class="layui-input">
+		</div>
+	</div>
 
-	<label class="label-size">传真</label>
-	<input type="text" name="fax" autocomplete="off" class="input-size">
+	<div class="layui-form-item layui-form-text">
+		<label class="layui-form-label layui-bg-cyan">备注</label>
+		<div class="layui-input-block">
+			<textarea name="remark" class="layui-textarea"></textarea>
+		</div>
+	</div>
 
-	<br>
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">部门负责人</label>
+		<div class="layui-input-inline">
+			<input type="hidden" name="supervisorId" class="layui-input">
+			<input type="text" name="supervisorName" autocomplete="off" class="layui-input" readonly="readonly">
+		</div>
 
-	<label class="label-size">备注</label>
-	<input type="text" name="remark" autocomplete="off" class="input-size" style="width: 450px">
+		<button type="button" class="layui-btn layui-btn-xs load-employee">...</button>
+	</div>
 
-	<br>
-
-	<label class="label-size label-color">部门负责人*</label>
-	<input type="text" name="supervisorId" class="input-size" hidden="true">
-	<input type="text" name="supervisorName" required  lay-verify="required" autocomplete="off" class="input-size" readonly="readonly">
-	<button type="button" class="layui-btn layui-btn-xs load-employee">...</button>
 
 	<hr class="layui-bg-green">
 	<div class="layui-form-item">
@@ -83,6 +99,7 @@
 			layer.open({
 				type: 2,
 				maxmin: true,
+				skin: 'out-class',
 				title: '选择负责人',
 				area: ['99%', '99%'],
 				fix: false,

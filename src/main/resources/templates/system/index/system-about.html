@@ -28,15 +28,19 @@
 	</div>
 	<div class="layui-colla-item">
 		<h2 class="layui-colla-title">意见反馈</h2>
-		<div class="layui-colla-content">
-			<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;" id="form01">
-
-				<textarea name="content" id="feedback" required  lay-verify="required" class="input-textarea-size"></textarea>
-
+		<div class="layui-colla-content layui-show">
+			<form class="layui-form layui-form-pane padding02" action="" method="post" onsubmit="return false;"  id="form01">
+				<div class="layui-form-item layui-form-text">
+					<label class="layui-form-label layui-bg-cyan">意见反馈</label>
+					<div class="layui-input-block">
+						<textarea name="content" id="feedback" class="layui-textarea" lay-verify="required"></textarea>
+					</div>
+				</div>
 				<div class="layui-form-item">
 					<button class="layui-btn layui-btn-sm" lay-submit lay-filter="formSubmit1">提交</button>
 				</div>
 			</form>
+
 		</div>
 	</div>
 </div>

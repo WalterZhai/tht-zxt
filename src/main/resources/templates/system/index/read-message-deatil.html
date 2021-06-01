@@ -11,13 +11,22 @@
 </head>
 <body>
 
-<label class="label-size label-color">消息标题*</label>
-<input type="text" name="title" required  lay-verify="required" autocomplete="off" class="input-size-big" readonly="readonly">
+<form class="layui-form layui-form-pane padding02" action="" method="post" onsubmit="return false;">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">消息标题</label>
+		<div class="layui-input-inline">
+			<input type="text" name="title" lay-verify="required" autocomplete="off" class="layui-input" readonly="readonly">
+		</div>
+	</div>
 
-<br>
+	<div class="layui-form-item layui-form-text">
+		<label class="layui-form-label layui-bg-cyan">消息内容</label>
+		<div class="layui-input-block">
+			<textarea name="content" class="layui-textarea" readonly="readonly"></textarea>
+		</div>
+	</div>
 
-<label class="label-size label-color">消息内容*</label>
-<textarea name="content" required  lay-verify="required" class="input-textarea-size" readonly="readonly"></textarea>
+</form>
 
 </body>
 

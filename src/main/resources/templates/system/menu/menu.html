@@ -61,7 +61,7 @@
             ,page: {curr:1} //开启分页
             ,limit:20
             ,size: 'sm'
-            ,height: 'full-80'
+            ,height: 'full-70'
             ,cols: [
                 [ //表头
                     {title: '序号', templet: '#xuhao', width: 60}
@@ -150,6 +150,7 @@
             layer.open({
                 type : 2,
                 maxmin : true,
+                skin: 'out-class',
                 title : '添加菜单',
                 area : [ '500px', '400px' ],
                 fix : false,
@@ -186,7 +187,8 @@
             layer.open({
                 type : 2,
                 maxmin : true,
-                title : '修改菜单信息',
+                skin: 'out-class',
+                title : '修改菜单',
                 area : [ '500px', '400px' ],
                 fix : false,
                 content : '/topage?url=system/menu/menu-edit.html',
@@ -195,7 +197,11 @@
                     body.find("input[name='id']").val(obj.id);
                     body.find("input[name='name']").val(obj.name);
                     body.find("input[name='href']").val(obj.href);
-                    body.find("input[name='type']").val(obj.type);
+                    if(obj.type==0){
+                        body.find("input[name='type'][value='0']").prop("checked",true);
+                    }else{
+                        body.find("input[name='type'][value='1']").prop("checked",true);
+                    }
                     body.find("input[name='icon']").val(obj.icon);
                 }
             });

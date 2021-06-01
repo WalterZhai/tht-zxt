@@ -12,12 +12,26 @@
 <body>
 <div id="depart-tree"></div>
 
-<label class="label-size">选中部门</label>
-<input type="text" id="departId"  class="input-size"  hidden="hidden">
-<input type="text" id="departNme" class="input-size" readonly="readonly">
-<div class="layui-input-block">
-	<button class="layui-btn layui-btn-sm tree-confirm" >确定</button>
-</div>
+<form class="layui-form layui-form-pane padding02" action="" method="post" onsubmit="return false;" id="form01">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">选中部门</label>
+		<div class="layui-input-inline">
+			<input type="hidden" name="departId" id="departId" class="layui-input">
+			<input type="text" name="departName" id="departNme" required lay-verify="required" autocomplete="off"
+				   class="layui-input" readonly="readonly">
+		</div>
+	</div>
+
+	<hr class="layui-bg-green">
+	<div class="layui-form-item">
+		<div class="layui-input-block">
+			<button class="layui-btn layui-btn-sm tree-confirm" >确定</button>
+		</div>
+	</div>
+
+</form>
+
+
 
 </body>
 

@@ -228,7 +228,7 @@ layui.use(['jquery','element', 'layer'], function () {
     });
 
     function FrameWH() {
-        var h = $(window).height() -41- 10 - 60 -10-44 -10;
+        var h = $(window).height() - 60 - 31 - 10 - 30;
         $("iframe").css("height",h+"px");
     }
 
@@ -242,6 +242,7 @@ layui.use(['jquery','element', 'layer'], function () {
             type : 2,
             maxmin : true,
             title : '密码修改',
+            skin: 'out-class',
             area : [ '300px', '300px' ],
             fix : false,
             content : '/topage?url=system/index/edit-password.html'
@@ -271,8 +272,9 @@ layui.use(['jquery','element', 'layer'], function () {
         layer.open({
             type : 2,
             maxmin : true,
+            skin: 'out-class',
             title : '信息查看',
-            area : [ '721px', '500px' ],
+            area : [ '730px', '520px' ],
             fix : false,
             content : '/topage?url=system/index/read-message.html'
         });

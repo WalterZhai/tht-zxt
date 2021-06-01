@@ -11,97 +11,144 @@
 </head>
 <body>
 
-<form class="layui-form layui-form-pane" action="" method="post" onsubmit="return false;" id="form01">
+<form class="layui-form layui-form-pane padding02" action="" method="post" onsubmit="return false;" id="form01">
 
 	<input type="text" name="id" hidden="hidden" th:value="${employee.id}">
 
-	<label class="label-size label-color">姓名*</label>
-	<input type="text" name="name" required  lay-verify="required" autocomplete="off" class="input-size" th:value="${employee.name}">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan layui-required">姓名</label>
+		<div class="layui-input-inline">
+			<input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input" th:value="${employee.name}">
+		</div>
 
-	<label class="label-size">曾用名</label>
-	<input type="text" name="usedName" autocomplete="off" class="input-size" th:value="${employee.usedName}">
+		<label class="layui-form-label layui-bg-cyan">曾用名</label>
+		<div class="layui-input-inline">
+			<input type="text" name="usedName" autocomplete="off" class="layui-input" th:value="${employee.usedName}">
+		</div>
+	</div>
 
-	<br>
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan layui-required">性别</label>
+		<div class="layui-input-inline">
+			<input type="radio" name="sex" value="0" title="男" th:checked="${employee.sex==0}">
+			<input type="radio" name="sex" value="1" title="女" th:checked="${employee.sex==1}">
+		</div>
 
-	<label class="label-size label-color">性别</label>
-	<input type="radio" name="sex" value="0" title="男" th:checked="${employee.sex==0}">
-	<input type="radio" name="sex" value="1" title="女" th:checked="${employee.sex==1}">
+		<label class="layui-form-label layui-bg-cyan">身份证号</label>
+		<div class="layui-input-inline">
+			<input type="text" name="idCardNum" autocomplete="off" class="layui-input" th:value="${employee.idCardNum}">
+		</div>
+	</div>
 
-	<label class="label-size">身份证号</label>
-	<input type="text" name="idCardNum" autocomplete="off" class="input-size" th:value="${employee.idCardNum}">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">社会保障号</label>
+		<div class="layui-input-inline">
+			<input type="text" name="socCardNum" autocomplete="off" class="layui-input" th:value="${employee.socCardNum}">
+		</div>
 
-	<br>
+		<label class="layui-form-label layui-bg-cyan">出生日期</label>
+		<div class="layui-input-inline">
+			<input type="date" name="birthday" autocomplete="off" class="layui-input" th:value="${#dates.format(employee.birthday,'yyyy-MM-dd')}">
+		</div>
+	</div>
 
-	<label class="label-size">社会保障号</label>
-	<input type="text" name="socCardNum" autocomplete="off" class="input-size" th:value="${employee.socCardNum}">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">家庭地址</label>
+		<div class="layui-input-inline">
+			<input type="text" name="address" autocomplete="off" class="layui-input" style="width: 450px" th:value="${employee.address}">
+		</div>
+	</div>
 
-	<label class="label-size">出生日期</label>
-	<input type="date" name="birthday" autocomplete="off" class="input-size" th:value="${#dates.format(employee.birthday,'yyyy-MM-dd')}">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">邮政编码</label>
+		<div class="layui-input-inline">
+			<input type="text" name="zipcode" autocomplete="off" class="layui-input" th:value="${employee.zipcode}">
+		</div>
 
-	<br>
+		<label class="layui-form-label layui-bg-cyan">办公电话</label>
+		<div class="layui-input-inline">
+			<input type="text" name="officeTele" autocomplete="off" class="layui-input" th:value="${employee.officeTele}">
+		</div>
+	</div>
 
-	<label class="label-size">家庭地址</label>
-	<input type="text" name="address" autocomplete="off" class="input-size" style="width: 450px" th:value="${employee.address}">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">家庭电话</label>
+		<div class="layui-input-inline">
+			<input type="text" name="homeTele" autocomplete="off" class="layui-input" th:value="${employee.homeTele}">
+		</div>
 
-	<br>
+		<label class="layui-form-label layui-bg-cyan">手机号码</label>
+		<div class="layui-input-inline">
+			<input type="text" name="mobile" autocomplete="off" class="layui-input" th:value="${employee.mobile}">
+		</div>
+	</div>
 
-	<label class="label-size">邮政编码</label>
-	<input type="text" name="zipcode" autocomplete="off" class="input-size" th:value="${employee.zipcode}">
 
-	<label class="label-size">办公电话</label>
-	<input type="text" name="officeTele" autocomplete="off" class="input-size" th:value="${employee.officeTele}">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">电子邮箱</label>
+		<div class="layui-input-inline">
+			<input type="text" name="email" autocomplete="off" class="layui-input" th:value="${employee.email}">
+		</div>
 
-	<br>
+		<label class="layui-form-label layui-bg-cyan">参加工作日期</label>
+		<div class="layui-input-inline">
+			<input type="date" name="careerBeginDate" autocomplete="off" class="layui-input" th:value="${#dates.format(employee.careerBeginDate,'yyyy-MM-dd')}">
+		</div>
+	</div>
 
-	<label class="label-size">家庭电话</label>
-	<input type="text" name="homeTele" autocomplete="off" class="input-size" th:value="${employee.homeTele}">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">入职日期</label>
+		<div class="layui-input-inline">
+			<input type="date" name="joinCompanyDate" autocomplete="off" class="layui-input" th:value="${#dates.format(employee.joinCompanyDate,'yyyy-MM-dd')}">
+		</div>
 
-	<label class="label-size label-color">手机号码</label>
-	<input type="text" name="mobile" required  lay-verify="required" autocomplete="off" class="input-size" th:value="${employee.mobile}">
+		<label class="layui-form-label layui-bg-cyan">学历</label>
+		<div class="layui-input-inline">
+			<input type="text" name="education" autocomplete="off" class="layui-input" th:value="${employee.education}">
+		</div>
+	</div>
 
-	<br>
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">专业</label>
+		<div class="layui-input-inline">
+			<input type="text" name="major" autocomplete="off" class="layui-input" th:value="${employee.major}">
+		</div>
 
-	<label class="label-size">电子邮箱</label>
-	<input type="text" name="email" autocomplete="off" class="input-size" th:value="${employee.email}">
+		<label class="layui-form-label layui-bg-cyan">职务</label>
+		<div class="layui-input-inline">
+			<input type="text" name="job" autocomplete="off" class="layui-input" th:value="${employee.job}">
+		</div>
+	</div>
 
-	<label class="label-size">参加工作日期</label>
-	<input type="date" name="careerBeginDate" autocomplete="off" class="input-size" th:value="${#dates.format(employee.careerBeginDate,'yyyy-MM-dd')}">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">银行卡号</label>
+		<div class="layui-input-inline">
+			<input type="text" name="bankNumber" autocomplete="off" class="layui-input" th:value="${employee.bankNumber}">
+		</div>
 
-	<br>
+		<label class="layui-form-label layui-bg-cyan">合同截止日期</label>
+		<div class="layui-input-inline">
+			<input type="date" name="contractEndDate" autocomplete="off" class="layui-input" th:value="${#dates.format(employee.contractEndDate,'yyyy-MM-dd')}">
+		</div>
+	</div>
 
-	<label class="label-size">入职日期</label>
-	<input type="date" name="joinCompanyDate" autocomplete="off" class="input-size" th:value="${#dates.format(employee.joinCompanyDate,'yyyy-MM-dd')}">
+	<div class="layui-form-item layui-form-text">
+		<label class="layui-form-label layui-bg-cyan">备注</label>
+		<div class="layui-input-block">
+			<textarea name="remark" class="layui-textarea" th:text="${employee.remark}"></textarea>
+		</div>
+	</div>
 
-	<label class="label-size">学历</label>
-	<input type="text" name="education" autocomplete="off" class="input-size" th:value="${employee.education}">
+	<div class="layui-form-item">
+		<label class="layui-form-label layui-bg-cyan">部门</label>
+		<div class="layui-input-inline">
+			<input type="hidden" name="departId" class="layui-input" th:value="${employee.departId}">
+			<input type="text" name="departName" autocomplete="off" class="layui-input" readonly="readonly" th:value="${employee.departName}">
+		</div>
 
-	<br>
+		<button type="button" class="layui-btn layui-btn-xs load-depart">...</button>
+	</div>
 
-	<label class="label-size">专业</label>
-	<input type="text" name="major" autocomplete="off" class="input-size" th:value="${employee.major}">
-
-	<label class="label-size">职务</label>
-	<input type="text" name="job" autocomplete="off" class="input-size" th:value="${employee.job}">
-
-	<br>
-
-	<label class="label-size">银行卡号</label>
-	<input type="text" name="bankNumber" autocomplete="off" class="input-size" th:value="${employee.bankNumber}">
-
-	<label class="label-size">合同截止日期</label>
-	<input type="date" name="contractEndDate" autocomplete="off" class="input-size" th:value="${#dates.format(employee.contractEndDate,'yyyy-MM-dd')}">
-
-	<br>
-
-	<label class="label-size">备注</label>
-	<input type="text" name="remark" autocomplete="off" class="input-size" style="width: 450px" th:value="${employee.remark}">
-
-	<br>
-
-	<label class="label-size label-color">部门</label>
-	<input type="text" name="departId" class="input-size" hidden="true" th:value="${employee.departId}">
-	<input type="text" name="departName" required  lay-verify="required" autocomplete="off" class="input-size" readonly="readonly" th:value="${employee.departName}">
-	<button type="button" class="layui-btn layui-btn-xs load-depart">...</button>
 
 
 	<hr class="layui-bg-green">
@@ -147,6 +194,7 @@
 			layer.open({
 				type : 2,
 				maxmin : true,
+				skin : 'out-class',
 				title : '选择部门',
 				area : ['99%','99%'],
 				fix : false,

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>修改定时任务</title>
+	<title>添加自定义档案</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/index.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/layui/css/layui.css}"/>
 	<script th:src="@{/layui/layui.js}"></script>
@@ -13,43 +13,24 @@
 
 <form class="layui-form layui-form-pane padding02" action="" method="post" onsubmit="return false;">
 
-	<input name="id" type="hidden" th:value="${scheduleTask.id}">
-
 	<div class="layui-form-item">
-		<label class="layui-form-label layui-bg-cyan layui-required">名称</label>
+		<label class="layui-form-label layui-bg-cyan layui-required">档案名称</label>
 		<div class="layui-input-inline">
-			<input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input" th:value="${scheduleTask.name}">
+			<input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input">
 		</div>
 
-		<label class="layui-form-label layui-bg-cyan layui-required">时间表达式</label>
+		<label class="layui-form-label layui-bg-cyan layui-required">档案编码</label>
 		<div class="layui-input-inline">
-			<input type="text" name="cron" lay-verify="required" autocomplete="off" class="layui-input" th:value="${scheduleTask.cron}">
+			<input type="text" name="code" lay-verify="required" autocomplete="off" class="layui-input">
 		</div>
-	</div>
-
-	<div class="layui-form-item">
-		<label class="layui-form-label layui-bg-cyan layui-required">调度对象全名</label>
-		<div class="layui-input-inline">
-			<input type="text" name="serviceFullName" lay-verify="required" autocomplete="off" class="layui-input" style="width: 400px" th:value="${scheduleTask.serviceFullName}">
-		</div>
-
-	</div>
-
-	<div class="layui-form-item">
-		<label class="layui-form-label layui-bg-cyan layui-required">调度方法</label>
-		<div class="layui-input-inline">
-			<input type="text" name="methodName" lay-verify="required" autocomplete="off" class="layui-input" style="width: 400px" th:value="${scheduleTask.methodName}">
-		</div>
-
 	</div>
 
 	<div class="layui-form-item layui-form-text">
-		<label class="layui-form-label layui-bg-cyan">定时任务说明</label>
+		<label class="layui-form-label layui-bg-cyan">档案说明</label>
 		<div class="layui-input-block">
-			<textarea name="description" class="layui-textarea" th:text="${scheduleTask.description}"></textarea>
+			<textarea name="description" class="layui-textarea"></textarea>
 		</div>
 	</div>
-
 
 	<hr class="layui-bg-green">
 
@@ -72,11 +53,10 @@
 		//监听提交
 		form.on('submit(formSubmit)', function(data){
 			$.ajax({
-				url:'/scheduleTask/editScheduleTask',
+				url:'/definedFile/addDefinedFile',
 				type:'post',
 				data:data.field,
 				async: false,
-				beforeSend:function () {},
 				success:function(result){
 					if(result.state == 1){
 						var index = parent.layer.getFrameIndex(window.name);
@@ -85,10 +65,10 @@
 					}else{
 						layer.msg(result.message,{icon: 5});
 					}
-				},
-				complete: function () {},
+				}
 			});
 		});
+
 	});
 
 </script>

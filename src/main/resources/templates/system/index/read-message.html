@@ -10,7 +10,13 @@
 	<script th:src="@{/assets/js/templet.js}"></script>
 </head>
 <body>
-<button type="button" class="layui-btn layui-btn-danger layui-btn-sm message-refresh" style="margin-top: 10px;margin-left: 20px"><i class="layui-icon layui-icon-note"></i>全部已读</button>
+<form class="layui-form toolbar">
+	<div class="layui-form-item">
+		<div class="search-input-inline padding02">
+			<button type="button" class="layui-btn layui-btn-danger layui-btn-sm message-refresh"><i class="layui-icon layui-icon-note"></i>全部已读</button>
+		</div>
+	</div>
+</form>
 
 	<table class="layui-table" id="tableList" lay-filter="tableList"></table>
 
@@ -35,7 +41,7 @@
 			elem: '#tableList'
 			,url: '/message/tableDataMessageInfo' //数据接口
 			,title: '消息表'
-			,height:'500'
+			,height:'400'
 			,page: {curr:1} //开启分页
 			,limit:20
 			,size: 'sm'
@@ -84,6 +90,7 @@
 			layer.open({
 				type : 2,
 				maxmin : true,
+				skin: 'out-class',
 				title : '消息查看',
 				area : ['500px','400px'],
 				fix : false,
