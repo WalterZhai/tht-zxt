@@ -2,6 +2,7 @@ package com.cimctht.thtzxt.customconfig.controller;
 
 import com.cimctht.thtzxt.basedata.entity.PasswordPolicy;
 import com.cimctht.thtzxt.common.constant.SysConstant;
+import com.cimctht.thtzxt.common.distributedlock.CacheLock;
 import com.cimctht.thtzxt.common.entity.JsonResult;
 import com.cimctht.thtzxt.common.entity.TableEntity;
 import com.cimctht.thtzxt.common.exception.UnimaxException;
@@ -72,6 +73,7 @@ public class DocuNumController {
         return modelAndView;
     }
 
+    @CacheLock(prefix = "/docuNum/addDocuNum")
     @PostMapping(value = "/docuNum/addDocuNum")
     public JsonResult addDocuNum(HttpServletRequest request) {
         String code = request.getParameter("code");
@@ -95,6 +97,8 @@ public class DocuNumController {
         }
     }
 
+
+    @CacheLock(prefix = "/docuNum/editDocuNum")
     @PostMapping(value = "/docuNum/editDocuNum")
     public JsonResult editDocuNum(HttpServletRequest request) {
         String id = request.getParameter("id");

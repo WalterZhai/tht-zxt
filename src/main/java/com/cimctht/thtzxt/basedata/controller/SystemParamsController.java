@@ -3,6 +3,7 @@ package com.cimctht.thtzxt.basedata.controller;
 import com.cimctht.thtzxt.basedata.Impl.SystemParamsServiceImpl;
 import com.cimctht.thtzxt.basedata.entity.SystemParams;
 import com.cimctht.thtzxt.basedata.repository.SystemParamsRepository;
+import com.cimctht.thtzxt.common.distributedlock.CacheLock;
 import com.cimctht.thtzxt.common.entity.JsonResult;
 import com.cimctht.thtzxt.common.entity.TableEntity;
 import com.cimctht.thtzxt.common.exception.UnimaxException;
@@ -69,6 +70,7 @@ public class SystemParamsController {
         return modelAndView;
     }
 
+    @CacheLock(prefix = "/systemParams/addSystemParams")
     @PostMapping(value = "/systemParams/addSystemParams")
     public JsonResult addSystemParams(HttpServletRequest request) {
         String name = request.getParameter("name");
@@ -88,6 +90,7 @@ public class SystemParamsController {
         }
     }
 
+    @CacheLock(prefix = "/systemParams/editSystemParams")
     @PostMapping(value = "/systemParams/editSystemParams")
     public JsonResult editSystemParams(HttpServletRequest request) {
         String id = request.getParameter("id");

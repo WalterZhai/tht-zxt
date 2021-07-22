@@ -3,6 +3,7 @@ package com.cimctht.thtzxt.system.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.cimctht.thtzxt.common.constant.SysConstant;
+import com.cimctht.thtzxt.common.distributedlock.CacheLock;
 import com.cimctht.thtzxt.common.entity.JsonResult;
 import com.cimctht.thtzxt.common.entity.TableEntity;
 import com.cimctht.thtzxt.common.exception.UnimaxException;
@@ -109,7 +110,7 @@ public class RoleController {
         }
     }
 
-
+    @CacheLock(prefix = "/role/addRole")
     @PostMapping(value = "/role/addRole")
     public JsonResult addRole(HttpServletRequest request,String name,String description) {
         try{
@@ -124,7 +125,7 @@ public class RoleController {
         }
     }
 
-
+    @CacheLock(prefix = "/role/editRole")
     @PostMapping(value = "/role/editRole")
     public JsonResult editRole(HttpServletRequest request,String id,String name,String description) {
         try{

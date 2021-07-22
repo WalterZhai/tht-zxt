@@ -1,6 +1,7 @@
 package com.cimctht.thtzxt.customconfig.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.cimctht.thtzxt.common.distributedlock.CacheLock;
 import com.cimctht.thtzxt.customconfig.Impl.DefinedFileServiceImpl;
 import com.cimctht.thtzxt.customconfig.entity.DefinedFile;
 import com.cimctht.thtzxt.customconfig.entity.DefinedFileDetail;
@@ -60,6 +61,7 @@ public class DefinedFileController {
         return table;
     }
 
+    @CacheLock(prefix = "/definedFile/addDefinedFile")
     @PostMapping(value = "/definedFile/addDefinedFile")
     public JsonResult addDefinedFile(HttpServletRequest request, String code, String name, String description) {
         try{
@@ -74,6 +76,7 @@ public class DefinedFileController {
         }
     }
 
+    @CacheLock(prefix = "/definedFile/editDefinedFile")
     @PostMapping(value = "/definedFile/editDefinedFile")
     public JsonResult editDefinedFile(HttpServletRequest request,String id,String code,String name,String description) {
         try{
@@ -107,6 +110,7 @@ public class DefinedFileController {
     }
 
 
+    @CacheLock(prefix = "/definedFileDetail/addDefinedFileDetail")
     @PostMapping(value = "/definedFileDetail/addDefinedFileDetail")
     public JsonResult addDefinedFileDetail(HttpServletRequest request, String definedid, String code, String name, Integer seq, String value, String remark) {
         try{
@@ -139,7 +143,7 @@ public class DefinedFileController {
         }
     }
 
-
+    @CacheLock(prefix = "/definedFileDetail/editDefinedFileDetail")
     @PostMapping(value = "/definedFileDetail/editDefinedFileDetail")
     public JsonResult editDefinedFileDetail(HttpServletRequest request, String id, String code, String name, Integer seq, String value, String remark) {
         try{

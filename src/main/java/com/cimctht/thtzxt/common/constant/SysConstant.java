@@ -148,4 +148,10 @@ public interface SysConstant {
     /** 单据号最大值 **/
     String DOCUNUM_MAX_VALUE = "999999999999";
 
+    /** 分布式锁 定时任务 serviceName **/
+    String DISTRIBUTED_LOCK_SERVICE_NAME = "LockService";
+
+    /** 分布式锁 定时任务 methodName **/
+    String DISTRIBUTED_LOCK_METHOD_NAME = "distributedLockVerify";
+
 }

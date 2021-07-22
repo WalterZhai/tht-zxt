@@ -6,6 +6,7 @@ import com.cimctht.thtzxt.basedata.bo.SimpleEmployeeBo;
 import com.cimctht.thtzxt.basedata.entity.Depart;
 import com.cimctht.thtzxt.basedata.entity.Employee;
 import com.cimctht.thtzxt.basedata.repository.EmployeeRepository;
+import com.cimctht.thtzxt.common.distributedlock.CacheLock;
 import com.cimctht.thtzxt.common.entity.JsonResult;
 import com.cimctht.thtzxt.common.entity.TableEntity;
 import com.cimctht.thtzxt.common.exception.UnimaxException;
@@ -126,6 +127,7 @@ public class EmployeeController {
         return modelAndView;
     }
 
+    @CacheLock(prefix = "/employee/addEmployee")
     @PostMapping(value = "/employee/addEmployee")
     public JsonResult addEmployee(HttpServletRequest request) {
         String name = request.getParameter("name");
@@ -194,6 +196,7 @@ public class EmployeeController {
         }
     }
 
+    @CacheLock(prefix = "/employee/editEmployee")
     @PostMapping(value = "/employee/editEmployee")
     public JsonResult editEmployee(HttpServletRequest request) {
         String id = request.getParameter("id");

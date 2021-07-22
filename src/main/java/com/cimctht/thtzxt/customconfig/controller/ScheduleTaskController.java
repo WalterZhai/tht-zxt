@@ -1,5 +1,6 @@
 package com.cimctht.thtzxt.customconfig.controller;
 
+import com.cimctht.thtzxt.common.distributedlock.CacheLock;
 import com.cimctht.thtzxt.common.entity.JsonResult;
 import com.cimctht.thtzxt.common.entity.TableEntity;
 import com.cimctht.thtzxt.common.exception.UnimaxException;
@@ -56,7 +57,7 @@ public class ScheduleTaskController {
         return modelAndView;
     }
 
-
+    @CacheLock(prefix = "/scheduleTask/addScheduleTask")
     @PostMapping(value = "/scheduleTask/addScheduleTask")
     public JsonResult addScheduleTask(HttpServletRequest request) {
         String name = request.getParameter("name");
@@ -80,6 +81,7 @@ public class ScheduleTaskController {
         }
     }
 
+    @CacheLock(prefix = "/scheduleTask/editScheduleTask")
     @PostMapping(value = "/scheduleTask/editScheduleTask")
     public JsonResult editScheduleTask(HttpServletRequest request) {
         String id = request.getParameter("id");

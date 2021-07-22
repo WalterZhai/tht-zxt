@@ -1,6 +1,5 @@
 package com.cimctht.thtzxt.customconfig.repository;
 
-import com.cimctht.thtzxt.customconfig.entity.DefinedFile;
 import com.cimctht.thtzxt.customconfig.entity.ScheduleTask;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,4 +19,6 @@ public interface ScheduleTaskRepository extends JpaRepository<ScheduleTask,Strin
     ScheduleTask findScheduleTaskById(String id);
 
     Page<ScheduleTask> findScheduleTasksByIsDeleteAndNameLikeOrderByCreateDate(Integer isDelete, String name, Pageable pageable);
+
+    ScheduleTask findScheduleTaskByIsDeleteAndServiceNameAndMethodName(Integer isDelete, String serviceName, String methodName);
 }

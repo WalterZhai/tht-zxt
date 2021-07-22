@@ -2,8 +2,12 @@ package com.cimctht.thtzxt.common.init;
 
 import cn.hutool.core.util.StrUtil;
 import com.cimctht.thtzxt.common.constant.SysConstant;
+import com.cimctht.thtzxt.customconfig.entity.ScheduleTask;
+import com.cimctht.thtzxt.customconfig.repository.ScheduleTaskRepository;
+import com.cimctht.thtzxt.system.repository.DistributedLockRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +28,9 @@ public class InitCustomConfigService {
 
     @PersistenceContext(unitName = "unimaxPersistenceUnit")
     private EntityManager unimaxEntityManager;
+
+    @Autowired
+    private ScheduleTaskRepository scheduleTaskRepository;
 
 
     /**
@@ -298,6 +305,27 @@ public class InitCustomConfigService {
 
     }
 
+    /**
+     * @comment 初始化分布式锁定时任务
+     * @author Walter(翟笑天)
+     * @date 2021/7/22
+     */
+    public void InitDistributedLockSchedule() {
+        ScheduleTask scheduleTask = scheduleTaskRepository.findScheduleTaskByIsDeleteAndServiceNameAndMethodName(0, SysConstant.DISTRIBUTED_LOCK_SERVICE_NAME, SysConstant.DISTRIBUTED_LOCK_METHOD_NAME);
+        if (scheduleTask == null) {
+            scheduleTask = new ScheduleTask();
+            scheduleTask.setName("分布式锁定刷新任务");
+            scheduleTask.setServiceFullName("com.cimctht.thtzxt.common.distributedlock.LockService");
+            scheduleTask.setServiceName("LockService");
+            scheduleTask.setMethodName("distributedLockVerify");
+            scheduleTask.setCron("*/10 * * * * ?");
+            scheduleTask.setIsopen(0);
+            scheduleTask.setDescription("定时将超时的锁删除。");
+            scheduleTask.setCreateId("admin");
+            scheduleTask.setModifyId("admin");
+            scheduleTaskRepository.save(scheduleTask);
+        }
+    }
 
 
 }

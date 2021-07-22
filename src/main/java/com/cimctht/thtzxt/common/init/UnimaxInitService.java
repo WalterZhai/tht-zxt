@@ -47,6 +47,7 @@ public class UnimaxInitService implements ApplicationRunner {
             initBasedataService.initSystemParams();
             //
             initCustomConfigService.InitCustomConfigComment();
+            initCustomConfigService.InitDistributedLockSchedule();
             logger.info("项目初始化结束");
         }else if(SysConstant.INIT_STATE_CLOSE.equals(state)){
             logger.info("项目初始化未开启");

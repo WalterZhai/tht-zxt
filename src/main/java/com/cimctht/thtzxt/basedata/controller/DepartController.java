@@ -7,6 +7,7 @@ import com.cimctht.thtzxt.basedata.entity.Depart;
 import com.cimctht.thtzxt.basedata.entity.Employee;
 import com.cimctht.thtzxt.basedata.repository.DepartRepository;
 import com.cimctht.thtzxt.basedata.repository.EmployeeRepository;
+import com.cimctht.thtzxt.common.distributedlock.CacheLock;
 import com.cimctht.thtzxt.common.entity.JsonResult;
 import com.cimctht.thtzxt.common.entity.TableEntity;
 import com.cimctht.thtzxt.common.exception.UnimaxException;
@@ -73,6 +74,7 @@ public class DepartController {
         return modelAndView;
     }
 
+    @CacheLock(prefix = "/depart/addDeaprt")
     @PostMapping(value = "/depart/addDeaprt")
     public JsonResult addDeaprt(HttpServletRequest request) {
         String parentId = request.getParameter("parentId");
@@ -106,6 +108,7 @@ public class DepartController {
         }
     }
 
+    @CacheLock(prefix = "/depart/editDeaprt")
     @PostMapping(value = "/depart/editDeaprt")
     public JsonResult editDeaprt(HttpServletRequest request) {
         String id = request.getParameter("id");

@@ -3,6 +3,7 @@ package com.cimctht.thtzxt.system.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.cimctht.thtzxt.common.constant.SysConstant;
+import com.cimctht.thtzxt.common.distributedlock.CacheLock;
 import com.cimctht.thtzxt.common.entity.JsonResult;
 import com.cimctht.thtzxt.common.entity.TableEntity;
 import com.cimctht.thtzxt.common.exception.UnimaxException;
@@ -135,6 +136,7 @@ public class MenuController {
         return table;
     }
 
+    @CacheLock(prefix = "/menu/addMenu")
     @PostMapping(value = "/menu/addMenu")
     public JsonResult addMenu(HttpServletRequest request,String id,String name,String href,Integer type,String icon) {
         try{
@@ -160,6 +162,7 @@ public class MenuController {
         }
     }
 
+    @CacheLock(prefix = "/menu/editMenu")
     @PostMapping(value = "/menu/editMenu")
     public JsonResult editMenu(HttpServletRequest request,String id,String name,String href,Integer type,String icon) {
         try{

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.cimctht.thtzxt.basedata.Impl.PasswordPolicyServiceImpl;
 import com.cimctht.thtzxt.basedata.entity.PasswordPolicy;
 import com.cimctht.thtzxt.basedata.repository.PasswordPolicyRepository;
+import com.cimctht.thtzxt.common.distributedlock.CacheLock;
 import com.cimctht.thtzxt.common.entity.JsonResult;
 import com.cimctht.thtzxt.common.entity.TableEntity;
 import com.cimctht.thtzxt.common.exception.UnimaxException;
@@ -72,6 +73,7 @@ public class PasswordPolicyController {
         return modelAndView;
     }
 
+    @CacheLock(prefix = "/passwordPolicy/addPasswordPolicy")
     @PostMapping(value = "/passwordPolicy/addPasswordPolicy")
     public JsonResult addPasswordPolicy(HttpServletRequest request) {
         String name = request.getParameter("name");
@@ -90,6 +92,7 @@ public class PasswordPolicyController {
         }
     }
 
+    @CacheLock(prefix = "/passwordPolicy/editPasswordPolicy")
     @PostMapping(value = "/passwordPolicy/editPasswordPolicy")
     public JsonResult editPasswordPolicy(HttpServletRequest request) {
         String id = request.getParameter("id");

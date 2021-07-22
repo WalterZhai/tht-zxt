@@ -3,6 +3,8 @@ package com.cimctht.thtzxt.system.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.cimctht.thtzxt.common.constant.SysConstant;
+import com.cimctht.thtzxt.common.distributedlock.CacheLock;
+import com.cimctht.thtzxt.common.distributedlock.CacheParam;
 import com.cimctht.thtzxt.common.entity.JsonResult;
 import com.cimctht.thtzxt.common.entity.TableEntity;
 import com.cimctht.thtzxt.common.exception.UnimaxException;
@@ -17,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,6 +28,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Walter(翟笑天)
@@ -122,6 +126,7 @@ public class UserController {
         }
     }
 
+    @CacheLock(prefix = "/user/addUser")
     @PostMapping(value = "/user/addUser")
     public JsonResult addUser(HttpServletRequest request) {
         String name = request.getParameter("name");
@@ -168,7 +173,7 @@ public class UserController {
         }
     }
 
-
+    @CacheLock(prefix = "/user/editUser")
     @PostMapping(value = "/user/editUser")
     public JsonResult editUser(HttpServletRequest request) {
         String id = request.getParameter("id");
