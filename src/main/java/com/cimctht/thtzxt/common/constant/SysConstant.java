@@ -154,4 +154,10 @@ public interface SysConstant {
     /** 分布式锁 定时任务 methodName **/
     String DISTRIBUTED_LOCK_METHOD_NAME = "distributedLockVerify";
 
+    /** 分布式锁 类型 个人 **/
+    String DISTRIBUTED_PERSONAL = "personal";
+
+    /** 分布式锁 类型 集群 **/
+    String DISTRIBUTED_CLUSTER = "cluster";
+
 }

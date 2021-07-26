@@ -126,7 +126,7 @@ public class UserController {
         }
     }
 
-    @CacheLock(prefix = "/user/addUser")
+    @CacheLock(prefix = "/user/addUser", type = "cluster")
     @PostMapping(value = "/user/addUser")
     public JsonResult addUser(HttpServletRequest request) {
         String name = request.getParameter("name");
@@ -134,6 +134,7 @@ public class UserController {
         String email = request.getParameter("email");
         String mobile = request.getParameter("mobile");
         try{
+            TimeUnit.SECONDS.sleep(10);
             User user = new User();
             user.setLoginName(loginName);
             user.setPassword(SysConstant.PASSWORD);

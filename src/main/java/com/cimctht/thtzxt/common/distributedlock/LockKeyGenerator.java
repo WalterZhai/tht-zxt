@@ -1,5 +1,6 @@
 package com.cimctht.thtzxt.common.distributedlock;
 
+import com.cimctht.thtzxt.common.constant.SysConstant;
 import com.cimctht.thtzxt.common.exception.UnimaxException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -53,12 +54,18 @@ public class LockKeyGenerator implements CacheKeyGenerator {
             }
         }
         //将session id 也同时加入
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HttpSession session = request.getSession();
-        if (session == null) {
-            throw new UnimaxException("session已断开，请重新登录");
+        if(SysConstant.DISTRIBUTED_PERSONAL.equals(lockAnnotation.type())){
+            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+            HttpSession session = request.getSession();
+            if (session == null) {
+                throw new UnimaxException("session已断开，请重新登录");
+            }
+            String sessionid = lockAnnotation.delimiter() + session.getId();
+            return lockAnnotation.prefix() + builder.toString() + sessionid;
+        }else if(SysConstant.DISTRIBUTED_CLUSTER.equals(lockAnnotation.type())){
+            return lockAnnotation.prefix() + builder.toString();
+        }else{
+            throw new UnimaxException("CacheLock 类型不正确");
         }
-        String sessionid = lockAnnotation.delimiter() + session.getId();
-        return lockAnnotation.prefix() + builder.toString() + sessionid;
     }
 }
